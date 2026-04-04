@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 type PageId = 'dashboard' | 'portfolio' | 'performance' | 'trades' | 'statements' | 'dividends' | 'intertrans' | 'insights' | 'messages' | 'fees' | 'profile'
 
@@ -12,6 +13,7 @@ const TICKERS = [
 ]
 
 export default function PortalPage() {
+  const router = useRouter()
   const [page, setPage] = useState<PageId>('dashboard')
   const [tickers, setTickers] = useState(TICKERS)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -612,6 +614,14 @@ export default function PortalPage() {
                 <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
                   <button style={{ padding: '10px 18px', background: 'transparent', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 8, color: '#C9A84C', fontSize: 11, cursor: 'pointer' }}>Change Password</button>
                   <button style={{ padding: '10px 18px', background: 'transparent', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 8, color: '#C9A84C', fontSize: 11, cursor: 'pointer' }}>Download All Statements</button>
+                </div>
+                <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                  <button
+                    onClick={() => router.push('/')}
+                    style={{ padding: '10px 22px', background: 'rgba(212,75,58,0.1)', border: '1px solid rgba(212,75,58,0.35)', borderRadius: 8, color: '#D44B3A', fontSize: 11, cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                  >
+                    Log Out
+                  </button>
                 </div>
               </Card>
             </div>
