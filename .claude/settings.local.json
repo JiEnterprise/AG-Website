@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(export PATH=\"/opt/homebrew/bin:/usr/local/bin:$PATH\" cd \"/Users/saswatjimac/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Ji Enterpries/Aurum Global Inc./04 - Technology/AurumGlobal.com\" npm run build)",
+      "Bash(pkill -f \"next dev\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(pkill -f next)",
+      "Bash(sleep 1 export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH 'WORKDIR=/Users/saswatjimac/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Ji Enterpries/Aurum Global Inc./04 - Technology/AurumGlobal.com' cd $WORKDIR rm -rf .next npm run build)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Read(//private/tmp/**)",
+      "Bash(unzip -o \"/var/folders/s3/f57lnx1j1dn0dbdc__wrg6yr0000gn/T/com.anthropic.claudefordesktop/zip_cache/CC176978-976A-4BA2-841C-6A2E7F91BCA1-902-0000008ACDFA63AA\" -d dl_intertrans)"
+    ]
+  }
+}

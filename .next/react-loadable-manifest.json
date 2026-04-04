@@ -1,0 +1,26 @@
+{
+  "app/page.tsx -> @/components/IntroAnimation": {
+    "id": "app/page.tsx -> @/components/IntroAnimation",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_IntroAnimation_tsx.js"
+    ]
+  },
+  "app/page.tsx -> lenis": {
+    "id": "app/page.tsx -> lenis",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_lenis_dist_lenis_mjs.js"
+    ]
+  },
+  "components/sections/CryptoSection.tsx -> @/components/three/CrystalScene": {
+    "id": "components/sections/CryptoSection.tsx -> @/components/three/CrystalScene",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_three_CrystalScene_tsx.js"
+    ]
+  },
+  "components/sections/HeroSection.tsx -> @/components/three/ParticleNetwork": {
+    "id": "components/sections/HeroSection.tsx -> @/components/three/ParticleNetwork",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_three_ParticleNetwork_tsx.js"
+    ]
+  }
+}
