@@ -13,16 +13,26 @@ const CAREERS_LINKS = [
   { label: 'Open Roles', href: '#careers-roles' },
 ]
 
+const OUR_FIRM_LINKS = [
+  { label: 'Our People and Leadership', href: '#firm-people' },
+  { label: '157 Years of Excellence', href: '#firm-history' },
+  { label: 'Community Impact', href: '#firm-community' },
+  { label: 'Our Focus on Sustainability', href: '#firm-sustainability' },
+  { label: 'Our Vendor Program', href: '#firm-vendor' },
+  { label: 'Partnerships', href: '#firm-partnerships' },
+  { label: 'Locations', href: '#firm-locations' },
+]
+
 const NAV_LINKS = [
   { label: 'Products', href: '#products' },
   { label: 'Solutions', href: '#solutions' },
   { label: 'Markets', href: '#markets' },
   { label: 'Insights', href: '#insights' },
-  { label: 'Company', href: '#company' },
 ]
 
 const ALL_MOBILE_LINKS = [
   ...NAV_LINKS,
+  { label: 'Our Firm', href: '#company' },
   { label: 'Careers', href: '#careers' },
 ]
 
@@ -55,9 +65,12 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [careersOpen, setCareersOpen] = useState(false)
+  const [firmOpen, setFirmOpen] = useState(false)
   const [tickers, setTickers] = useState<TickerItem[]>(INITIAL_TICKERS)
   const careersRef = useRef<HTMLDivElement>(null)
+  const firmRef = useRef<HTMLDivElement>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const firmCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -77,11 +90,14 @@ export default function Navigation() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (careersRef.current && !careersRef.current.contains(e.target as Node)) {
         setCareersOpen(false)
+      }
+      if (firmRef.current && !firmRef.current.contains(e.target as Node)) {
+        setFirmOpen(false)
       }
     }
     document.addEventListener('mousedown', handler)
@@ -94,6 +110,14 @@ export default function Navigation() {
   }
   const scheduleCareersClose = () => {
     closeTimer.current = setTimeout(() => setCareersOpen(false), 120)
+  }
+
+  const openFirm = () => {
+    if (firmCloseTimer.current) clearTimeout(firmCloseTimer.current)
+    setFirmOpen(true)
+  }
+  const scheduleFirmClose = () => {
+    firmCloseTimer.current = setTimeout(() => setFirmOpen(false), 120)
   }
 
   return (
@@ -140,6 +164,30 @@ export default function Navigation() {
               </a>
             ))}
 
+            {/* Our Firm with dropdown */}
+            <div
+              ref={firmRef}
+              className="relative"
+              onMouseEnter={openFirm}
+              onMouseLeave={scheduleFirmClose}
+            >
+              <button
+                onClick={() => setFirmOpen(o => !o)}
+                aria-expanded={firmOpen}
+                aria-haspopup="true"
+                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#B8AE99] hover:text-aurum-gold transition-colors duration-200"
+              >
+                Our Firm
+                <motion.span
+                  animate={{ rotate: firmOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="inline-flex"
+                >
+                  <ChevronDown size={12} strokeWidth={1.5} />
+                </motion.span>
+              </button>
+            </div>
+
             {/* Careers with dropdown */}
             <div
               ref={careersRef}
@@ -162,7 +210,6 @@ export default function Navigation() {
                   <ChevronDown size={12} strokeWidth={1.5} />
                 </motion.span>
               </button>
-
             </div>
           </nav>
 
@@ -190,6 +237,71 @@ export default function Navigation() {
           </div>
         </div>
       </header>
+
+      {/* Full-width Our Firm mega menu */}
+      <AnimatePresence>
+        {firmOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed top-16 left-0 right-0 z-40"
+            style={{
+              background: 'rgba(8,8,10,0.97)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              borderBottom: '1px solid rgba(201,168,76,0.12)',
+            }}
+            role="menu"
+            aria-label="Our Firm menu"
+            onMouseEnter={openFirm}
+            onMouseLeave={scheduleFirmClose}
+          >
+            <div className="max-w-[1400px] mx-auto px-6 py-10">
+              <div className="grid grid-cols-2 gap-20">
+
+                {/* Left — editorial */}
+                <div>
+                  <h3 className="font-playfair text-[38px] font-normal text-pale-gold mb-3 leading-tight">
+                    Our Firm
+                  </h3>
+                  <p className="font-dm text-[15px] text-[#B8AE99] leading-relaxed mb-7">
+                    We aspire to be the world&apos;s most exceptional financial institution.
+                  </p>
+                  <a
+                    href="#company"
+                    role="menuitem"
+                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#0A0800] transition-all duration-200"
+                  >
+                    About Us
+                  </a>
+                </div>
+
+                {/* Right — links */}
+                <div className="pt-1">
+                  <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-[#5A5040] mb-4">
+                    About AG
+                  </p>
+                  <div>
+                    {OUR_FIRM_LINKS.map(link => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        role="menuitem"
+                        className="block font-dm text-[15px] text-[#C8BEA8] hover:text-pale-gold py-3 border-b border-[rgba(201,168,76,0.07)] transition-colors duration-150 last:border-0"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Full-width Careers mega menu */}
       <AnimatePresence>
@@ -295,6 +407,25 @@ export default function Navigation() {
                   {link.label}
                 </motion.a>
               ))}
+
+              {/* Mobile Our Firm sub-links */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: ALL_MOBILE_LINKS.length * 0.07 + 0.05 }}
+                className="flex flex-wrap gap-x-5 gap-y-1 mt-2 pl-1"
+              >
+                {OUR_FIRM_LINKS.map(link => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="font-dm text-[12px] text-muted-gold hover:text-aurum-gold transition-colors uppercase tracking-wider"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </motion.div>
 
               {/* Mobile careers sub-links */}
               <motion.div
