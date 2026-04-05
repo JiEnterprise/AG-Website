@@ -181,22 +181,14 @@ export default function Navigation() {
           {/* Logo */}
           <a
             href="/"
-            className="flex items-center gap-2.5 flex-shrink-0"
+            className="flex items-center flex-shrink-0"
             aria-label="Aurum Global Inc. — Home"
           >
-            <div className="w-9 h-9 flex items-center justify-center border border-[rgba(201,168,76,0.5)] rounded-sm">
-              <span className="font-playfair text-lg font-bold text-aurum-gold leading-none" style={{ letterSpacing: '-0.02em' }}>
-                AG
-              </span>
-            </div>
-            <div className="hidden sm:flex flex-col">
-              <span className="font-dm text-[10px] text-pale-gold tracking-[0.28em] uppercase font-medium leading-tight">
-                AURUM GLOBAL
-              </span>
-              <span className="font-dm text-[8px] text-muted-gold tracking-[0.12em] uppercase leading-tight">
-                INC.
-              </span>
-            </div>
+            <img
+              src="/ag-logo.png"
+              alt="Aurum Global Inc."
+              className="h-10 w-auto object-contain"
+            />
           </a>
 
           {/* Desktop nav */}
@@ -531,10 +523,8 @@ export default function Navigation() {
               <X size={22} />
             </button>
 
-            <div className="absolute top-5 left-6 flex items-center gap-2.5">
-              <div className="w-9 h-9 flex items-center justify-center border border-[rgba(201,168,76,0.5)] rounded-sm">
-                <span className="font-playfair text-lg font-bold text-aurum-gold">AG</span>
-              </div>
+            <div className="absolute top-5 left-6 flex items-center">
+              <img src="/ag-logo.png" alt="Aurum Global Inc." className="h-10 w-auto object-contain" />
             </div>
 
             <nav className="flex flex-col justify-center h-full px-8 gap-0" aria-label="Mobile navigation">
