@@ -14,7 +14,7 @@ const CAREERS_LINKS = [
 ]
 
 const OUR_FIRM_LINKS = [
-  { label: 'Our People and Leadership', href: '#firm-people' },
+  { label: 'Our People and Leadership', href: '/our-people' },
   { label: '157 Years of Excellence', href: '#firm-history' },
   { label: 'Community Impact', href: '#firm-community' },
   { label: 'Our Focus on Sustainability', href: '#firm-sustainability' },
