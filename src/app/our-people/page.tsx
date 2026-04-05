@@ -56,7 +56,7 @@ export default function OurPeoplePage() {
         <div className="relative z-10 max-w-[1240px] mx-auto w-full px-6 sm:px-10 pb-16 sm:pb-20">
           <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-6">Our People & Leadership</p>
           <h1 className="font-playfair text-[52px] sm:text-[72px] leading-[1.05] text-pale-gold max-w-[820px] mb-8">
-            The People of Aurum Global<br />Are Aurum Global.
+            The People of<br />Aurum Global<br />Are Aurum Global.
           </h1>
           <p className="font-dm text-[16px] leading-relaxed text-[#C8BEA8] max-w-[620px]">
             Our people are our greatest asset — we say it often and with good reason. It is only with the determination and dedication of our people that we can serve our clients, generate long-term value, and contribute meaningfully to our communities.
