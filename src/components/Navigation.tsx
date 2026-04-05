@@ -185,11 +185,11 @@ export default function Navigation() {
             aria-label="Aurum Global Inc. — Home"
           >
             <div
-              className="flex flex-col leading-none"
-              style={{ fontFamily: 'var(--font-cormorant)', letterSpacing: '0.04em' }}
+              className="flex flex-col justify-center leading-none"
+              style={{ fontFamily: 'var(--font-cormorant)', letterSpacing: '0.06em' }}
             >
-              <span style={{ fontSize: 22, fontWeight: 500, color: '#C9A84C', lineHeight: 1.1 }}>Aurum</span>
-              <span style={{ fontSize: 22, fontWeight: 500, color: '#C9A84C', lineHeight: 1.1 }}>Global</span>
+              <span style={{ fontSize: 17, fontWeight: 400, color: '#C9A84C', lineHeight: 1.15 }}>Aurum</span>
+              <span style={{ fontSize: 17, fontWeight: 400, color: '#C9A84C', lineHeight: 1.15 }}>Global</span>
             </div>
           </a>
 
