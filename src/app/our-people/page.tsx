@@ -31,26 +31,37 @@ export default function OurPeoplePage() {
   return (
     <main className="bg-obsidian text-pale-gold min-h-screen">
 
-      {/* Back nav */}
-      <div className="max-w-[1240px] mx-auto px-6 sm:px-10 pt-28 pb-2">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[rgba(201,168,76,0.22)] font-dm text-[11px] uppercase tracking-[0.12em] text-[#C8BEA8] hover:text-pale-gold hover:border-aurum-gold transition-all duration-200 mb-10"
-        >
-          <ArrowLeft size={13} strokeWidth={1.75} />
-          Back to Site
-        </Link>
-      </div>
+      {/* ── Hero with background image ── */}
+      <section className="relative min-h-[92vh] flex flex-col justify-end border-b border-[rgba(201,168,76,0.1)] overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/people-hero.jpg')" }}
+        />
+        {/* Dark overlay — stronger at bottom for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(7,7,10,0.45)] via-[rgba(7,7,10,0.55)] to-[rgba(7,7,10,0.88)]" />
 
-      {/* ── Hero ── */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 pb-20 border-b border-[rgba(201,168,76,0.1)]">
-        <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-6">Our People & Leadership</p>
-        <h1 className="font-playfair text-[52px] sm:text-[68px] leading-[1.05] text-pale-gold max-w-[820px] mb-8">
-          The People of Aurum Global<br />Are Aurum Global.
-        </h1>
-        <p className="font-dm text-[16px] leading-relaxed text-[#B8AE99] max-w-[660px]">
-          Our people are our greatest asset — we say it often and with good reason. It is only with the determination and dedication of our people that we can serve our clients, generate long-term value, and contribute meaningfully to our communities.
-        </p>
+        {/* Back link — top left */}
+        <div className="absolute top-28 left-6 sm:left-10 z-10">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[rgba(201,168,76,0.3)] font-dm text-[11px] uppercase tracking-[0.12em] text-[#C8BEA8] hover:text-pale-gold hover:border-aurum-gold transition-all duration-200 backdrop-blur-sm bg-[rgba(0,0,0,0.2)]"
+          >
+            <ArrowLeft size={13} strokeWidth={1.75} />
+            Back to Site
+          </Link>
+        </div>
+
+        {/* Text content — bottom */}
+        <div className="relative z-10 max-w-[1240px] mx-auto w-full px-6 sm:px-10 pb-16 sm:pb-20">
+          <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-6">Our People & Leadership</p>
+          <h1 className="font-playfair text-[52px] sm:text-[72px] leading-[1.05] text-pale-gold max-w-[820px] mb-8">
+            The People of Aurum Global<br />Are Aurum Global.
+          </h1>
+          <p className="font-dm text-[16px] leading-relaxed text-[#C8BEA8] max-w-[620px]">
+            Our people are our greatest asset — we say it often and with good reason. It is only with the determination and dedication of our people that we can serve our clients, generate long-term value, and contribute meaningfully to our communities.
+          </p>
+        </div>
       </section>
 
       {/* ── Founder quote ── */}
