@@ -72,7 +72,9 @@ export default function OurPeoplePage() {
               &ldquo;Our culture is what defines us — it is our identity and it is at the heart of everything we do for our clients.&rdquo;
             </p>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#5C4620] to-[#C9A84C] flex items-center justify-center font-playfair text-sm font-bold text-[#0A0800]">SC</div>
+              <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-[rgba(201,168,76,0.3)]">
+                <img src="/saswat-profile.jpg" alt="Saswat C." style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 12%' }} />
+              </div>
               <div>
                 <p className="font-dm text-[13px] font-medium text-pale-gold">Saswat C.</p>
                 <p className="font-dm text-[11px] text-muted-gold tracking-wider uppercase mt-0.5">Chairman and Chief Executive Officer</p>
@@ -130,7 +132,9 @@ export default function OurPeoplePage() {
 
         {/* Founder profile */}
         <div className="rounded-2xl border border-[rgba(201,168,76,0.18)] bg-[rgba(17,17,20,0.7)] p-8 sm:p-10 flex flex-col sm:flex-row gap-8 items-start">
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#5C4620] to-[#C9A84C] flex items-center justify-center font-playfair text-2xl font-bold text-[#0A0800] flex-shrink-0">SC</div>
+          <div className="w-20 h-20 rounded-full flex-shrink-0 overflow-hidden border-2 border-[rgba(201,168,76,0.3)]" style={{ boxShadow: '0 0 0 3px rgba(201,168,76,0.12)' }}>
+            <img src="/saswat-profile.jpg" alt="Saswat C." style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 12%' }} />
+          </div>
           <div className="flex-1">
             <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-muted-gold mb-2">Leadership</p>
             <h3 className="font-playfair text-[28px] text-pale-gold mb-1">Saswat C.</h3>
