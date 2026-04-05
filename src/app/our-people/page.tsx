@@ -64,7 +64,7 @@ export default function OurPeoplePage() {
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#5C4620] to-[#C9A84C] flex items-center justify-center font-playfair text-sm font-bold text-[#0A0800]">SC</div>
               <div>
                 <p className="font-dm text-[13px] font-medium text-pale-gold">Saswat C.</p>
-                <p className="font-dm text-[11px] text-muted-gold tracking-wider uppercase mt-0.5">Founder & Portfolio Manager</p>
+                <p className="font-dm text-[11px] text-muted-gold tracking-wider uppercase mt-0.5">Chairman and Chief Executive Officer</p>
               </div>
             </div>
           </div>
@@ -121,9 +121,9 @@ export default function OurPeoplePage() {
         <div className="rounded-2xl border border-[rgba(201,168,76,0.18)] bg-[rgba(17,17,20,0.7)] p-8 sm:p-10 flex flex-col sm:flex-row gap-8 items-start">
           <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#5C4620] to-[#C9A84C] flex items-center justify-center font-playfair text-2xl font-bold text-[#0A0800] flex-shrink-0">SC</div>
           <div className="flex-1">
-            <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-muted-gold mb-2">Founder</p>
+            <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-muted-gold mb-2">Leadership</p>
             <h3 className="font-playfair text-[28px] text-pale-gold mb-1">Saswat C.</h3>
-            <p className="font-dm text-[12px] uppercase tracking-[0.14em] text-aurum-gold mb-5">Founder & Portfolio Manager, Aurum Global Inc.</p>
+            <p className="font-dm text-[12px] uppercase tracking-[0.14em] text-aurum-gold mb-5">Chairman and Chief Executive Officer</p>
             <p className="font-dm text-[14px] text-[#8A8070] leading-relaxed max-w-[680px]">
               Saswat founded Aurum Global with the conviction that institutional-grade wealth management should be accessible, transparent, and relentlessly client-focused. With a background spanning private equity, alternative assets, and quantitative strategy, he leads the firm's investment process and client relationships directly.
             </p>
