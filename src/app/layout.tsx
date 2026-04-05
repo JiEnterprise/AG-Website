@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans, JetBrains_Mono, Lora } from 'next/font/google'
+import { Playfair_Display, DM_Sans, JetBrains_Mono, Lora, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -23,6 +23,13 @@ const jetbrainsMono = JetBrains_Mono({
 const lora = Lora({
   subsets: ['latin'],
   variable: '--font-lora',
+  display: 'swap',
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 })
 
@@ -65,7 +72,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${lora.variable}`}
+      className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${lora.variable} ${cormorant.variable}`}
     >
       <body>
         <a href="#main-content" className="skip-nav">

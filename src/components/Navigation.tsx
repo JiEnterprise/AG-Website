@@ -184,12 +184,13 @@ export default function Navigation() {
             className="flex items-center flex-shrink-0"
             aria-label="Aurum Global Inc. — Home"
           >
-            <img
-              src="/ag-logo.png"
-              alt="Aurum Global Inc."
-              className="w-auto object-contain"
-              style={{ height: 52, maxWidth: 220 }}
-            />
+            <div
+              className="flex flex-col leading-none"
+              style={{ fontFamily: 'var(--font-cormorant)', letterSpacing: '0.04em' }}
+            >
+              <span style={{ fontSize: 22, fontWeight: 500, color: '#C9A84C', lineHeight: 1.1 }}>Aurum</span>
+              <span style={{ fontSize: 22, fontWeight: 500, color: '#C9A84C', lineHeight: 1.1 }}>Global</span>
+            </div>
           </a>
 
           {/* Desktop nav */}
@@ -525,7 +526,10 @@ export default function Navigation() {
             </button>
 
             <div className="absolute top-5 left-6 flex items-center">
-              <img src="/ag-logo.png" alt="Aurum Global Inc." className="h-10 w-auto object-contain" />
+              <div className="flex flex-col leading-none" style={{ fontFamily: 'var(--font-cormorant)', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: 22, fontWeight: 500, color: '#C9A84C', lineHeight: 1.1 }}>Aurum</span>
+                <span style={{ fontSize: 22, fontWeight: 500, color: '#C9A84C', lineHeight: 1.1 }}>Global</span>
+              </div>
             </div>
 
             <nav className="flex flex-col justify-center h-full px-8 gap-0" aria-label="Mobile navigation">
