@@ -27,7 +27,7 @@ const WHAT_WE_DO = [
   {
     group: 'Private Banking',
     links: [
-      { label: 'Private Wealth Management', href: '#pwm' },
+      { label: 'Private Wealth Management', href: '/private-wealth-management' },
       { label: 'Institutional Banking', href: '#institutional' },
       { label: 'Loans & Credit', href: '#loans' },
     ],
