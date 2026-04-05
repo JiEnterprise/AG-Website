@@ -23,14 +23,48 @@ const OUR_FIRM_LINKS = [
   { label: 'Locations', href: '#firm-locations' },
 ]
 
+const WHAT_WE_DO = [
+  {
+    group: 'Global Banking & Markets',
+    links: [
+      { label: 'Investment Banking', href: '#ib' },
+      { label: 'FICC and Equities', href: '#ficc' },
+      { label: 'Marquee', href: '#marquee' },
+    ],
+  },
+  {
+    group: 'Asset & Wealth Management',
+    links: [
+      { label: 'Asset Management', href: '#asset-mgmt' },
+      { label: 'Private Wealth Management', href: '#pwm' },
+      { label: 'Private Banking and Lending', href: '#pbl' },
+    ],
+  },
+  {
+    group: 'Platform Solutions',
+    links: [
+      { label: 'Enterprise Partnerships', href: '#enterprise' },
+      { label: 'Transaction Banking', href: '#txn-banking' },
+    ],
+  },
+  {
+    group: 'Research & Perspectives',
+    links: [
+      { label: 'Global Investment Research', href: '#research' },
+      { label: 'Global Institute', href: '#institute' },
+      { label: 'Serving Clients', href: '#clients' },
+    ],
+  },
+]
+
 const NAV_LINKS = [
-  { label: 'Products', href: '#products' },
   { label: 'Solutions', href: '#solutions' },
   { label: 'Markets', href: '#markets' },
   { label: 'Insights', href: '#insights' },
 ]
 
 const ALL_MOBILE_LINKS = [
+  { label: 'What We Do', href: '#products' },
   ...NAV_LINKS,
   { label: 'Our Firm', href: '#company' },
   { label: 'Careers', href: '#careers' },
@@ -66,11 +100,14 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [careersOpen, setCareersOpen] = useState(false)
   const [firmOpen, setFirmOpen] = useState(false)
+  const [whatWeDoOpen, setWhatWeDoOpen] = useState(false)
   const [tickers, setTickers] = useState<TickerItem[]>(INITIAL_TICKERS)
   const careersRef = useRef<HTMLDivElement>(null)
   const firmRef = useRef<HTMLDivElement>(null)
+  const whatWeDoRef = useRef<HTMLDivElement>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const firmCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const whatWeDoCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -99,6 +136,9 @@ export default function Navigation() {
       if (firmRef.current && !firmRef.current.contains(e.target as Node)) {
         setFirmOpen(false)
       }
+      if (whatWeDoRef.current && !whatWeDoRef.current.contains(e.target as Node)) {
+        setWhatWeDoOpen(false)
+      }
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
@@ -110,6 +150,14 @@ export default function Navigation() {
   }
   const scheduleCareersClose = () => {
     closeTimer.current = setTimeout(() => setCareersOpen(false), 120)
+  }
+
+  const openWhatWeDo = () => {
+    if (whatWeDoCloseTimer.current) clearTimeout(whatWeDoCloseTimer.current)
+    setWhatWeDoOpen(true)
+  }
+  const scheduleWhatWeDoClose = () => {
+    whatWeDoCloseTimer.current = setTimeout(() => setWhatWeDoOpen(false), 120)
   }
 
   const openFirm = () => {
@@ -154,6 +202,31 @@ export default function Navigation() {
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-7" aria-label="Main navigation">
+
+            {/* What We Do with dropdown */}
+            <div
+              ref={whatWeDoRef}
+              className="relative"
+              onMouseEnter={openWhatWeDo}
+              onMouseLeave={scheduleWhatWeDoClose}
+            >
+              <button
+                onClick={() => setWhatWeDoOpen(o => !o)}
+                aria-expanded={whatWeDoOpen}
+                aria-haspopup="true"
+                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#B8AE99] hover:text-aurum-gold transition-colors duration-200"
+              >
+                What We Do
+                <motion.span
+                  animate={{ rotate: whatWeDoOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="inline-flex"
+                >
+                  <ChevronDown size={12} strokeWidth={1.5} />
+                </motion.span>
+              </button>
+            </div>
+
             {NAV_LINKS.map(link => (
               <a
                 key={link.label}
@@ -237,6 +310,78 @@ export default function Navigation() {
           </div>
         </div>
       </header>
+
+      {/* Full-width What We Do mega menu */}
+      <AnimatePresence>
+        {whatWeDoOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed top-16 left-0 right-0 z-40"
+            style={{
+              background: 'rgba(8,8,10,0.97)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              borderBottom: '1px solid rgba(201,168,76,0.12)',
+            }}
+            role="menu"
+            aria-label="What We Do menu"
+            onMouseEnter={openWhatWeDo}
+            onMouseLeave={scheduleWhatWeDoClose}
+          >
+            <div className="max-w-[1400px] mx-auto px-6 py-10">
+              <div className="grid grid-cols-[1fr_2.4fr] gap-16">
+
+                {/* Left — editorial */}
+                <div>
+                  <h3 className="font-playfair text-[38px] font-normal text-pale-gold mb-3 leading-tight">
+                    What We Do
+                  </h3>
+                  <p className="font-dm text-[14px] text-[#B8AE99] leading-relaxed mb-7">
+                    Learn more about how we cultivate and harness world-class intellectual capital and expertise to solve our clients&apos; most complex challenges.
+                  </p>
+                  <a
+                    href="#products"
+                    role="menuitem"
+                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#0A0800] transition-all duration-200"
+                  >
+                    Explore Our Businesses
+                  </a>
+                </div>
+
+                {/* Right — 4 columns */}
+                <div className="grid grid-cols-4 gap-8 pt-1">
+                  {WHAT_WE_DO.map(col => (
+                    <div key={col.group}>
+                      <p className="font-dm text-[9px] uppercase tracking-[0.22em] text-[#5A5040] mb-4 leading-tight">{col.group}</p>
+                      {col.links.map(link => (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          role="menuitem"
+                          className="block font-dm text-[14px] text-[#C8BEA8] hover:text-pale-gold py-2.5 border-b border-[rgba(201,168,76,0.07)] transition-colors duration-150 last:border-0"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+
+              {/* Bottom bar */}
+              <div className="mt-8 pt-6 border-t border-[rgba(201,168,76,0.08)]">
+                <p className="font-dm text-[12px] text-[#6A5E50]">
+                  <span className="text-[#C8BEA8] font-medium">Serving Clients</span> — We harness every resource, insight, relationship, and competitive advantage to drive superior results for our clients.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Full-width Our Firm mega menu */}
       <AnimatePresence>
