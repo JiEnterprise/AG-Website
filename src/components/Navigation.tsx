@@ -187,7 +187,8 @@ export default function Navigation() {
             <img
               src="/ag-logo.png"
               alt="Aurum Global Inc."
-              className="h-10 w-auto object-contain"
+              className="w-auto object-contain"
+              style={{ height: 52, maxWidth: 220 }}
             />
           </a>
 
