@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, ChevronRight } from 'lucide-react'
+import Navigation from '@/components/Navigation'
 
 const SOLUTIONS = [
   { title: 'Accessing Alternative Markets', desc: 'Private equity, hedge funds, real assets, and structured products — curated for your risk profile.' },
@@ -44,19 +45,13 @@ export default function PrivateWealthPage() {
   return (
     <main className="bg-obsidian text-pale-gold min-h-screen">
 
+      <Navigation />
+
       {/* ── Hero ── */}
       <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden border-b border-[rgba(201,168,76,0.1)]">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A0900] via-[#0D0C08] to-[#08080A]" />
         {/* Subtle pattern overlay */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #C9A84C 0%, transparent 50%), radial-gradient(circle at 80% 20%, #C9A84C 0%, transparent 40%)' }} />
-
-        {/* Back link */}
-        <div className="absolute top-28 left-6 sm:left-10 z-10">
-          <Link href="/" className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[rgba(201,168,76,0.22)] font-dm text-[11px] uppercase tracking-[0.12em] text-[#C8BEA8] hover:text-pale-gold hover:border-aurum-gold transition-all duration-200 backdrop-blur-sm bg-[rgba(0,0,0,0.2)]">
-            <ArrowLeft size={13} strokeWidth={1.75} />
-            Back
-          </Link>
-        </div>
 
         <div className="relative z-10 max-w-[1240px] mx-auto w-full px-6 sm:px-10 pb-20">
           <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-6">Private Wealth Management</p>
