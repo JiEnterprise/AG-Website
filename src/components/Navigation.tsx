@@ -36,6 +36,7 @@ const WHAT_WE_DO = [
     group: 'Asset Management',
     links: [
       { label: 'Asset Management', href: '#asset-mgmt' },
+      { label: 'Crypto Management', href: '#crypto' },
       { label: 'Mergers & Acquisitions', href: '#ma' },
     ],
   },
@@ -51,7 +52,6 @@ const WHAT_WE_DO = [
       { label: 'AG Terminal', href: '#ag-terminal' },
       { label: 'AGQuant', href: '#agquant' },
       { label: 'Bot Trading', href: '#bot-trading' },
-      { label: 'Crypto Management', href: '#crypto' },
     ],
   },
   {
