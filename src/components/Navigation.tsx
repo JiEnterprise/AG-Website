@@ -36,6 +36,12 @@ const WHAT_WE_DO = [
     group: 'Asset Management',
     links: [
       { label: 'Asset Management', href: '#asset-mgmt' },
+      { label: 'Mutual Funds', href: '#mutual-funds' },
+      { label: 'ETFs', href: '#etfs' },
+      { label: 'Money Market Funds', href: '#money-market' },
+      { label: 'Stocks', href: '#stocks' },
+      { label: 'CDs', href: '#cds' },
+      { label: 'Bonds', href: '#bonds' },
       { label: 'Mergers & Acquisitions', href: '#ma' },
     ],
   },
