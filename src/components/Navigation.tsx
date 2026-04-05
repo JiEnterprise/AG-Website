@@ -25,34 +25,33 @@ const OUR_FIRM_LINKS = [
 
 const WHAT_WE_DO = [
   {
-    group: 'Global Banking & Markets',
+    group: 'Private Banking',
     links: [
-      { label: 'Investment Banking', href: '#ib' },
-      { label: 'FICC and Equities', href: '#ficc' },
-      { label: 'Marquee', href: '#marquee' },
+      { label: 'Private Wealth Management', href: '#pwm' },
+      { label: 'Institutional Banking', href: '#institutional' },
+      { label: 'Loans & Credit', href: '#loans' },
     ],
   },
   {
-    group: 'Asset & Wealth Management',
+    group: 'Asset Management',
     links: [
       { label: 'Asset Management', href: '#asset-mgmt' },
-      { label: 'Private Wealth Management', href: '#pwm' },
-      { label: 'Private Banking and Lending', href: '#pbl' },
+      { label: 'Mergers & Acquisitions', href: '#ma' },
     ],
   },
   {
-    group: 'Platform Solutions',
+    group: 'Markets & Trading',
     links: [
-      { label: 'Enterprise Partnerships', href: '#enterprise' },
-      { label: 'Transaction Banking', href: '#txn-banking' },
+      { label: 'AG Terminal', href: '#ag-terminal' },
+      { label: 'AGQuant', href: '#agquant' },
+      { label: 'Bot Trading', href: '#bot-trading' },
+      { label: 'Crypto Management', href: '#crypto' },
     ],
   },
   {
-    group: 'Research & Perspectives',
+    group: 'Intelligence',
     links: [
-      { label: 'Global Investment Research', href: '#research' },
-      { label: 'Global Institute', href: '#institute' },
-      { label: 'Serving Clients', href: '#clients' },
+      { label: 'AG Insights', href: '#insights' },
     ],
   },
 ]
