@@ -6,6 +6,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 type PageId = 'dashboard' | 'portfolio' | 'performance' | 'trades' | 'statements' | 'dividends' | 'intertrans' | 'insights' | 'messages' | 'fees' | 'profile'
 
+// ── User registry ──────────────────────────────────────────
+// Add new clients here to grant portal access.
+// If a username is not in this map, the portal shows "Ask Your Advisor For Activation".
+const PORTAL_USERS: Record<string, { name: string; firstName: string; initials: string; accountId: string; activated: boolean }> = {
+  DL2503:  { name: 'David Low',   firstName: 'David',  initials: 'DL', accountId: 'DL2503',  activated: true },
+  SaswatC: { name: 'Saswat C.',   firstName: 'Saswat', initials: 'SC', accountId: 'SaswatC', activated: true },
+}
+
 const TICKERS = [
   { sym: 'SPY',  price: 585.34, chg:  0.42 },
   { sym: 'BTC',  price: 83241,  chg: -1.18 },
@@ -26,6 +34,13 @@ export default function PortalPage() {
   const [tickers, setTickers] = useState(TICKERS)
   const [hoveredNav, setHoveredNav] = useState<string | null>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [currentUser, setCurrentUser] = useState<typeof PORTAL_USERS[string] | null | undefined>(undefined)
+
+  useEffect(() => {
+    const username = sessionStorage.getItem('ag_user') ?? ''
+    const user = PORTAL_USERS[username] ?? null
+    setCurrentUser(user)
+  }, [])
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -146,6 +161,35 @@ export default function PortalPage() {
     ]},
   ]
 
+  // Loading
+  if (currentUser === undefined) return null
+
+  // Not activated
+  if (!currentUser || !currentUser.activated) {
+    return (
+      <div style={{ background: '#07070A', color: '#E2DDD4', minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 0 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, maxWidth: 460, textAlign: 'center', padding: '0 24px' }}>
+          <div style={{ width: 56, height: 56, border: '1.5px solid rgba(201,168,76,0.4)', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 700, color: '#C9A84C', letterSpacing: '0.04em', marginBottom: 4 }}>AG</div>
+          <div style={{ fontSize: 22, fontWeight: 600, color: '#E8DDD0', letterSpacing: '-0.01em' }}>Portal Not Yet Activated</div>
+          <div style={{ fontSize: 14, color: '#5A5040', lineHeight: 1.7 }}>
+            Your account hasn&apos;t been assigned a portal yet.<br />
+            Please speak with your Aurum Global advisor to get started.
+          </div>
+          <div style={{ marginTop: 8, padding: '16px 24px', background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 12 }}>
+            <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#8A7050', marginBottom: 6 }}>Next Step</div>
+            <div style={{ fontSize: 15, color: '#C9A84C', fontWeight: 500 }}>Ask Your Advisor For Activation</div>
+          </div>
+          <button
+            onClick={() => { sessionStorage.removeItem('ag_user'); router.push('/') }}
+            style={{ marginTop: 8, fontSize: 11, color: '#4A4030', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em' }}
+          >
+            Return to homepage
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div style={{ background: '#07070A', color: '#E2DDD4', minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif", display: 'flex', flexDirection: 'column' }}>
 
@@ -181,7 +225,7 @@ export default function PortalPage() {
           <div
             onClick={() => nav('profile')}
             style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg,#5C4620,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#0A0800', cursor: 'pointer', letterSpacing: '0.04em', boxShadow: '0 0 0 2px rgba(201,168,76,0.2)' }}
-          >DL</div>
+          >{currentUser.initials}</div>
         </div>
       </div>
 
@@ -228,7 +272,7 @@ export default function PortalPage() {
           <div style={{ flex: 1 }} />
           <div style={{ padding: '14px 16px 0', borderTop: '1px solid rgba(255,255,255,0.04)', marginTop: 12 }}>
             <div style={{ fontSize: 9, color: '#2E2A22', letterSpacing: '0.1em', marginBottom: 4 }}>ACCOUNT</div>
-            <div style={{ fontSize: 10, color: '#4A4030' }}>David Low · DL2503</div>
+            <div style={{ fontSize: 10, color: '#4A4030' }}>{currentUser.name} · {currentUser.accountId}</div>
             <div style={{ fontSize: 9, color: '#2E2A22', marginTop: 2 }}>T-1 Billing · Active</div>
           </div>
         </div>
@@ -251,8 +295,8 @@ export default function PortalPage() {
                   {/* Welcome banner */}
                   <div style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(201,168,76,0.03) 100%)', border: '1px solid rgba(201,168,76,0.16)', borderRadius: 14, padding: '20px 24px', marginBottom: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
                     <div>
-                      <div style={{ fontSize: 18, fontWeight: 600, color: '#E8DDD0', marginBottom: 4, letterSpacing: '-0.01em' }}>{getGreeting()}, David.</div>
-                      <div style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.6 }}>Your portfolio is performing well. November total return: <span style={{ color: '#1D9E75', fontWeight: 500 }}>+$168.35</span> · Account ID: <span style={{ color: '#C9A84C' }}>DL2503</span></div>
+                      <div style={{ fontSize: 18, fontWeight: 600, color: '#E8DDD0', marginBottom: 4, letterSpacing: '-0.01em' }}>{getGreeting()}, {currentUser.firstName}.</div>
+                      <div style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.6 }}>Your portfolio is performing well. November total return: <span style={{ color: '#1D9E75', fontWeight: 500 }}>+$168.35</span> · Account ID: <span style={{ color: '#C9A84C' }}>{currentUser.accountId}</span></div>
                     </div>
                     <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', flexShrink: 0 }}>
                       {[{ label: 'PWM Client', color: '#8A7050' }, { label: 'T-1 Billing', color: '#8A7050' }, { label: '● Active', color: '#1D9E75' }].map(b => (

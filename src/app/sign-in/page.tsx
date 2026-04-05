@@ -25,6 +25,7 @@ export default function SignInPage() {
 
     setTimeout(() => {
       if ((username === 'DL2503' && password === 'David') || (username === 'SaswatC' && password === 'Saswat')) {
+        sessionStorage.setItem('ag_user', username)
         router.push('/portal')
       } else {
         setError('Invalid username or password. Please try again.')
