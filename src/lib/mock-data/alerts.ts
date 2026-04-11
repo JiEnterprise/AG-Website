@@ -1,0 +1,8 @@
+import type { Alert } from '@/lib/types'
+export const alerts: Alert[] = [
+  { id:'A001',severity:'critical',title:'Fee outstanding — DL2503',body:'$9.23 due December 5. 4 days remaining. November statement issued Nov 30. Payment not yet received from David Low.',relatedClientId:'DL2503',timestamp:new Date().toISOString(),read:false,actionLabel:'View billing',actionRoute:'/advisor/billing' },
+  { id:'A002',severity:'warning',title:'TSLY approaching entry zone',body:'TSLY trading at $7.18 — within target entry range $7.00–$7.20 for both DL2503 and SR2501. Pre-ex-div entry window open. Dec 5 ex-dividend approaching.',relatedSymbol:'TSLY',timestamp:new Date(Date.now()-1800000).toISOString(),read:false,actionLabel:'Review signal',actionRoute:'/advisor/signals' },
+  { id:'A003',severity:'warning',title:'TSLY ex-dividend Dec 5',body:'Ex-div date December 5, 2025. Estimated distribution $0.13–$0.15/sh. Current price $7.18. Positioning decision required by Dec 4 market close.',relatedSymbol:'TSLY',timestamp:new Date(Date.now()-3600000).toISOString(),read:false,actionLabel:'View calendar',actionRoute:'/advisor/calendar' },
+  { id:'A004',severity:'success',title:'SR2501 fee collected',body:'Rehan Shaikh November 2025 fee of $9.03 received. Account in good standing. All statements current.',relatedClientId:'SR2501',timestamp:new Date(Date.now()-86400000).toISOString(),read:true },
+  { id:'A005',severity:'success',title:'DL2503 Nov statement verified',body:'November 2025 MCS all figures reconciled. +$168.35 total return confirmed. PLUG gain: +$83.60. TSLY cycle 1: +$37.60. TSLY cycle 2: +$47.15.',relatedClientId:'DL2503',timestamp:new Date(Date.now()-172800000).toISOString(),read:true },
+]

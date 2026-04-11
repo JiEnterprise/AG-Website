@@ -139,7 +139,20 @@ export default function PortalPage() {
       ? Math.round(t.price).toLocaleString()
       : t.price.toFixed(2)
 
-  const SIDEBAR = [
+  type SidebarItem = {
+    id: PageId
+    text: string
+    icon: string
+    iconTag?: 'polyline' | 'multi-line'
+    badge?: string
+  }
+
+  type SidebarGroup = {
+    label: string
+    items: SidebarItem[]
+  }
+
+  const SIDEBAR: SidebarGroup[] = [
     { label: 'Overview', items: [
       { id: 'dashboard'   as PageId, text: 'Dashboard',        icon: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z' },
       { id: 'portfolio'   as PageId, text: 'Portfolio',         icon: 'M22 12 18 12 15 21 9 3 6 12 2 12', iconTag: 'polyline' },

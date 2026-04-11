@@ -1,0 +1,25 @@
+import type { Trade } from '@/lib/types'
+
+export const trades: Trade[] = [
+  { id:'T001',clientId:'DL2503',symbol:'TSLY',type:'BUY',shares:80,price:8.05,amount:-644.00,date:'2025-10-17',gain:null,transactionFee:0,notes:'Initial TSLY position — dividend capture',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T002',clientId:'DL2503',symbol:'TSLY',type:'DIV',shares:80,price:0.16,amount:12.80,date:'2025-10-23',gain:12.80,transactionFee:0,notes:'TSLY weekly dividend — 80sh × $0.16',executedBy:'SC001',executionVenue:'manual' },
+  { id:'T003',clientId:'DL2503',symbol:'TSLY',type:'SELL',shares:80,price:8.69,amount:695.20,date:'2025-10-29',gain:51.20,transactionFee:0,notes:'Closed TSLY — target hit',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T004',clientId:'DL2503',symbol:'PLUG',type:'BUY',shares:280,price:2.50,amount:-700.20,date:'2025-11-04',gain:null,transactionFee:0.20,notes:'PLUG mean reversion entry — contrarian thesis',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T005',clientId:'DL2503',symbol:'PLUG',type:'SELL',shares:280,price:2.80,amount:783.80,date:'2025-11-10',gain:83.60,transactionFee:0.20,notes:'PLUG closed — +12% gain, target hit',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T006',clientId:'DL2503',symbol:'TSLY',type:'BUY',shares:100,price:7.24,amount:-724.00,date:'2025-11-14',gain:null,transactionFee:0,notes:'TSLY re-entry — pre ex-div positioning',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T007',clientId:'DL2503',symbol:'TSLY',type:'BUY',shares:10,price:7.55,amount:-75.50,date:'2025-11-18',gain:null,transactionFee:0,notes:'TSLY add — averaging up on strength',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T008',clientId:'DL2503',symbol:'TSLY',type:'SELL',shares:110,price:7.61,amount:837.10,date:'2025-11-19',gain:37.60,transactionFee:0,notes:'TSLY cycle 1 closed — +$37.60',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T009',clientId:'DL2503',symbol:'TSLY',type:'BUY',shares:115,price:7.25,amount:-833.75,date:'2025-11-21',gain:null,transactionFee:0,notes:'TSLY cycle 2 — fresh entry on pullback',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T010',clientId:'DL2503',symbol:'TSLY',type:'SELL',shares:115,price:7.66,amount:880.90,date:'2025-11-25',gain:47.15,transactionFee:0,notes:'TSLY cycle 2 closed — +$47.15',executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T011',clientId:'SR2501',symbol:'TSLY',type:'BUY',shares:6,price:7.74,amount:-46.44,date:'2025-07-15',gain:null,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T012',clientId:'SR2501',symbol:'TSLY',type:'SELL',shares:6,price:7.87,amount:47.22,date:'2025-08-06',gain:0.78,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T013',clientId:'SR2501',symbol:'TSLY',type:'BUY',shares:7,price:7.55,amount:-52.85,date:'2025-08-07',gain:null,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T014',clientId:'SR2501',symbol:'TSLY',type:'SELL',shares:7,price:9.18,amount:64.26,date:'2025-09-23',gain:11.41,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T015',clientId:'SR2501',symbol:'TSLY',type:'BUY',shares:8,price:8.25,amount:-66.00,date:'2025-10-10',gain:null,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T016',clientId:'SR2501',symbol:'TSLY',type:'SELL',shares:8,price:8.69,amount:69.52,date:'2025-10-29',gain:3.52,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T017',clientId:'SR2501',symbol:'PLUG',type:'BUY',shares:28,price:2.50,amount:-70.20,date:'2025-11-04',gain:null,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T018',clientId:'SR2501',symbol:'PLUG',type:'SELL',shares:28,price:2.80,amount:78.40,date:'2025-11-10',gain:8.20,transactionFee:0.20,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T019',clientId:'SR2501',symbol:'TSLY',type:'BUY',shares:5,price:7.24,amount:-36.20,date:'2025-11-14',gain:null,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T020',clientId:'SR2501',symbol:'TSLY',type:'BUY',shares:5,price:7.55,amount:-37.75,date:'2025-11-18',gain:null,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+  { id:'T021',clientId:'SR2501',symbol:'TSLY',type:'SELL',shares:10,price:7.61,amount:76.10,date:'2025-11-19',gain:2.15,transactionFee:0,executedBy:'SC001',executionVenue:'alpaca_paper' },
+]
