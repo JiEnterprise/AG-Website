@@ -82,7 +82,7 @@ function TickerStrip({ tickers }: { tickers: TickerItem[] }) {
       <div className="ticker-inner flex items-center gap-6">
         {double.map((t, i) => (
           <span key={i} className="flex items-center gap-1.5 text-[10px] font-mono whitespace-nowrap">
-            <span className="text-[#B8AE99] tracking-wider">{t.symbol}</span>
+            <span className="text-[#86868B] tracking-wider">{t.symbol}</span>
             <span className="text-pale-gold font-medium">
               {['BTC','ETH','SOL','BNB'].includes(t.symbol)
                 ? t.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -178,8 +178,8 @@ export default function Navigation() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${
           scrolled
-            ? 'border-b border-[rgba(201,168,76,0.12)] bg-[rgba(8,8,10,0.92)] backdrop-blur-[20px]'
-            : 'bg-[rgba(8,8,10,0.75)] backdrop-blur-[12px]'
+            ? 'border-b border-[rgba(255,255,255,0.09)] bg-[rgba(0,0,0,0.84)] backdrop-blur-[20px]'
+            : 'bg-[rgba(0,0,0,0.75)] backdrop-blur-[12px]'
         }`}
       >
         <div className="max-w-[1400px] mx-auto h-full px-6 flex items-center justify-between gap-4">
@@ -213,7 +213,7 @@ export default function Navigation() {
                 onClick={() => setWhatWeDoOpen(o => !o)}
                 aria-expanded={whatWeDoOpen}
                 aria-haspopup="true"
-                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#B8AE99] hover:text-aurum-gold transition-colors duration-200"
+                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#86868B] hover:text-aurum-gold transition-colors duration-200"
               >
                 What We Do
                 <motion.span
@@ -230,7 +230,7 @@ export default function Navigation() {
               <a
                 key={link.label}
                 href={link.href}
-                className="font-dm text-[11px] tracking-[0.12em] uppercase text-[#B8AE99] hover:text-aurum-gold transition-colors duration-200"
+                className="font-dm text-[11px] tracking-[0.12em] uppercase text-[#86868B] hover:text-aurum-gold transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -247,7 +247,7 @@ export default function Navigation() {
                 onClick={() => setFirmOpen(o => !o)}
                 aria-expanded={firmOpen}
                 aria-haspopup="true"
-                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#B8AE99] hover:text-aurum-gold transition-colors duration-200"
+                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#86868B] hover:text-aurum-gold transition-colors duration-200"
               >
                 Our Firm
                 <motion.span
@@ -271,7 +271,7 @@ export default function Navigation() {
                 onClick={() => setCareersOpen(o => !o)}
                 aria-expanded={careersOpen}
                 aria-haspopup="true"
-                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#B8AE99] hover:text-aurum-gold transition-colors duration-200"
+                className="flex items-center gap-1 font-dm text-[11px] tracking-[0.12em] uppercase text-[#86868B] hover:text-aurum-gold transition-colors duration-200"
               >
                 Careers
                 <motion.span
@@ -292,7 +292,7 @@ export default function Navigation() {
             </div>
             <a
               href="/sign-in"
-              className="hidden sm:flex items-center px-5 h-9 rounded-full bg-aurum-gold text-[11px] font-dm uppercase tracking-[0.1em] font-medium text-[#0A0800] hover:bg-pale-gold transition-colors duration-200 whitespace-nowrap"
+              className="hidden sm:flex items-center px-5 h-9 rounded-full bg-aurum-gold text-[11px] font-dm uppercase tracking-[0.1em] font-medium text-[#000000] hover:bg-pale-gold transition-colors duration-200 whitespace-nowrap"
             >
               Sign In
             </a>
@@ -320,10 +320,10 @@ export default function Navigation() {
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="fixed top-16 left-0 right-0 z-40"
             style={{
-              background: 'rgba(8,8,10,0.97)',
+              background: 'rgba(0,0,0,0.88)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              borderBottom: '1px solid rgba(201,168,76,0.12)',
+              borderBottom: '1px solid rgba(255,255,255,0.09)',
             }}
             role="menu"
             aria-label="What We Do menu"
@@ -338,13 +338,13 @@ export default function Navigation() {
                   <h3 className="font-playfair text-[38px] font-normal text-pale-gold mb-3 leading-tight">
                     What We Do
                   </h3>
-                  <p className="font-dm text-[14px] text-[#B8AE99] leading-relaxed mb-7">
+                  <p className="font-dm text-[14px] text-[#86868B] leading-relaxed mb-7">
                     Learn more about how we cultivate and harness world-class intellectual capital and expertise to solve our clients&apos; most complex challenges.
                   </p>
                   <a
                     href="#products"
                     role="menuitem"
-                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#0A0800] transition-all duration-200"
+                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#000000] transition-all duration-200"
                   >
                     Explore Our Businesses
                   </a>
@@ -354,13 +354,13 @@ export default function Navigation() {
                 <div className="grid grid-cols-4 gap-8 pt-1">
                   {WHAT_WE_DO.map(col => (
                     <div key={col.group}>
-                      <p className="font-dm text-[9px] uppercase tracking-[0.22em] text-[#5A5040] mb-4 leading-tight">{col.group}</p>
+                      <p className="font-dm text-[9px] uppercase tracking-[0.22em] text-[#6E6E73] mb-4 leading-tight">{col.group}</p>
                       {col.links.map(link => (
                         <a
                           key={link.label}
                           href={link.href}
                           role="menuitem"
-                          className="block font-dm text-[14px] text-[#C8BEA8] hover:text-pale-gold py-2.5 border-b border-[rgba(201,168,76,0.07)] transition-colors duration-150 last:border-0"
+                          className="block font-dm text-[14px] text-[#F5F5F7] hover:text-pale-gold py-2.5 border-b border-[rgba(255,255,255,0.06)] transition-colors duration-150 last:border-0"
                         >
                           {link.label}
                         </a>
@@ -372,9 +372,9 @@ export default function Navigation() {
               </div>
 
               {/* Bottom bar */}
-              <div className="mt-8 pt-6 border-t border-[rgba(201,168,76,0.08)]">
-                <p className="font-dm text-[12px] text-[#6A5E50]">
-                  <span className="text-[#C8BEA8] font-medium">Serving Clients</span> — We harness every resource, insight, relationship, and competitive advantage to drive superior results for our clients.
+              <div className="mt-8 pt-6 border-t border-[rgba(255,255,255,0.07)]">
+                <p className="font-dm text-[12px] text-[#6E6E73]">
+                  <span className="text-[#F5F5F7] font-medium">Serving Clients</span> — We harness every resource, insight, relationship, and competitive advantage to drive superior results for our clients.
                 </p>
               </div>
             </div>
@@ -392,10 +392,10 @@ export default function Navigation() {
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="fixed top-16 left-0 right-0 z-40"
             style={{
-              background: 'rgba(8,8,10,0.97)',
+              background: 'rgba(0,0,0,0.88)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              borderBottom: '1px solid rgba(201,168,76,0.12)',
+              borderBottom: '1px solid rgba(255,255,255,0.09)',
             }}
             role="menu"
             aria-label="Our Firm menu"
@@ -410,13 +410,13 @@ export default function Navigation() {
                   <h3 className="font-playfair text-[38px] font-normal text-pale-gold mb-3 leading-tight">
                     Our Firm
                   </h3>
-                  <p className="font-dm text-[15px] text-[#B8AE99] leading-relaxed mb-7">
+                  <p className="font-dm text-[15px] text-[#86868B] leading-relaxed mb-7">
                     We aspire to be the world&apos;s most exceptional financial institution.
                   </p>
                   <a
                     href="#company"
                     role="menuitem"
-                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#0A0800] transition-all duration-200"
+                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#000000] transition-all duration-200"
                   >
                     About Us
                   </a>
@@ -424,7 +424,7 @@ export default function Navigation() {
 
                 {/* Right — links */}
                 <div className="pt-1">
-                  <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-[#5A5040] mb-4">
+                  <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-[#6E6E73] mb-4">
                     About AG
                   </p>
                   <div>
@@ -433,7 +433,7 @@ export default function Navigation() {
                         key={link.label}
                         href={link.href}
                         role="menuitem"
-                        className="block font-dm text-[15px] text-[#C8BEA8] hover:text-pale-gold py-3 border-b border-[rgba(201,168,76,0.07)] transition-colors duration-150 last:border-0"
+                        className="block font-dm text-[15px] text-[#F5F5F7] hover:text-pale-gold py-3 border-b border-[rgba(255,255,255,0.06)] transition-colors duration-150 last:border-0"
                       >
                         {link.label}
                       </a>
@@ -457,10 +457,10 @@ export default function Navigation() {
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="fixed top-16 left-0 right-0 z-40"
             style={{
-              background: 'rgba(8,8,10,0.97)',
+              background: 'rgba(0,0,0,0.88)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              borderBottom: '1px solid rgba(201,168,76,0.12)',
+              borderBottom: '1px solid rgba(255,255,255,0.09)',
             }}
             role="menu"
             aria-label="Careers menu"
@@ -475,14 +475,14 @@ export default function Navigation() {
                   <h3 className="font-playfair text-[38px] font-normal text-pale-gold mb-3 leading-tight">
                     Careers
                   </h3>
-                  <p className="font-dm text-[15px] text-[#B8AE99] leading-relaxed mb-7">
+                  <p className="font-dm text-[15px] text-[#86868B] leading-relaxed mb-7">
                     There are many chapters in a career.
                     There is only one Aurum Global.
                   </p>
                   <a
                     href="#careers"
                     role="menuitem"
-                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#0A0800] transition-all duration-200"
+                    className="inline-flex items-center px-5 h-10 border border-aurum-gold font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:bg-aurum-gold hover:text-[#000000] transition-all duration-200"
                   >
                     Discover Careers
                   </a>
@@ -490,7 +490,7 @@ export default function Navigation() {
 
                 {/* Right — links */}
                 <div className="pt-1">
-                  <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-[#5A5040] mb-4">
+                  <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-[#6E6E73] mb-4">
                     Working at AG
                   </p>
                   <div>
@@ -499,7 +499,7 @@ export default function Navigation() {
                         key={link.label}
                         href={link.href}
                         role="menuitem"
-                        className="block font-dm text-[15px] text-[#C8BEA8] hover:text-pale-gold py-3 border-b border-[rgba(201,168,76,0.07)] transition-colors duration-150 last:border-0"
+                        className="block font-dm text-[15px] text-[#F5F5F7] hover:text-pale-gold py-3 border-b border-[rgba(255,255,255,0.06)] transition-colors duration-150 last:border-0"
                       >
                         {link.label}
                       </a>
@@ -521,7 +521,7 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[60] bg-[rgba(8,8,10,0.97)] backdrop-blur-xl"
+            className="fixed inset-0 z-[60] bg-[rgba(0,0,0,0.88)] backdrop-blur-xl"
           >
             <button
               onClick={() => setMobileOpen(false)}
@@ -547,7 +547,7 @@ export default function Navigation() {
                   initial={{ opacity: 0, x: 40 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="font-playfair text-4xl text-pale-gold hover:text-aurum-gold transition-colors py-3 border-b border-[rgba(201,168,76,0.08)]"
+                  className="font-playfair text-4xl text-pale-gold hover:text-aurum-gold transition-colors py-3 border-b border-[rgba(255,255,255,0.07)]"
                 >
                   {link.label}
                 </motion.a>
@@ -597,7 +597,7 @@ export default function Navigation() {
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: ALL_MOBILE_LINKS.length * 0.07 + 0.2, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-7 inline-flex self-start items-center px-6 h-12 rounded-full bg-aurum-gold text-[12px] font-dm uppercase tracking-[0.1em] font-medium text-[#0A0800]"
+                className="mt-7 inline-flex self-start items-center px-6 h-12 rounded-full bg-aurum-gold text-[12px] font-dm uppercase tracking-[0.1em] font-medium text-[#000000]"
               >
                 Sign In
               </motion.a>

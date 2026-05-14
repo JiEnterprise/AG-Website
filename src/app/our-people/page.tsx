@@ -32,20 +32,20 @@ export default function OurPeoplePage() {
     <main className="bg-obsidian text-pale-gold min-h-screen">
 
       {/* ── Hero with background image ── */}
-      <section className="relative min-h-[92vh] flex flex-col justify-end border-b border-[rgba(201,168,76,0.1)] overflow-hidden">
+      <section className="relative min-h-[92vh] flex flex-col justify-end border-b border-[rgba(255,255,255,0.09)] overflow-hidden">
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/people-hero.jpg')" }}
         />
         {/* Dark overlay — stronger at bottom for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(7,7,10,0.45)] via-[rgba(7,7,10,0.55)] to-[rgba(7,7,10,0.88)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.45)] via-[rgba(0,0,0,0.55)] to-[rgba(0,0,0,0.84)]" />
 
         {/* Back link — top left */}
         <div className="absolute top-28 left-6 sm:left-10 z-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[rgba(201,168,76,0.3)] font-dm text-[11px] uppercase tracking-[0.12em] text-[#C8BEA8] hover:text-pale-gold hover:border-aurum-gold transition-all duration-200 backdrop-blur-sm bg-[rgba(0,0,0,0.2)]"
+            className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[rgba(255,255,255,0.18)] font-dm text-[11px] uppercase tracking-[0.12em] text-[#F5F5F7] hover:text-pale-gold hover:border-aurum-gold transition-all duration-200 backdrop-blur-sm bg-[rgba(0,0,0,0.2)]"
           >
             <ArrowLeft size={13} strokeWidth={1.75} />
             Back to Site
@@ -58,21 +58,21 @@ export default function OurPeoplePage() {
           <h1 className="font-playfair text-[52px] sm:text-[72px] leading-[1.05] text-pale-gold max-w-[820px] mb-8">
             The People of<br />Aurum Global<br />Are Aurum Global.
           </h1>
-          <p className="font-dm text-[16px] leading-relaxed text-[#C8BEA8] max-w-[620px]">
+          <p className="font-dm text-[16px] leading-relaxed text-[#F5F5F7] max-w-[620px]">
             Our people are our greatest asset — we say it often and with good reason. It is only with the determination and dedication of our people that we can serve our clients, generate long-term value, and contribute meaningfully to our communities.
           </p>
         </div>
       </section>
 
       {/* ── Founder quote ── */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(201,168,76,0.1)]">
+      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(255,255,255,0.09)]">
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-16 items-center">
           <div>
             <p className="font-playfair text-[28px] sm:text-[34px] italic text-pale-gold leading-[1.35] mb-10">
               &ldquo;Our culture is what defines us — it is our identity and it is at the heart of everything we do for our clients.&rdquo;
             </p>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-[rgba(201,168,76,0.3)]">
+              <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-[rgba(255,255,255,0.18)]">
                 <img src="/saswat-profile.jpeg" alt="Saswat C." style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 50%' }} />
               </div>
               <div>
@@ -81,7 +81,7 @@ export default function OurPeoplePage() {
               </div>
             </div>
           </div>
-          <div className="rounded-2xl border border-[rgba(201,168,76,0.14)] bg-[rgba(17,17,20,0.7)] p-8 backdrop-blur-sm">
+          <div className="rounded-2xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.05)] p-8 backdrop-blur-sm">
             <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-muted-gold mb-5">Our Values</p>
             {[
               { title: 'Client First', desc: 'Every decision begins and ends with what is best for our clients.' },
@@ -89,11 +89,11 @@ export default function OurPeoplePage() {
               { title: 'Excellence', desc: 'We pursue exceptional outcomes — for clients, shareholders, and communities.' },
               { title: 'Partnership', desc: 'We succeed together. Our people collaborate across every level and discipline.' },
             ].map(v => (
-              <div key={v.title} className="flex gap-4 py-4 border-b border-[rgba(201,168,76,0.07)] last:border-0">
+              <div key={v.title} className="flex gap-4 py-4 border-b border-[rgba(255,255,255,0.06)] last:border-0">
                 <div className="w-1 h-1 mt-2 rounded-full bg-aurum-gold flex-shrink-0" />
                 <div>
                   <p className="font-dm text-[13px] font-medium text-pale-gold mb-1">{v.title}</p>
-                  <p className="font-dm text-[12px] text-[#8A8070] leading-relaxed">{v.desc}</p>
+                  <p className="font-dm text-[12px] text-[#86868B] leading-relaxed">{v.desc}</p>
                 </div>
               </div>
             ))}
@@ -102,10 +102,10 @@ export default function OurPeoplePage() {
       </section>
 
       {/* ── Leadership ── */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(201,168,76,0.1)]">
+      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(255,255,255,0.09)]">
         <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-4">Leadership</p>
         <h2 className="font-playfair text-[42px] text-pale-gold mb-4">Our Leadership</h2>
-        <p className="font-dm text-[15px] text-[#B8AE99] leading-relaxed max-w-[600px] mb-14">
+        <p className="font-dm text-[15px] text-[#86868B] leading-relaxed max-w-[600px] mb-14">
           Aurum Global leaders are committed to ensuring the firm operates at the highest possible level — for our clients, our shareholders, and our people.
         </p>
 
@@ -118,11 +118,11 @@ export default function OurPeoplePage() {
           ].map(l => (
             <div
               key={l.title}
-              className="group rounded-2xl border border-[rgba(201,168,76,0.12)] bg-[rgba(17,17,20,0.6)] p-7 hover:border-[rgba(201,168,76,0.32)] hover:-translate-y-1 transition-all duration-200 cursor-pointer"
+              className="group rounded-2xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.04)] p-7 hover:border-[rgba(255,255,255,0.20)] hover:-translate-y-1 transition-all duration-200 cursor-pointer"
             >
               <div className="text-2xl text-aurum-gold mb-5 opacity-70">{l.icon}</div>
               <h3 className="font-playfair text-[20px] text-pale-gold mb-3">{l.title}</h3>
-              <p className="font-dm text-[13px] text-[#8A8070] leading-relaxed mb-5">{l.desc}</p>
+              <p className="font-dm text-[13px] text-[#86868B] leading-relaxed mb-5">{l.desc}</p>
               <span className="inline-flex items-center gap-1.5 font-dm text-[11px] uppercase tracking-[0.1em] text-aurum-gold group-hover:gap-3 transition-all duration-200">
                 View <ArrowRight size={12} strokeWidth={1.75} />
               </span>
@@ -131,15 +131,15 @@ export default function OurPeoplePage() {
         </div>
 
         {/* Founder profile */}
-        <div className="rounded-2xl border border-[rgba(201,168,76,0.18)] bg-[rgba(17,17,20,0.7)] p-8 sm:p-10 flex flex-col sm:flex-row gap-8 items-start">
-          <div className="w-20 h-20 rounded-full flex-shrink-0 overflow-hidden border-2 border-[rgba(201,168,76,0.3)]" style={{ boxShadow: '0 0 0 3px rgba(201,168,76,0.12)' }}>
+        <div className="rounded-2xl border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.05)] p-8 sm:p-10 flex flex-col sm:flex-row gap-8 items-start">
+          <div className="w-20 h-20 rounded-full flex-shrink-0 overflow-hidden border-2 border-[rgba(255,255,255,0.18)]" style={{ boxShadow: '0 0 0 3px rgba(255,255,255,0.09)' }}>
             <img src="/saswat-profile.jpeg" alt="Saswat C." style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 50%' }} />
           </div>
           <div className="flex-1">
             <p className="font-dm text-[10px] uppercase tracking-[0.22em] text-muted-gold mb-2">Leadership</p>
             <h3 className="font-playfair text-[28px] text-pale-gold mb-1">Saswat C.</h3>
             <p className="font-dm text-[12px] uppercase tracking-[0.14em] text-aurum-gold mb-5">Chairman and Chief Executive Officer</p>
-            <p className="font-dm text-[14px] text-[#8A8070] leading-relaxed max-w-[680px]">
+            <p className="font-dm text-[14px] text-[#86868B] leading-relaxed max-w-[680px]">
               Saswat founded Aurum Global with the conviction that institutional-grade wealth management should be accessible, transparent, and relentlessly client-focused. With a background spanning private equity, alternative assets, and quantitative strategy, he leads the firm's investment process and client relationships directly.
             </p>
           </div>
@@ -147,18 +147,18 @@ export default function OurPeoplePage() {
       </section>
 
       {/* ── Voices of the Firm ── */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(201,168,76,0.1)]">
+      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(255,255,255,0.09)]">
         <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-4">Our People</p>
         <div className="flex items-end justify-between mb-12">
           <h2 className="font-playfair text-[42px] text-pale-gold leading-tight">Voices of the Firm</h2>
-          <p className="hidden sm:block font-dm text-[13px] text-[#6A5E50] max-w-[340px] text-right">
+          <p className="hidden sm:block font-dm text-[13px] text-[#6E6E73] max-w-[340px] text-right">
             Our people share their experiences, insights, and reflections on what it means to be a part of Aurum Global.
           </p>
         </div>
 
         {/* Testimonial slider */}
         <div className="relative">
-          <div className="rounded-2xl border border-[rgba(201,168,76,0.14)] bg-[rgba(17,17,20,0.7)] p-10 sm:p-14 min-h-[240px] transition-all duration-300">
+          <div className="rounded-2xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.05)] p-10 sm:p-14 min-h-[240px] transition-all duration-300">
             <p className="font-playfair text-[22px] sm:text-[26px] italic text-pale-gold leading-[1.4] mb-8">
               &ldquo;{TESTIMONIALS[activeSlide].quote}&rdquo;
             </p>
@@ -179,7 +179,7 @@ export default function OurPeoplePage() {
               <button
                 key={i}
                 onClick={() => setActiveSlide(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === activeSlide ? 'w-8 bg-aurum-gold' : 'w-3 bg-[rgba(201,168,76,0.25)]'}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === activeSlide ? 'w-8 bg-aurum-gold' : 'w-3 bg-[rgba(255,255,255,0.16)]'}`}
               />
             ))}
             <span className="font-dm text-[10px] text-muted-gold ml-2">Slide {activeSlide + 1} of {TESTIMONIALS.length}</span>
@@ -187,19 +187,19 @@ export default function OurPeoplePage() {
         </div>
 
         <div className="mt-10">
-          <a href="#company" className="inline-flex items-center gap-2 font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold border border-aurum-gold px-6 h-11 hover:bg-aurum-gold hover:text-[#0A0800] transition-all duration-200">
+          <a href="#company" className="inline-flex items-center gap-2 font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold border border-aurum-gold px-6 h-11 hover:bg-aurum-gold hover:text-[#000000] transition-all duration-200">
             Meet Our People <ArrowRight size={13} strokeWidth={1.75} />
           </a>
         </div>
       </section>
 
       {/* ── Diversity ── */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(201,168,76,0.1)]">
+      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(255,255,255,0.09)]">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-4">Life at AG</p>
             <h2 className="font-playfair text-[38px] text-pale-gold mb-5 leading-tight">Our Commitment<br />to Diversity</h2>
-            <p className="font-dm text-[14px] text-[#B8AE99] leading-relaxed mb-8">
+            <p className="font-dm text-[14px] text-[#86868B] leading-relaxed mb-8">
               Our people are our greatest asset. We believe that a major strength and principal reason for our success is the quality, dedication, determination, and collaboration of our people — which enables us to serve our clients, generate long-term value for our shareholders, and contribute to the broader community.
             </p>
             <a href="#company" className="inline-flex items-center gap-2 font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold hover:text-pale-gold transition-colors duration-200">
@@ -213,9 +213,9 @@ export default function OurPeoplePage() {
               { label: 'Women in Leadership', value: '44%' },
               { label: 'Client Satisfaction', value: '98%' },
             ].map(s => (
-              <div key={s.label} className="rounded-xl border border-[rgba(201,168,76,0.12)] bg-[rgba(17,17,20,0.6)] p-6">
+              <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.04)] p-6">
                 <p className="font-playfair text-[38px] text-aurum-gold mb-2">{s.value}</p>
-                <p className="font-dm text-[11px] text-[#6A5E50] leading-relaxed uppercase tracking-wider">{s.label}</p>
+                <p className="font-dm text-[11px] text-[#6E6E73] leading-relaxed uppercase tracking-wider">{s.label}</p>
               </div>
             ))}
           </div>
@@ -223,15 +223,15 @@ export default function OurPeoplePage() {
       </section>
 
       {/* ── Alumni ── */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(201,168,76,0.1)]">
+      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(255,255,255,0.09)]">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div>
             <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-4">Alumni</p>
             <h2 className="font-playfair text-[38px] text-pale-gold mb-5 leading-tight">A Strong and Active<br />Alumni Network</h2>
-            <p className="font-dm text-[14px] text-[#B8AE99] leading-relaxed mb-8">
+            <p className="font-dm text-[14px] text-[#86868B] leading-relaxed mb-8">
               Our people become a part of Aurum Global's history, and the firm becomes a part of theirs. Our alumni network keeps former colleagues around the world connected to the firm and one another, creating opportunities for business collaboration, thought leadership, and lasting relationships.
             </p>
-            <a href="#company" className="inline-flex items-center gap-2 font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold border border-aurum-gold px-6 h-11 hover:bg-aurum-gold hover:text-[#0A0800] transition-all duration-200">
+            <a href="#company" className="inline-flex items-center gap-2 font-dm text-[12px] uppercase tracking-[0.1em] text-aurum-gold border border-aurum-gold px-6 h-11 hover:bg-aurum-gold hover:text-[#000000] transition-all duration-200">
               Explore our Alumni Network <ArrowRight size={13} strokeWidth={1.75} />
             </a>
           </div>
@@ -241,7 +241,7 @@ export default function OurPeoplePage() {
               { value: '40+',    label: 'Countries Represented',   note: 'Global reach across 6 continents' },
               { value: '120+',   label: 'Alumni in Executive Roles at Leading Firms', note: 'C-Suite, MD, and Founder-level positions' },
             ].map(s => (
-              <div key={s.label} className="rounded-xl border border-[rgba(201,168,76,0.12)] bg-[rgba(17,17,20,0.6)] p-6 flex gap-6 items-center">
+              <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.04)] p-6 flex gap-6 items-center">
                 <p className="font-playfair text-[36px] text-aurum-gold flex-shrink-0">{s.value}</p>
                 <div>
                   <p className="font-dm text-[13px] text-pale-gold font-medium mb-1">{s.label}</p>
@@ -258,7 +258,7 @@ export default function OurPeoplePage() {
         <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-4">Discover Aurum Global</p>
         <div className="flex items-end justify-between mb-10">
           <h2 className="font-playfair text-[38px] text-pale-gold">Explore More</h2>
-          <p className="hidden sm:block font-dm text-[13px] text-[#6A5E50] max-w-[340px] text-right">Learn more about life at Aurum Global and our impact on the communities in which we live and work.</p>
+          <p className="hidden sm:block font-dm text-[13px] text-[#6E6E73] max-w-[340px] text-right">Learn more about life at Aurum Global and our impact on the communities in which we live and work.</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
@@ -270,9 +270,9 @@ export default function OurPeoplePage() {
             <a
               key={l.title}
               href={l.href}
-              className="group rounded-xl border border-[rgba(201,168,76,0.1)] bg-[rgba(17,17,20,0.5)] p-6 hover:border-[rgba(201,168,76,0.3)] hover:-translate-y-1 transition-all duration-200"
+              className="group rounded-xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.04)] p-6 hover:border-[rgba(255,255,255,0.18)] hover:-translate-y-1 transition-all duration-200"
             >
-              <p className="font-dm text-[14px] text-[#C8BEA8] group-hover:text-pale-gold transition-colors duration-150 mb-4">{l.title}</p>
+              <p className="font-dm text-[14px] text-[#F5F5F7] group-hover:text-pale-gold transition-colors duration-150 mb-4">{l.title}</p>
               <ArrowRight size={14} strokeWidth={1.75} className="text-aurum-gold opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </a>
           ))}

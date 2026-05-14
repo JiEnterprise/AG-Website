@@ -141,7 +141,7 @@ function ForceGraph({ onSelect }: { onSelect: (id: string | null) => void }) {
               key={i}
               x1={`${sA.x}%`} y1={`${sA.y}%`}
               x2={`${sB.x}%`} y2={`${sB.y}%`}
-              stroke="rgba(201,168,76,0.25)"
+              stroke="rgba(255,255,255,0.16)"
               strokeWidth={isActive ? '0.4' : '0.2'}
               className="transition-all duration-300"
             />
@@ -168,7 +168,7 @@ function ForceGraph({ onSelect }: { onSelect: (id: string | null) => void }) {
                 <circle
                   cx={`${s.x}%`} cy={`${s.y}%`} r="3.2"
                   fill="none"
-                  stroke="rgba(201,168,76,0.4)"
+                  stroke="rgba(255,255,255,0.25)"
                   strokeWidth="0.5"
                   className="animate-pulse-slow"
                 />
@@ -208,7 +208,7 @@ function StrategyPanel({ strategyId }: { strategyId: string | null }) {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-carbon border border-[rgba(201,168,76,0.1)] rounded-xl p-6 min-h-[160px]"
+      className="bg-carbon border border-[rgba(255,255,255,0.09)] rounded-xl p-6 min-h-[160px]"
     >
       {strategy ? (
         <>
@@ -338,17 +338,17 @@ function CodeBlock() {
   return (
     <div
       ref={ref}
-      className="bg-[#060608] border border-[rgba(201,168,76,0.1)] rounded-xl overflow-hidden"
+      className="bg-[#060608] border border-[rgba(255,255,255,0.09)] rounded-xl overflow-hidden"
     >
       {/* Code bar */}
-      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-[rgba(201,168,76,0.08)]">
+      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-[rgba(255,255,255,0.07)]">
         <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
         <div className="w-2 h-2 rounded-full bg-[#FEBC2E]" />
         <div className="w-2 h-2 rounded-full bg-[#28C840]" />
         <span className="ml-3 font-mono text-[10px] text-muted-gold">agquant_strategy.py</span>
       </div>
       <pre className="p-4 overflow-x-auto">
-        <code className="font-mono text-[11px] text-[#B8AE99] leading-[1.7] whitespace-pre">
+        <code className="font-mono text-[11px] text-[#86868B] leading-[1.7] whitespace-pre">
           {displayed}
           {started && displayed.length < PYTHON_CODE.length && (
             <span className="terminal-cursor" />
@@ -394,7 +394,7 @@ export default function QuantSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 font-dm text-[15px] text-[#B8AE99] max-w-[560px] mx-auto leading-relaxed"
+            className="mt-5 font-dm text-[15px] text-[#86868B] max-w-[560px] mx-auto leading-relaxed"
           >
             Institutional quantitative strategies, automated execution, and
             AI-enhanced market analysis.
@@ -412,7 +412,7 @@ export default function QuantSection() {
         </div>
 
         {/* Metrics */}
-        <div className="grid grid-cols-3 gap-8 mb-14 border-y border-[rgba(201,168,76,0.1)] py-10">
+        <div className="grid grid-cols-3 gap-8 mb-14 border-y border-[rgba(255,255,255,0.09)] py-10">
           {[
             { value: 2.84, label: 'Avg Sharpe Ratio', suffix: '', decimals: 2 },
             { value: 68.3, label: 'Average Win Rate', suffix: '%', decimals: 1 },

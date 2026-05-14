@@ -146,7 +146,7 @@ function NewsScroll() {
         transition={{ duration: 0.3 }}
         className="absolute inset-0 flex items-center"
       >
-        <span className="font-mono text-[9px] text-[#7A7060] whitespace-nowrap">
+        <span className="font-mono text-[9px] text-[#86868B] whitespace-nowrap">
           <span className="text-aurum-gold mr-2">▶</span>
           {NEWS_ITEMS[idx]}
         </span>
@@ -204,7 +204,7 @@ export default function TerminalSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 font-lora text-[16px] text-[#B8AE99] leading-[1.8] max-w-[480px]"
+              className="mt-6 font-lora text-[16px] text-[#86868B] leading-[1.8] max-w-[480px]"
             >
               The AG Terminal delivers institutional-grade market intelligence to
               private traders and wealth managers. Real-time data, AI-powered
@@ -231,7 +231,7 @@ export default function TerminalSection() {
                     hidden: { opacity: 0, x: -16 },
                     visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
                   }}
-                  className="flex items-center gap-3 font-dm text-[14px] text-[#B8AE99]"
+                  className="flex items-center gap-3 font-dm text-[14px] text-[#86868B]"
                 >
                   <span className="flex-shrink-0 w-5 h-5 rounded-full border border-aurum-gold flex items-center justify-center">
                     <Check size={10} className="text-aurum-gold" strokeWidth={2.5} />
@@ -251,13 +251,13 @@ export default function TerminalSection() {
             >
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-7 h-11 rounded-full bg-aurum-gold text-[12px] font-dm font-medium uppercase tracking-[0.08em] text-[#0A0800] hover:bg-pale-gold transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-7 h-11 rounded-full bg-aurum-gold text-[12px] font-dm font-medium uppercase tracking-[0.08em] text-[#000000] hover:bg-pale-gold transition-colors duration-200"
               >
                 Start Free Trial
               </a>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 px-7 h-11 rounded-full border border-[rgba(201,168,76,0.4)] text-[12px] font-dm uppercase tracking-[0.08em] text-aurum-gold hover:border-aurum-gold transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-7 h-11 rounded-full border border-[rgba(255,255,255,0.25)] text-[12px] font-dm uppercase tracking-[0.08em] text-aurum-gold hover:border-aurum-gold transition-colors duration-200"
               >
                 View Documentation
                 <ArrowUpRight size={13} />
@@ -281,7 +281,7 @@ export default function TerminalSection() {
               }}
             >
               {/* Terminal chrome bar */}
-              <div className="flex items-center justify-between px-4 py-2.5 border-b border-[rgba(201,168,76,0.08)]">
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-[rgba(255,255,255,0.07)]">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
@@ -298,7 +298,7 @@ export default function TerminalSection() {
                   {tickers.slice(0, 4).map(t => (
                     <div
                       key={t.symbol}
-                      className="bg-[#070709] rounded p-2 border border-[rgba(201,168,76,0.06)]"
+                      className="bg-[#070709] rounded p-2 border border-[rgba(255,255,255,0.05)]"
                     >
                       <div className="font-mono text-[9px] text-muted-gold">{t.symbol}</div>
                       <div className="font-mono text-[11px] text-pale-gold font-medium">

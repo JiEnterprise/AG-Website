@@ -32,7 +32,7 @@ export default function StatsBar() {
               className="text-center"
             >
               <div
-                className="font-playfair font-bold text-[#0A0900]"
+                className="font-playfair font-bold text-[#000000]"
                 style={{ fontSize: 'clamp(44px, 5.5vw, 68px)' }}
               >
                 <CountUp

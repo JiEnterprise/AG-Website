@@ -72,7 +72,7 @@ export default function HeroSection() {
       <div
         className="absolute bottom-0 left-0 right-0 h-40 z-[2] pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, transparent, #08080A)',
+          background: 'linear-gradient(to bottom, transparent, #000000)',
         }}
         aria-hidden="true"
       />
@@ -110,7 +110,7 @@ export default function HeroSection() {
         {/* Sub */}
         <motion.p
           variants={itemVariants}
-          className="mt-7 font-dm text-[17px] text-[#B8AE99] max-w-[560px] leading-relaxed"
+          className="mt-7 font-dm text-[17px] text-[#86868B] max-w-[560px] leading-relaxed"
         >
           Multi-asset intelligence. Institutional-grade execution.
           AI-powered insight. One unified platform.
@@ -123,14 +123,14 @@ export default function HeroSection() {
         >
           <a
             href="#terminal"
-            className="group relative inline-flex items-center gap-2 px-8 h-12 rounded-full bg-aurum-gold text-[13px] font-dm font-medium uppercase tracking-[0.08em] text-[#0A0800] overflow-hidden transition-all duration-300 hover:shadow-[0_0_32px_rgba(201,168,76,0.35)]"
+            className="group relative inline-flex items-center gap-2 px-8 h-12 rounded-full bg-aurum-gold text-[13px] font-dm font-medium uppercase tracking-[0.08em] text-[#000000] overflow-hidden transition-all duration-300 hover:shadow-[0_0_32px_rgba(255,255,255,0.22)]"
           >
             <span className="relative z-10">Explore Platform</span>
             <div className="absolute inset-0 bg-pale-gold scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out" />
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center px-8 h-12 rounded-full border border-aurum-gold text-[13px] font-dm font-medium uppercase tracking-[0.08em] text-aurum-gold transition-all duration-300 hover:bg-aurum-gold hover:text-[#0A0800]"
+            className="inline-flex items-center px-8 h-12 rounded-full border border-aurum-gold text-[13px] font-dm font-medium uppercase tracking-[0.08em] text-aurum-gold transition-all duration-300 hover:bg-aurum-gold hover:text-[#000000]"
           >
             Request Demo
           </a>

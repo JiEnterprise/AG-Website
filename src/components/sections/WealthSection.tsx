@@ -81,7 +81,7 @@ export default function WealthSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8 font-lora text-[16px] text-[#3A3328] leading-[1.8] max-w-[520px]"
+              className="mt-8 font-lora text-[16px] text-[#6E6E73] leading-[1.8] max-w-[520px]"
             >
               Our Private Wealth Management division provides bespoke portfolio
               management for high-net-worth individuals, family offices, and
@@ -104,7 +104,7 @@ export default function WealthSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               href="#contact"
-              className="mt-8 inline-flex items-center px-7 h-12 rounded-full border border-[#1A1510] text-[12px] font-dm font-medium uppercase tracking-[0.1em] text-[#1A1510] hover:bg-aurum-gold hover:border-aurum-gold hover:text-[#0A0800] transition-all duration-300"
+              className="mt-8 inline-flex items-center px-7 h-12 rounded-full border border-[#1A1510] text-[12px] font-dm font-medium uppercase tracking-[0.1em] text-[#1A1510] hover:bg-aurum-gold hover:border-aurum-gold hover:text-[#000000] transition-all duration-300"
             >
               Schedule Consultation
             </motion.a>

@@ -59,7 +59,7 @@ export default function ContactSection() {
   }
 
   const inputClass =
-    'w-full h-11 px-4 bg-[#0A0A0C] border border-[rgba(201,168,76,0.12)] rounded-lg font-dm text-[13px] text-pale-gold placeholder:text-muted-gold focus:outline-none focus:border-aurum-gold transition-colors duration-200'
+    'w-full h-11 px-4 bg-[#0A0A0C] border border-[rgba(255,255,255,0.09)] rounded-lg font-dm text-[13px] text-pale-gold placeholder:text-muted-gold focus:outline-none focus:border-aurum-gold transition-colors duration-200'
 
   const labelClass = 'block font-dm text-[11px] uppercase tracking-[0.12em] text-muted-gold mb-1.5'
 
@@ -98,7 +98,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 font-dm text-[16px] text-[#B8AE99] max-w-[560px] mx-auto leading-relaxed"
+            className="mt-5 font-dm text-[16px] text-[#86868B] max-w-[560px] mx-auto leading-relaxed"
           >
             Join Aurum Global and access institutional-grade financial services,
             technology, and intelligence.
@@ -126,7 +126,7 @@ export default function ContactSection() {
                     <Check size={28} className="text-gain" />
                   </div>
                   <h3 className="font-playfair text-[26px] text-pale-gold">Request Submitted</h3>
-                  <p className="mt-3 font-dm text-[14px] text-[#B8AE99] max-w-[320px] leading-relaxed">
+                  <p className="mt-3 font-dm text-[14px] text-[#86868B] max-w-[320px] leading-relaxed">
                     A member of our team will contact you within one business day.
                     We look forward to discussing your goals.
                   </p>
@@ -215,8 +215,8 @@ export default function ContactSection() {
                             onClick={() => toggleProduct(p)}
                             className={`px-3 py-1.5 rounded-full text-[11px] font-dm border transition-all duration-200 ${
                               selected
-                                ? 'bg-aurum-gold border-aurum-gold text-[#0A0800] font-medium'
-                                : 'border-[rgba(201,168,76,0.2)] text-muted-gold hover:border-aurum-gold hover:text-pale-gold'
+                                ? 'bg-aurum-gold border-aurum-gold text-[#000000] font-medium'
+                                : 'border-[rgba(255,255,255,0.13)] text-muted-gold hover:border-aurum-gold hover:text-pale-gold'
                             }`}
                             aria-pressed={selected}
                           >
@@ -250,7 +250,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full h-12 rounded-full bg-aurum-gold text-[13px] font-dm font-medium uppercase tracking-[0.1em] text-[#0A0800] hover:bg-pale-gold hover:shadow-[0_0_32px_rgba(201,168,76,0.3)] transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-2"
+                    className="w-full h-12 rounded-full bg-aurum-gold text-[13px] font-dm font-medium uppercase tracking-[0.1em] text-[#000000] hover:bg-pale-gold hover:shadow-[0_0_32px_rgba(255,255,255,0.18)] transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-2"
                   >
                     {status === 'loading' ? (
                       <>
@@ -292,7 +292,7 @@ export default function ContactSection() {
                     className="text-aurum-gold flex-shrink-0 mt-1.5"
                     fill="#C9A84C"
                   />
-                  <span className="font-dm text-[15px] text-[#B8AE99] leading-relaxed">
+                  <span className="font-dm text-[15px] text-[#86868B] leading-relaxed">
                     {bullet}
                   </span>
                 </motion.li>
@@ -300,7 +300,7 @@ export default function ContactSection() {
             </ul>
 
             {/* Trust indicators */}
-            <div className="mt-12 pt-8 border-t border-[rgba(201,168,76,0.1)]">
+            <div className="mt-12 pt-8 border-t border-[rgba(255,255,255,0.09)]">
               <div className="grid grid-cols-2 gap-6">
                 {[
                   { label: 'Regulated', sub: 'Registered Investment Advisor' },

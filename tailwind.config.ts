@@ -10,16 +10,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        obsidian: '#08080A',
-        carbon: '#111114',
-        elevated: '#1A1A1E',
-        'aurum-gold': '#C9A84C',
-        'pale-gold': '#E8D5A3',
-        'muted-gold': '#5A5040',
-        'off-white': '#F5F3EE',
-        'border-gold': 'rgba(201,168,76,0.15)',
-        gain: '#2D8C5E',
-        loss: '#D44B3A',
+        obsidian: '#000000',         // Apple pure black
+        carbon: '#111111',           // Apple elevated surface
+        elevated: '#1C1C1E',         // Apple secondary background
+        'aurum-gold': '#C9A84C',     // Brand gold accent — keep
+        'pale-gold': '#F5F5F7',      // Apple near-white (main text)
+        'muted-gold': '#6E6E73',     // Apple tertiary text
+        'off-white': '#F5F5F7',
+        'border-gold': 'rgba(255,255,255,0.09)',
+        'apple-blue': '#0071E3',
+        gain: '#30D158',             // Apple system green
+        loss: '#FF453A',             // Apple system red
       },
       fontFamily: {
         playfair: ['var(--font-playfair)', 'Georgia', 'serif'],
@@ -29,7 +30,7 @@ const config: Config = {
       },
       backgroundImage: {
         'gold-gradient': 'linear-gradient(135deg, #C9A84C 0%, #8B6E2E 100%)',
-        'dark-radial': 'radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%)',
+        'dark-radial': 'radial-gradient(ellipse at center, rgba(120,119,198,0.06) 0%, transparent 70%)',
       },
       animation: {
         'ticker-scroll': 'ticker-scroll 30s linear infinite',

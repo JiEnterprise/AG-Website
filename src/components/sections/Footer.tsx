@@ -46,7 +46,7 @@ const SOCIAL = [
 function FooterTicker({ tickers }: { tickers: TickerItem[] }) {
   const double = [...tickers, ...tickers]
   return (
-    <div className="overflow-hidden border-b border-[rgba(201,168,76,0.08)]" aria-label="Live market data">
+    <div className="overflow-hidden border-b border-[rgba(255,255,255,0.07)]" aria-label="Live market data">
       <div className="py-3 ticker-inner flex items-center gap-6">
         {double.map((t, i) => (
           <span key={i} className="flex items-center gap-1.5 text-[10px] font-mono whitespace-nowrap">
@@ -80,7 +80,7 @@ export default function Footer() {
   return (
     <footer
       className="bg-[#050506]"
-      style={{ borderTop: '1px solid rgba(201,168,76,0.08)' }}
+      style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
       aria-label="Site footer"
     >
       <FooterTicker tickers={tickers} />
@@ -180,10 +180,10 @@ export default function Footer() {
                 type="email"
                 placeholder="your@email.com"
                 aria-label="Newsletter email"
-                className="flex-1 min-w-0 h-9 px-3 bg-carbon border border-[rgba(201,168,76,0.12)] rounded-lg font-dm text-[12px] text-pale-gold placeholder:text-muted-gold focus:outline-none focus:border-aurum-gold transition-colors"
+                className="flex-1 min-w-0 h-9 px-3 bg-carbon border border-[rgba(255,255,255,0.09)] rounded-lg font-dm text-[12px] text-pale-gold placeholder:text-muted-gold focus:outline-none focus:border-aurum-gold transition-colors"
               />
               <button
-                className="h-9 px-4 rounded-lg bg-aurum-gold text-[11px] font-dm font-medium text-[#0A0800] hover:bg-pale-gold transition-colors whitespace-nowrap"
+                className="h-9 px-4 rounded-lg bg-aurum-gold text-[11px] font-dm font-medium text-[#000000] hover:bg-pale-gold transition-colors whitespace-nowrap"
                 aria-label="Subscribe to newsletter"
               >
                 Join
@@ -204,7 +204,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-[rgba(201,168,76,0.06)] py-5">
+      <div className="border-t border-[rgba(255,255,255,0.05)] py-5">
         <div className="max-w-[1400px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="font-dm text-[11px] text-muted-gold">
             © 2025 Aurum Global Inc. All rights reserved.

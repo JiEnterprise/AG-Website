@@ -79,7 +79,7 @@ export default function PortalPage() {
       ctx.beginPath()
       ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y)
       ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1; ctx.stroke()
-      ctx.fillStyle = '#3A3328'; ctx.font = '8px monospace'
+      ctx.fillStyle = '#6E6E73'; ctx.font = '8px monospace'
       ctx.fillText(`$${val}`, 0, y + 3)
     })
     ctx.setLineDash([])
@@ -113,14 +113,14 @@ export default function PortalPage() {
     ctx.strokeStyle = lineGrad; ctx.lineWidth = 1.8; ctx.stroke()
 
     // X labels
-    ctx.fillStyle = '#3A3328'; ctx.font = '8px monospace'
+    ctx.fillStyle = '#6E6E73'; ctx.font = '8px monospace'
     ctx.fillText('Oct 15', PAD.l, h - 6)
     ctx.fillText('Nov 30', w - PAD.r - 28, h - 6)
 
     // End dot glow
     const lx = toX(data.length - 1), ly = toY(data[data.length - 1])
     const glow = ctx.createRadialGradient(lx, ly, 0, lx, ly, 8)
-    glow.addColorStop(0, 'rgba(201,168,76,0.35)')
+    glow.addColorStop(0, 'rgba(255,255,255,0.22)')
     glow.addColorStop(1, 'transparent')
     ctx.beginPath(); ctx.arc(lx, ly, 8, 0, Math.PI * 2)
     ctx.fillStyle = glow; ctx.fill()
@@ -180,21 +180,21 @@ export default function PortalPage() {
   // Not activated
   if (!currentUser || !currentUser.activated) {
     return (
-      <div style={{ background: '#07070A', color: '#E2DDD4', minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 0 }}>
+      <div style={{ background: '#000000', color: '#F5F5F7', minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, maxWidth: 460, textAlign: 'center', padding: '0 24px' }}>
-          <div style={{ width: 56, height: 56, border: '1.5px solid rgba(201,168,76,0.4)', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 700, color: '#C9A84C', letterSpacing: '0.04em', marginBottom: 4 }}>AG</div>
-          <div style={{ fontSize: 22, fontWeight: 600, color: '#E8DDD0', letterSpacing: '-0.01em' }}>Portal Not Yet Activated</div>
-          <div style={{ fontSize: 14, color: '#5A5040', lineHeight: 1.7 }}>
+          <div style={{ width: 56, height: 56, border: '1.5px solid rgba(255,255,255,0.25)', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 700, color: '#C9A84C', letterSpacing: '0.04em', marginBottom: 4 }}>AG</div>
+          <div style={{ fontSize: 22, fontWeight: 600, color: '#F5F5F7', letterSpacing: '-0.01em' }}>Portal Not Yet Activated</div>
+          <div style={{ fontSize: 14, color: '#6E6E73', lineHeight: 1.7 }}>
             Your account hasn&apos;t been assigned a portal yet.<br />
             Please speak with your Aurum Global advisor to get started.
           </div>
-          <div style={{ marginTop: 8, padding: '16px 24px', background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 12 }}>
-            <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#8A7050', marginBottom: 6 }}>Next Step</div>
+          <div style={{ marginTop: 8, padding: '16px 24px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12 }}>
+            <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#86868B', marginBottom: 6 }}>Next Step</div>
             <div style={{ fontSize: 15, color: '#C9A84C', fontWeight: 500 }}>Ask Your Advisor For Activation</div>
           </div>
           <button
             onClick={() => { sessionStorage.removeItem('ag_user'); router.push('/') }}
-            style={{ marginTop: 8, fontSize: 11, color: '#4A4030', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em' }}
+            style={{ marginTop: 8, fontSize: 11, color: '#6E6E73', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em' }}
           >
             Return to homepage
           </button>
@@ -204,22 +204,22 @@ export default function PortalPage() {
   }
 
   return (
-    <div style={{ background: '#07070A', color: '#E2DDD4', minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif", display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: '#000000', color: '#F5F5F7', minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif", display: 'flex', flexDirection: 'column' }}>
 
       {/* ── Top bar ── */}
-      <div style={{ background: 'rgba(10,10,13,0.97)', borderBottom: '1px solid rgba(201,168,76,0.12)', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', flexShrink: 0 }}>
+      <div style={{ background: 'rgba(10,10,13,0.97)', borderBottom: '1px solid rgba(255,255,255,0.09)', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, flexShrink: 0 }}>
             <div style={{ width: 28, height: 28, border: '1.5px solid rgba(201,168,76,0.6)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#C9A84C', letterSpacing: '0.02em' }}>AG</div>
             <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.2em', color: '#C9A84C', textTransform: 'uppercase' }}>Aurum Global</span>
-            <span style={{ fontSize: 9, color: '#3A3328', letterSpacing: '0.1em' }}>PWM</span>
+            <span style={{ fontSize: 9, color: '#6E6E73', letterSpacing: '0.1em' }}>PWM</span>
           </div>
           <div style={{ width: 1, height: 22, background: 'rgba(255,255,255,0.07)' }} />
           <div style={{ display: 'flex', gap: 14, alignItems: 'center', overflow: 'hidden' }}>
             {tickers.map(t => (
               <div key={t.sym} style={{ display: 'flex', gap: 5, alignItems: 'center', flexShrink: 0 }}>
-                <span style={{ fontSize: 9, fontFamily: 'monospace', color: '#5A5040', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{t.sym}</span>
-                <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#C8BFA8', fontWeight: 500 }}>{fmtPrice(t)}</span>
+                <span style={{ fontSize: 9, fontFamily: 'monospace', color: '#6E6E73', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{t.sym}</span>
+                <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#F5F5F7', fontWeight: 500 }}>{fmtPrice(t)}</span>
                 <span style={{ fontSize: 9, fontFamily: 'monospace', padding: '1px 5px', borderRadius: 3, background: t.chg >= 0 ? 'rgba(29,158,117,0.14)' : 'rgba(212,75,58,0.12)', color: t.chg >= 0 ? '#2DB870' : '#D44B3A', fontWeight: 500 }}>
                   {t.chg >= 0 ? '+' : ''}{t.chg.toFixed(2)}%
                 </span>
@@ -232,12 +232,12 @@ export default function PortalPage() {
             onClick={() => nav('messages')}
             style={{ width: 34, height: 34, borderRadius: 9, border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', position: 'relative', transition: 'border-color 0.2s' }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6A5E50" strokeWidth="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6E6E73" strokeWidth="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             <div style={{ position: 'absolute', top: 7, right: 7, width: 6, height: 6, background: '#C9A84C', borderRadius: '50%', boxShadow: '0 0 6px rgba(201,168,76,0.7)' }} />
           </button>
           <div
             onClick={() => nav('profile')}
-            style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg,#5C4620,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#0A0800', cursor: 'pointer', letterSpacing: '0.04em', boxShadow: '0 0 0 2px rgba(201,168,76,0.2)' }}
+            style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg,#1C1C1E,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#000000', cursor: 'pointer', letterSpacing: '0.04em', boxShadow: '0 0 0 2px rgba(255,255,255,0.13)' }}
           >{currentUser.initials}</div>
         </div>
       </div>
@@ -261,9 +261,9 @@ export default function PortalPage() {
                     style={{
                       display: 'flex', alignItems: 'center', gap: 10,
                       padding: '8px 16px', fontSize: 12, cursor: 'pointer',
-                      color: isActive ? '#C9A84C' : isHovered ? '#A89060' : '#5A5040',
+                      color: isActive ? '#C9A84C' : isHovered ? '#A89060' : '#6E6E73',
                       borderLeft: `2px solid ${isActive ? '#C9A84C' : 'transparent'}`,
-                      background: isActive ? 'rgba(201,168,76,0.08)' : isHovered ? 'rgba(255,255,255,0.02)' : 'transparent',
+                      background: isActive ? 'rgba(255,255,255,0.07)' : isHovered ? 'rgba(255,255,255,0.02)' : 'transparent',
                       transition: 'all 0.15s ease',
                       letterSpacing: '0.01em',
                     }}
@@ -274,7 +274,7 @@ export default function PortalPage() {
                     </svg>
                     <span style={{ flex: 1 }}>{item.text}</span>
                     {item.badge && (
-                      <span style={{ fontSize: 9, background: 'rgba(201,168,76,0.18)', color: '#C9A84C', padding: '2px 6px', borderRadius: 10, fontWeight: 600 }}>{item.badge}</span>
+                      <span style={{ fontSize: 9, background: 'rgba(255,255,255,0.12)', color: '#C9A84C', padding: '2px 6px', borderRadius: 10, fontWeight: 600 }}>{item.badge}</span>
                     )}
                     {isActive && <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />}
                   </div>
@@ -285,13 +285,13 @@ export default function PortalPage() {
           <div style={{ flex: 1 }} />
           <div style={{ padding: '14px 16px 0', borderTop: '1px solid rgba(255,255,255,0.04)', marginTop: 12 }}>
             <div style={{ fontSize: 9, color: '#2E2A22', letterSpacing: '0.1em', marginBottom: 4 }}>ACCOUNT</div>
-            <div style={{ fontSize: 10, color: '#4A4030' }}>{currentUser.name} · {currentUser.accountId}</div>
+            <div style={{ fontSize: 10, color: '#6E6E73' }}>{currentUser.name} · {currentUser.accountId}</div>
             <div style={{ fontSize: 9, color: '#2E2A22', marginTop: 2 }}>T-1 Billing · Active</div>
           </div>
         </div>
 
         {/* ── Main content ── */}
-        <div style={{ flex: 1, overflowY: 'auto', background: '#07070A' }}>
+        <div style={{ flex: 1, overflowY: 'auto', background: '#000000' }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={page}
@@ -306,13 +306,13 @@ export default function PortalPage() {
               {page === 'dashboard' && (
                 <div>
                   {/* Welcome banner */}
-                  <div style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(201,168,76,0.03) 100%)', border: '1px solid rgba(201,168,76,0.16)', borderRadius: 14, padding: '20px 24px', marginBottom: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+                  <div style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(201,168,76,0.03) 100%)', border: '1px solid rgba(255,255,255,0.11)', borderRadius: 14, padding: '20px 24px', marginBottom: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
                     <div>
-                      <div style={{ fontSize: 18, fontWeight: 600, color: '#E8DDD0', marginBottom: 4, letterSpacing: '-0.01em' }}>{getGreeting()}, {currentUser.firstName}.</div>
-                      <div style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.6 }}>Your portfolio is performing well. November total return: <span style={{ color: '#1D9E75', fontWeight: 500 }}>+$168.35</span> · Account ID: <span style={{ color: '#C9A84C' }}>{currentUser.accountId}</span></div>
+                      <div style={{ fontSize: 18, fontWeight: 600, color: '#F5F5F7', marginBottom: 4, letterSpacing: '-0.01em' }}>{getGreeting()}, {currentUser.firstName}.</div>
+                      <div style={{ fontSize: 12, color: '#6E6E73', lineHeight: 1.6 }}>Your portfolio is performing well. November total return: <span style={{ color: '#1D9E75', fontWeight: 500 }}>+$168.35</span> · Account ID: <span style={{ color: '#C9A84C' }}>{currentUser.accountId}</span></div>
                     </div>
                     <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', flexShrink: 0 }}>
-                      {[{ label: 'PWM Client', color: '#8A7050' }, { label: 'T-1 Billing', color: '#8A7050' }, { label: '● Active', color: '#1D9E75' }].map(b => (
+                      {[{ label: 'PWM Client', color: '#86868B' }, { label: 'T-1 Billing', color: '#86868B' }, { label: '● Active', color: '#1D9E75' }].map(b => (
                         <div key={b.label} style={{ fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '4px 10px', borderRadius: 20, border: `1px solid rgba(255,255,255,0.08)`, color: b.color, background: 'rgba(255,255,255,0.02)' }}>{b.label}</div>
                       ))}
                     </div>
@@ -335,10 +335,10 @@ export default function PortalPage() {
                       { label: 'AG Insights',page: 'insights'   as PageId, d: 'M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z' },
                     ].map(qa => (
                       <HoverCard key={qa.label} onClick={() => nav(qa.page)} style={{ textAlign: 'center', cursor: 'pointer', padding: '16px 12px' }}>
-                        <div style={{ width: 32, height: 32, background: 'rgba(201,168,76,0.1)', borderRadius: 9, margin: '0 auto 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ width: 32, height: 32, background: 'rgba(255,255,255,0.09)', borderRadius: 9, margin: '0 auto 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5"><path d={qa.d} /></svg>
                         </div>
-                        <div style={{ fontSize: 10, color: '#6A5E50', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{qa.label}</div>
+                        <div style={{ fontSize: 10, color: '#6E6E73', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{qa.label}</div>
                       </HoverCard>
                     ))}
                   </div>
@@ -351,7 +351,7 @@ export default function PortalPage() {
                         <canvas ref={canvasRef} style={{ width: '100%', height: 148 }} />
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>
-                        <span style={{ fontSize: 9, color: '#3A3328', fontFamily: 'monospace' }}>10/15/2025 – 11/30/2025</span>
+                        <span style={{ fontSize: 9, color: '#6E6E73', fontFamily: 'monospace' }}>10/15/2025 – 11/30/2025</span>
                         <span style={{ fontSize: 9, color: '#1D9E75', fontFamily: 'monospace' }}>▲ +35.8% realized P&L</span>
                       </div>
                     </Card>
@@ -365,26 +365,26 @@ export default function PortalPage() {
                         <div key={a.name} style={{ padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, alignItems: 'center' }}>
                             <span style={{ fontSize: 11, color: a.color, fontFamily: 'monospace', fontWeight: 600 }}>{a.name}</span>
-                            <span style={{ fontSize: 11, color: '#6A5E50', fontFamily: 'monospace' }}>{a.pct}</span>
-                            <span style={{ fontSize: 11, color: '#C8BFA8', fontFamily: 'monospace' }}>{a.val}</span>
+                            <span style={{ fontSize: 11, color: '#6E6E73', fontFamily: 'monospace' }}>{a.pct}</span>
+                            <span style={{ fontSize: 11, color: '#F5F5F7', fontFamily: 'monospace' }}>{a.val}</span>
                           </div>
                           <div style={{ height: 3, background: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
                             <div style={{ height: 3, borderRadius: 2, width: a.w, background: `linear-gradient(90deg, ${a.color}88, ${a.color})`, transition: 'width 0.8s ease' }} />
                           </div>
                         </div>
                       ))}
-                      <div style={{ marginTop: 12, fontSize: 10, color: '#4A4438', lineHeight: 1.6 }}>Fully in cash as of Nov 30.<br />Awaiting next entry signal.</div>
+                      <div style={{ marginTop: 12, fontSize: 10, color: '#6E6E73', lineHeight: 1.6 }}>Fully in cash as of Nov 30.<br />Awaiting next entry signal.</div>
                     </Card>
                   </div>
 
                   {/* PM note */}
                   <div style={{ background: 'rgba(201,168,76,0.04)', border: '1px solid rgba(201,168,76,0.13)', borderRadius: 14, padding: '18px 20px', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg,#5C4620,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#0A0800', flexShrink: 0, boxShadow: '0 0 0 2px rgba(201,168,76,0.2)' }}>SC</div>
+                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg,#1C1C1E,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#000000', flexShrink: 0, boxShadow: '0 0 0 2px rgba(255,255,255,0.13)' }}>SC</div>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 13, fontWeight: 600, color: '#C9A84C', marginBottom: 2 }}>Saswat C. — Portfolio Manager</div>
-                      <div style={{ fontSize: 9, color: '#4A4030', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Aurum Global PWM · DL2503</div>
-                      <div style={{ fontSize: 12, color: '#8A8070', lineHeight: 1.7 }}>&ldquo;November was a strong month — we captured +$168.35 in realized gains across PLUG and two TSLY cycles. Account is fully in cash, positioned defensively into December. Watching TSLY for a re-entry around $7.00–$7.20 post-ex-dividend. Fee invoice due Dec 5.&rdquo;</div>
-                      <button onClick={() => nav('messages')} style={{ fontSize: 10, marginTop: 12, padding: '7px 16px', background: 'transparent', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 20, color: '#C9A84C', cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.15s' }}>Send Message →</button>
+                      <div style={{ fontSize: 9, color: '#6E6E73', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Aurum Global PWM · DL2503</div>
+                      <div style={{ fontSize: 12, color: '#86868B', lineHeight: 1.7 }}>&ldquo;November was a strong month — we captured +$168.35 in realized gains across PLUG and two TSLY cycles. Account is fully in cash, positioned defensively into December. Watching TSLY for a re-entry around $7.00–$7.20 post-ex-dividend. Fee invoice due Dec 5.&rdquo;</div>
+                      <button onClick={() => nav('messages')} style={{ fontSize: 10, marginTop: 12, padding: '7px 16px', background: 'transparent', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 20, color: '#C9A84C', cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.15s' }}>Send Message →</button>
                     </div>
                   </div>
                 </div>
@@ -418,7 +418,7 @@ export default function PortalPage() {
                     ].map(r => (
                       <div key={r.label} style={{ marginBottom: 16 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginBottom: 6 }}>
-                          <span style={{ color: '#6A5E50' }}>{r.label}</span>
+                          <span style={{ color: '#6E6E73' }}>{r.label}</span>
                           <span style={{ color: r.color, fontWeight: 500 }}>{r.val}</span>
                         </div>
                         <div style={{ height: 5, background: 'rgba(255,255,255,0.05)', borderRadius: 3 }}>
@@ -426,7 +426,7 @@ export default function PortalPage() {
                         </div>
                       </div>
                     ))}
-                    <div style={{ fontSize: 11, color: '#4A4438', marginTop: 6, lineHeight: 1.6 }}>Risk assessed by AGM system. TSLY is a YieldMax covered-call ETF subject to NAV erosion. Managed with active entry/exit discipline.</div>
+                    <div style={{ fontSize: 11, color: '#6E6E73', marginTop: 6, lineHeight: 1.6 }}>Risk assessed by AGM system. TSLY is a YieldMax covered-call ETF subject to NAV erosion. Managed with active entry/exit discipline.</div>
                   </Card>
                 </div>
               )}
@@ -465,7 +465,7 @@ export default function PortalPage() {
                         <div key={a.name} style={{ padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
                             <span style={{ fontSize: 11, color: a.color, fontFamily: 'monospace', fontWeight: 600, minWidth: 34 }}>{a.name}</span>
-                            <span style={{ fontSize: 11, color: '#6A5E50', fontFamily: 'monospace', minWidth: 28 }}>{a.pct}</span>
+                            <span style={{ fontSize: 11, color: '#6E6E73', fontFamily: 'monospace', minWidth: 28 }}>{a.pct}</span>
                             <span style={{ fontSize: 11, color: a.color, fontFamily: 'monospace', marginLeft: 'auto' }}>{a.val}</span>
                           </div>
                           <div style={{ height: 4, background: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
@@ -473,7 +473,7 @@ export default function PortalPage() {
                           </div>
                         </div>
                       ))}
-                      <div style={{ marginTop: 14, fontSize: 10, color: '#4A4438' }}>Dividend income attributed separately. Total gross: +$245.55 before fees.</div>
+                      <div style={{ marginTop: 14, fontSize: 10, color: '#6E6E73' }}>Dividend income attributed separately. Total gross: +$245.55 before fees.</div>
                     </Card>
                   </div>
                 </div>
@@ -486,27 +486,27 @@ export default function PortalPage() {
                   <Card>
                     <div style={{ display: 'grid', gridTemplateColumns: '44px 50px 1fr 80px 80px', gap: 8, padding: '0 0 8px', marginBottom: 4, borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                       {['Sym', 'Type', 'Details', 'Date', 'P&L'].map(h => (
-                        <span key={h} style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#3A3328' }}>{h}</span>
+                        <span key={h} style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#6E6E73' }}>{h}</span>
                       ))}
                     </div>
                     {[
                       { sym: 'TSLY', type: 'sell', desc: '115 shares @ $7.66',               date: '11/25/2025', gain: '+$47.15',  gainColor: '#1D9E75' },
-                      { sym: 'TSLY', type: 'buy',  desc: '115 shares @ $7.25',               date: '11/21/2025', gain: '-$833.75', gainColor: '#5A5040' },
+                      { sym: 'TSLY', type: 'buy',  desc: '115 shares @ $7.25',               date: '11/21/2025', gain: '-$833.75', gainColor: '#6E6E73' },
                       { sym: 'TSLY', type: 'sell', desc: '110 shares @ $7.61',               date: '11/19/2025', gain: '+$37.60',  gainColor: '#1D9E75' },
-                      { sym: 'TSLY', type: 'buy',  desc: '100 shares @ $7.24 + 10 @ $7.55', date: '11/14/2025', gain: '-$799.50', gainColor: '#5A5040' },
+                      { sym: 'TSLY', type: 'buy',  desc: '100 shares @ $7.24 + 10 @ $7.55', date: '11/14/2025', gain: '-$799.50', gainColor: '#6E6E73' },
                       { sym: 'PLUG', type: 'sell', desc: '280 shares @ $2.80',               date: '11/10/2025', gain: '+$83.60',  gainColor: '#1D9E75' },
-                      { sym: 'PLUG', type: 'buy',  desc: '280 shares @ $2.50',               date: '11/04/2025', gain: '-$700.20', gainColor: '#5A5040' },
+                      { sym: 'PLUG', type: 'buy',  desc: '280 shares @ $2.50',               date: '11/04/2025', gain: '-$700.20', gainColor: '#6E6E73' },
                       { sym: 'TSLY', type: 'sell', desc: '80 shares @ $8.69',                date: '10/29/2025', gain: '+$51.20',  gainColor: '#1D9E75' },
                       { sym: 'TSLY', type: 'div',  desc: '80 shares × $0.16 dividend',       date: '10/23/2025', gain: '+$12.80',  gainColor: '#C9A84C' },
-                      { sym: 'TSLY', type: 'buy',  desc: '80 shares @ $8.05',                date: '10/17/2025', gain: '-$644.00', gainColor: '#5A5040' },
+                      { sym: 'TSLY', type: 'buy',  desc: '80 shares @ $8.05',                date: '10/17/2025', gain: '-$644.00', gainColor: '#6E6E73' },
                     ].map((t, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '44px 50px 1fr 80px 80px', gap: 8, padding: '11px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', alignItems: 'center' }}>
                         <span style={{ fontFamily: 'monospace', fontSize: 11, fontWeight: 600, color: '#C9A84C' }}>{t.sym}</span>
                         <span style={{ fontSize: 9, padding: '2px 7px', borderRadius: 4, display: 'inline-block', textTransform: 'uppercase', fontWeight: 600,
-                          background: t.type === 'buy' ? 'rgba(29,158,117,0.1)' : t.type === 'sell' ? 'rgba(212,75,58,0.08)' : 'rgba(201,168,76,0.1)',
+                          background: t.type === 'buy' ? 'rgba(29,158,117,0.1)' : t.type === 'sell' ? 'rgba(212,75,58,0.08)' : 'rgba(255,255,255,0.09)',
                           color: t.type === 'buy' ? '#1D9E75' : t.type === 'sell' ? '#D44B3A' : '#C9A84C' }}>{t.type}</span>
-                        <span style={{ color: '#7A7060', fontSize: 11 }}>{t.desc}</span>
-                        <span style={{ color: '#4A4438', fontSize: 10, fontFamily: 'monospace', textAlign: 'right' }}>{t.date}</span>
+                        <span style={{ color: '#86868B', fontSize: 11 }}>{t.desc}</span>
+                        <span style={{ color: '#6E6E73', fontSize: 10, fontFamily: 'monospace', textAlign: 'right' }}>{t.date}</span>
                         <span style={{ fontWeight: 600, textAlign: 'right', color: t.gainColor, fontFamily: 'monospace', fontSize: 11 }}>{t.gain}</span>
                       </div>
                     ))}
@@ -528,11 +528,11 @@ export default function PortalPage() {
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" strokeWidth="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 12 18 15 15"/></svg>
                         </div>
                         <div style={{ flex: 1 }}>
-                          <div style={{ color: '#C8BFA8', fontWeight: 500, fontSize: 13 }}>{s.name}</div>
-                          <div style={{ fontSize: 10, color: '#4A4438', marginTop: 2 }}>{s.meta}</div>
+                          <div style={{ color: '#F5F5F7', fontWeight: 500, fontSize: 13 }}>{s.name}</div>
+                          <div style={{ fontSize: 10, color: '#6E6E73', marginTop: 2 }}>{s.meta}</div>
                         </div>
                         <span style={{ fontSize: 10, padding: '3px 10px', borderRadius: 20, background: s.statusBg, color: s.statusColor, fontWeight: 600 }}>{s.status}</span>
-                        <button style={{ fontSize: 10, color: '#5A5040', cursor: 'pointer', padding: '5px 12px', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, background: 'transparent', letterSpacing: '0.06em' }}>Download PDF</button>
+                        <button style={{ fontSize: 10, color: '#6E6E73', cursor: 'pointer', padding: '5px 12px', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, background: 'transparent', letterSpacing: '0.06em' }}>Download PDF</button>
                       </div>
                     ))}
                   </Card>
@@ -565,18 +565,18 @@ export default function PortalPage() {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', fontSize: 12 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span style={{ fontFamily: 'monospace', fontSize: 11, fontWeight: 600, color: '#C9A84C' }}>TSLY</span>
-                        <span style={{ fontSize: 9, padding: '2px 7px', borderRadius: 4, background: 'rgba(201,168,76,0.12)', color: '#C9A84C', fontWeight: 600 }}>DIV</span>
-                        <span style={{ color: '#7A7060', fontSize: 11 }}>80 shares · Ex-div 10/23/2025 · $0.16/share</span>
+                        <span style={{ fontSize: 9, padding: '2px 7px', borderRadius: 4, background: 'rgba(255,255,255,0.09)', color: '#C9A84C', fontWeight: 600 }}>DIV</span>
+                        <span style={{ color: '#86868B', fontSize: 11 }}>80 shares · Ex-div 10/23/2025 · $0.16/share</span>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                        <span style={{ color: '#4A4438', fontSize: 10, fontFamily: 'monospace' }}>10/23/2025</span>
+                        <span style={{ color: '#6E6E73', fontSize: 10, fontFamily: 'monospace' }}>10/23/2025</span>
                         <span style={{ color: '#C9A84C', fontWeight: 600, fontFamily: 'monospace' }}>+$12.80</span>
                       </div>
                     </div>
                   </Card>
                   <Card>
                     <SectionTitle>About TSLY income</SectionTitle>
-                    <div style={{ fontSize: 12, color: '#8A8070', lineHeight: 1.75 }}>TSLY (YieldMax TSLA Option Income Strategy ETF) distributes weekly dividends derived from covered call options on Tesla. The distribution rate varies weekly and is NOT guaranteed. NAV erosion is a structural risk — your PM actively manages entry/exit timing around ex-dividend dates to optimize total return vs. NAV decay.</div>
+                    <div style={{ fontSize: 12, color: '#86868B', lineHeight: 1.75 }}>TSLY (YieldMax TSLA Option Income Strategy ETF) distributes weekly dividends derived from covered call options on Tesla. The distribution rate varies weekly and is NOT guaranteed. NAV erosion is a structural risk — your PM actively manages entry/exit timing around ex-dividend dates to optimize total return vs. NAV decay.</div>
                   </Card>
                 </div>
               )}
@@ -595,7 +595,7 @@ export default function PortalPage() {
                   <Card style={{ marginBottom: 20 }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '100px 68px 1fr 90px', gap: 0, padding: '0 0 8px', marginBottom: 4, borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                       {['Date', 'Type', 'Description', 'Amount'].map(h => (
-                        <span key={h} style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#3A3328', textAlign: h === 'Amount' ? 'right' : 'left' }}>{h}</span>
+                        <span key={h} style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#6E6E73', textAlign: h === 'Amount' ? 'right' : 'left' }}>{h}</span>
                       ))}
                     </div>
                     {[
@@ -614,15 +614,15 @@ export default function PortalPage() {
                       { date: '12/01/2025', typ: 'DEP',    desc: 'Tfr SUTTON BANK · due 12/05/2025',        amount: '882.75',  isIn: true  },
                     ].map((t, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '100px 68px 1fr 90px', gap: 0, padding: '9px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', alignItems: 'center' }}>
-                        <span style={{ fontSize: 10, color: '#4A4438', fontFamily: 'monospace' }}>{t.date}</span>
+                        <span style={{ fontSize: 10, color: '#6E6E73', fontFamily: 'monospace' }}>{t.date}</span>
                         <span style={{ fontSize: 8, padding: '2px 6px', borderRadius: 4, display: 'inline-block', width: 'fit-content', fontWeight: 600, letterSpacing: '0.04em',
                           background: t.isIn === true ? 'rgba(29,158,117,0.1)' : t.isIn === false ? 'rgba(212,75,58,0.08)' : 'rgba(255,255,255,0.05)',
-                          color: t.isIn === true ? '#1D9E75' : t.isIn === false ? '#D44B3A' : '#6A5E50' }}>
+                          color: t.isIn === true ? '#1D9E75' : t.isIn === false ? '#D44B3A' : '#6E6E73' }}>
                           {t.typ}
                         </span>
-                        <span style={{ color: '#7A7060', fontSize: 11, paddingLeft: 8 }}>{t.desc}</span>
+                        <span style={{ color: '#86868B', fontSize: 11, paddingLeft: 8 }}>{t.desc}</span>
                         <span style={{ fontFamily: 'monospace', fontWeight: 600, textAlign: 'right', fontSize: 11,
-                          color: t.isIn === true ? '#1D9E75' : t.isIn === false ? '#D44B3A' : '#C8BFA8' }}>
+                          color: t.isIn === true ? '#1D9E75' : t.isIn === false ? '#D44B3A' : '#F5F5F7' }}>
                           {t.isIn === true ? '+' : t.isIn === false ? '−' : ''}{t.amount}
                         </span>
                       </div>
@@ -649,17 +649,17 @@ export default function PortalPage() {
                         const isBuy = r.note === 'BUY', isSell = r.note === 'SELL'
                         return (
                           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', fontSize: 11 }}>
-                            <span style={{ color: '#4A4438', fontFamily: 'monospace', minWidth: 32 }}>{r.date}</span>
+                            <span style={{ color: '#6E6E73', fontFamily: 'monospace', minWidth: 32 }}>{r.date}</span>
                             <span style={{ fontSize: 8, padding: '1px 5px', borderRadius: 3, fontWeight: 600,
-                              background: isBuy ? 'rgba(29,158,117,0.1)' : isSell ? 'rgba(212,75,58,0.08)' : 'rgba(201,168,76,0.1)',
+                              background: isBuy ? 'rgba(29,158,117,0.1)' : isSell ? 'rgba(212,75,58,0.08)' : 'rgba(255,255,255,0.09)',
                               color: isBuy ? '#1D9E75' : isSell ? '#D44B3A' : '#C9A84C' }}>{r.note}</span>
-                            <span style={{ color: '#8A8070', minWidth: 28, textAlign: 'right', fontFamily: 'monospace' }}>{r.shares}</span>
-                            <span style={{ color: '#5A5040', minWidth: 40, textAlign: 'right', fontFamily: 'monospace' }}>@ {r.price}</span>
-                            <span style={{ color: '#C8BFA8', marginLeft: 'auto', fontFamily: 'monospace' }}>{r.cost}</span>
+                            <span style={{ color: '#86868B', minWidth: 28, textAlign: 'right', fontFamily: 'monospace' }}>{r.shares}</span>
+                            <span style={{ color: '#6E6E73', minWidth: 40, textAlign: 'right', fontFamily: 'monospace' }}>@ {r.price}</span>
+                            <span style={{ color: '#F5F5F7', marginLeft: 'auto', fontFamily: 'monospace' }}>{r.cost}</span>
                           </div>
                         )
                       })}
-                      <div style={{ marginTop: 10, fontSize: 10, color: '#4A4438' }}>0 shares remaining · Fully closed</div>
+                      <div style={{ marginTop: 10, fontSize: 10, color: '#6E6E73' }}>0 shares remaining · Fully closed</div>
                     </Card>
                     <Card>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
@@ -673,17 +673,17 @@ export default function PortalPage() {
                         const isBuy = r.note === 'BUY'
                         return (
                           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', fontSize: 11 }}>
-                            <span style={{ color: '#4A4438', fontFamily: 'monospace', minWidth: 32 }}>{r.date}</span>
+                            <span style={{ color: '#6E6E73', fontFamily: 'monospace', minWidth: 32 }}>{r.date}</span>
                             <span style={{ fontSize: 8, padding: '1px 5px', borderRadius: 3, fontWeight: 600,
                               background: isBuy ? 'rgba(29,158,117,0.1)' : 'rgba(212,75,58,0.08)',
                               color: isBuy ? '#1D9E75' : '#D44B3A' }}>{r.note}</span>
-                            <span style={{ color: '#8A8070', minWidth: 28, textAlign: 'right', fontFamily: 'monospace' }}>{r.shares}</span>
-                            <span style={{ color: '#5A5040', minWidth: 40, textAlign: 'right', fontFamily: 'monospace' }}>@ {r.price}</span>
-                            <span style={{ color: '#C8BFA8', marginLeft: 'auto', fontFamily: 'monospace' }}>{r.cost}</span>
+                            <span style={{ color: '#86868B', minWidth: 28, textAlign: 'right', fontFamily: 'monospace' }}>{r.shares}</span>
+                            <span style={{ color: '#6E6E73', minWidth: 40, textAlign: 'right', fontFamily: 'monospace' }}>@ {r.price}</span>
+                            <span style={{ color: '#F5F5F7', marginLeft: 'auto', fontFamily: 'monospace' }}>{r.cost}</span>
                           </div>
                         )
                       })}
-                      <div style={{ marginTop: 10, fontSize: 10, color: '#4A4438' }}>0 shares remaining · Fully closed</div>
+                      <div style={{ marginTop: 10, fontSize: 10, color: '#6E6E73' }}>0 shares remaining · Fully closed</div>
                     </Card>
                   </div>
                 </div>
@@ -697,16 +697,16 @@ export default function PortalPage() {
                     { tag: 'Income Strategy', tagC: 'rgba(138,55,221,0.12)', tagFg: '#8A37DD', title: 'YieldMax ETFs: Navigating NAV decay in the current rate environment',              meta: 'AG Insights · Saswat C. · Nov 28, 2025' },
                     { tag: 'Equity',          tagC: 'rgba(29,158,117,0.12)', tagFg: '#1D9E75', title: 'PLUG Power deep dive: Hydrogen fuel cells and the green energy thesis',                meta: 'AG Insights · Nov 15, 2025' },
                     { tag: 'Macro',           tagC: 'rgba(55,138,221,0.12)', tagFg: '#378ADD', title: 'Fed December meeting preview: Rate path implications for dividend-focused portfolios',  meta: 'AG Insights · Dec 01, 2025' },
-                    { tag: 'Options',         tagC: 'rgba(201,168,76,0.12)', tagFg: '#C9A84C', title: 'Covered call strategy performance review: TSLY, MSFO, NVDY comparison Q4 2025',      meta: 'AG Insights · Nov 30, 2025' },
+                    { tag: 'Options',         tagC: 'rgba(255,255,255,0.09)', tagFg: '#C9A84C', title: 'Covered call strategy performance review: TSLY, MSFO, NVDY comparison Q4 2025',      meta: 'AG Insights · Nov 30, 2025' },
                     { tag: 'Macro',           tagC: 'rgba(55,138,221,0.12)', tagFg: '#378ADD', title: 'Small cap recovery signal: Mean reversion setup in beaten-down clean energy names',    meta: 'AG Insights · Dec 02, 2025' },
                   ].map((ins, i) => (
                     <HoverCard key={i} style={{ marginBottom: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14 }}>
                       <div style={{ flex: 1 }}>
                         <span style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '2px 8px', borderRadius: 20, display: 'inline-block', marginBottom: 8, background: ins.tagC, color: ins.tagFg, fontWeight: 600 }}>{ins.tag}</span>
-                        <div style={{ fontSize: 13, color: '#C8BFA8', fontWeight: 500, lineHeight: 1.45, marginBottom: 6 }}>{ins.title}</div>
-                        <div style={{ fontSize: 10, color: '#4A4438', fontFamily: 'monospace' }}>{ins.meta}</div>
+                        <div style={{ fontSize: 13, color: '#F5F5F7', fontWeight: 500, lineHeight: 1.45, marginBottom: 6 }}>{ins.title}</div>
+                        <div style={{ fontSize: 10, color: '#6E6E73', fontFamily: 'monospace' }}>{ins.meta}</div>
                       </div>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3A3328" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6E6E73" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </HoverCard>
                   ))}
                 </div>
@@ -723,28 +723,28 @@ export default function PortalPage() {
                       { time: '11/10/2025 · 09:55 AM', text: 'PLUG closed — 280 shares @ $2.80, up from $2.50. Net gain +$83.60. Back in cash, now reloading TSLY on weakness.', unread: false },
                     ].map((m, i) => (
                       <div key={i} style={{ display: 'flex', gap: 12, padding: '14px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', background: m.unread ? 'rgba(201,168,76,0.02)' : 'transparent' }}>
-                        <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg,#5C4620,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#0A0800', flexShrink: 0 }}>SC</div>
+                        <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg,#1C1C1E,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#000000', flexShrink: 0 }}>SC</div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, alignItems: 'center' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                               <span style={{ fontSize: 12, fontWeight: 600, color: '#C9A84C' }}>Saswat C.</span>
                               {m.unread && <span style={{ fontSize: 8, padding: '1px 6px', borderRadius: 10, background: 'rgba(201,168,76,0.15)', color: '#C9A84C', fontWeight: 700 }}>NEW</span>}
                             </div>
-                            <span style={{ fontSize: 10, color: '#4A4438', fontFamily: 'monospace', flexShrink: 0 }}>{m.time}</span>
+                            <span style={{ fontSize: 10, color: '#6E6E73', fontFamily: 'monospace', flexShrink: 0 }}>{m.time}</span>
                           </div>
-                          <div style={{ fontSize: 12, color: '#8A8070', lineHeight: 1.65 }}>{m.text}</div>
+                          <div style={{ fontSize: 12, color: '#86868B', lineHeight: 1.65 }}>{m.text}</div>
                         </div>
                       </div>
                     ))}
                   </Card>
                   <Card>
-                    <div style={{ fontSize: 10, color: '#4A4438', marginBottom: 8, letterSpacing: '0.1em', textTransform: 'uppercase' }}>New Message</div>
+                    <div style={{ fontSize: 10, color: '#6E6E73', marginBottom: 8, letterSpacing: '0.1em', textTransform: 'uppercase' }}>New Message</div>
                     <textarea
-                      style={{ width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, resize: 'none', color: '#C8BFA8', fontSize: 12, outline: 'none', height: 80, lineHeight: 1.65, padding: '10px 12px', boxSizing: 'border-box' }}
+                      style={{ width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, resize: 'none', color: '#F5F5F7', fontSize: 12, outline: 'none', height: 80, lineHeight: 1.65, padding: '10px 12px', boxSizing: 'border-box' }}
                       placeholder="Write a message to your portfolio manager..."
                     />
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}>
-                      <button style={{ padding: '9px 20px', background: '#C9A84C', border: 'none', borderRadius: 20, color: '#0A0800', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', cursor: 'pointer', textTransform: 'uppercase' }}>Send Message</button>
+                      <button style={{ padding: '9px 20px', background: '#C9A84C', border: 'none', borderRadius: 20, color: '#000000', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', cursor: 'pointer', textTransform: 'uppercase' }}>Send Message</button>
                     </div>
                   </Card>
                 </div>
@@ -767,10 +767,10 @@ export default function PortalPage() {
                     ['Total due',                          '$9.23'],
                   ]} />
                   <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-                    <button style={{ padding: '10px 22px', background: '#C9A84C', border: 'none', borderRadius: 20, color: '#0A0800', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', cursor: 'pointer', textTransform: 'uppercase' }}>Pay Now — $9.23</button>
-                    <button style={{ padding: '10px 20px', background: 'transparent', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 20, color: '#C9A84C', fontSize: 11, letterSpacing: '0.08em', cursor: 'pointer' }}>Download Invoice</button>
+                    <button style={{ padding: '10px 22px', background: '#C9A84C', border: 'none', borderRadius: 20, color: '#000000', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', cursor: 'pointer', textTransform: 'uppercase' }}>Pay Now — $9.23</button>
+                    <button style={{ padding: '10px 20px', background: 'transparent', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 20, color: '#C9A84C', fontSize: 11, letterSpacing: '0.08em', cursor: 'pointer' }}>Download Invoice</button>
                   </div>
-                  <div style={{ marginTop: 22, fontSize: 11, color: '#4A4438', lineHeight: 1.8, background: 'rgba(255,255,255,0.02)', borderRadius: 10, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)' }}>Fees are collected monthly on the 5th of each following month. The management fee is 1% of AUM at month-end. Transaction fees are charged per trade executed by the AGM system ($0.20 per side). All fees are disclosed in your monthly statement.</div>
+                  <div style={{ marginTop: 22, fontSize: 11, color: '#6E6E73', lineHeight: 1.8, background: 'rgba(255,255,255,0.02)', borderRadius: 10, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)' }}>Fees are collected monthly on the 5th of each following month. The management fee is 1% of AUM at month-end. Transaction fees are charged per trade executed by the AGM system ($0.20 per side). All fees are disclosed in your monthly statement.</div>
                 </div>
               )}
 
@@ -780,10 +780,10 @@ export default function PortalPage() {
                   <PageHeader greeting="Account settings" title="My Profile" sub="Your account details and investor classification" />
                   <Card style={{ marginBottom: 14 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
-                      <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'linear-gradient(135deg,#5C4620,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 700, color: '#0A0800', flexShrink: 0, boxShadow: '0 0 0 3px rgba(201,168,76,0.2)' }}>DL</div>
+                      <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'linear-gradient(135deg,#1C1C1E,#C9A84C)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 700, color: '#000000', flexShrink: 0, boxShadow: '0 0 0 3px rgba(255,255,255,0.13)' }}>DL</div>
                       <div>
-                        <div style={{ fontSize: 18, fontWeight: 600, color: '#E8DDD0', letterSpacing: '-0.01em' }}>David Low</div>
-                        <div style={{ fontSize: 11, color: '#5A5040', marginTop: 3, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Private Wealth Client · DL2503</div>
+                        <div style={{ fontSize: 18, fontWeight: 600, color: '#F5F5F7', letterSpacing: '-0.01em' }}>David Low</div>
+                        <div style={{ fontSize: 11, color: '#6E6E73', marginTop: 3, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Private Wealth Client · DL2503</div>
                       </div>
                     </div>
                     <MiniTable rows={[
@@ -806,8 +806,8 @@ export default function PortalPage() {
                       ['Last login',       '12/21/2025 · 9:04 AM','',      ''],
                     ]} />
                     <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
-                      <button style={{ padding: '10px 18px', background: 'transparent', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 8, color: '#C9A84C', fontSize: 11, cursor: 'pointer' }}>Change Password</button>
-                      <button style={{ padding: '10px 18px', background: 'transparent', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 8, color: '#C9A84C', fontSize: 11, cursor: 'pointer' }}>Download All Statements</button>
+                      <button style={{ padding: '10px 18px', background: 'transparent', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 8, color: '#C9A84C', fontSize: 11, cursor: 'pointer' }}>Change Password</button>
+                      <button style={{ padding: '10px 18px', background: 'transparent', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 8, color: '#C9A84C', fontSize: 11, cursor: 'pointer' }}>Download All Statements</button>
                     </div>
                     <div style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                       <button
@@ -839,7 +839,7 @@ function HoverCard({ children, style, onClick }: { children: React.ReactNode; st
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: '#111115',
+        background: '#111111',
         border: `1px solid ${hovered ? 'rgba(201,168,76,0.22)' : 'rgba(255,255,255,0.05)'}`,
         borderRadius: 12,
         padding: 20,
@@ -856,7 +856,7 @@ function HoverCard({ children, style, onClick }: { children: React.ReactNode; st
 
 function Card({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
-    <div style={{ background: '#111115', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 12, padding: 20, ...style }}>
+    <div style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 12, padding: 20, ...style }}>
       {children}
     </div>
   )
@@ -865,16 +865,16 @@ function Card({ children, style }: { children: React.ReactNode; style?: React.CS
 function PageHeader({ greeting, title, sub }: { greeting: string; title: string; sub: string }) {
   return (
     <div style={{ marginBottom: 26 }}>
-      <div style={{ fontSize: 10, color: '#4A4030', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 6 }}>{greeting}</div>
-      <div style={{ fontSize: 24, fontWeight: 600, color: '#E8DDD0', letterSpacing: '-0.02em', lineHeight: 1 }}>{title}</div>
-      <div style={{ fontSize: 12, color: '#5A5040', marginTop: 6 }}>{sub}</div>
+      <div style={{ fontSize: 10, color: '#6E6E73', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 6 }}>{greeting}</div>
+      <div style={{ fontSize: 24, fontWeight: 600, color: '#F5F5F7', letterSpacing: '-0.02em', lineHeight: 1 }}>{title}</div>
+      <div style={{ fontSize: 12, color: '#6E6E73', marginTop: 6 }}>{sub}</div>
     </div>
   )
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ fontSize: 9, letterSpacing: '0.22em', color: '#4A4030', textTransform: 'uppercase', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
+    <div style={{ fontSize: 9, letterSpacing: '0.22em', color: '#6E6E73', textTransform: 'uppercase', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
       {children}
       <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.04)' }} />
     </div>
@@ -886,43 +886,43 @@ function MetricCard({ label, value, valueColor, valueSize, sub, badge, badgeColo
   sub?: string; badge?: string; badgeColor?: 'gain' | 'loss' | 'gold'; accent?: boolean
 }) {
   const [hovered, setHovered] = useState(false)
-  const badgeBg = { gain: 'rgba(29,158,117,0.12)', loss: 'rgba(212,75,58,0.1)', gold: 'rgba(201,168,76,0.12)' }
+  const badgeBg = { gain: 'rgba(29,158,117,0.12)', loss: 'rgba(212,75,58,0.1)', gold: 'rgba(255,255,255,0.09)' }
   const badgeFg = { gain: '#1D9E75', loss: '#D44B3A', gold: '#C9A84C' }
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: '#111115',
-        border: `1px solid ${hovered ? 'rgba(201,168,76,0.25)' : accent ? 'rgba(201,168,76,0.18)' : 'rgba(255,255,255,0.05)'}`,
+        background: '#111111',
+        border: `1px solid ${hovered ? 'rgba(255,255,255,0.16)' : accent ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.05)'}`,
         borderRadius: 12, padding: '18px 18px 16px',
         transform: hovered ? 'translateY(-1px)' : 'translateY(0)',
         transition: 'all 0.18s ease',
         boxShadow: hovered ? '0 6px 20px rgba(0,0,0,0.3)' : 'none',
       }}
     >
-      <div style={{ fontSize: 9, letterSpacing: '0.16em', color: '#4A4030', textTransform: 'uppercase', marginBottom: 10 }}>{label}</div>
-      <div style={{ fontSize: valueSize ?? 24, fontWeight: 600, color: valueColor ?? '#E8DDD0', letterSpacing: '-0.02em', lineHeight: 1 }}>{value}</div>
+      <div style={{ fontSize: 9, letterSpacing: '0.16em', color: '#6E6E73', textTransform: 'uppercase', marginBottom: 10 }}>{label}</div>
+      <div style={{ fontSize: valueSize ?? 24, fontWeight: 600, color: valueColor ?? '#F5F5F7', letterSpacing: '-0.02em', lineHeight: 1 }}>{value}</div>
       {badge && badgeColor && (
         <div style={{ marginTop: 8 }}>
           <span style={{ fontSize: 9, padding: '2px 8px', borderRadius: 20, background: badgeBg[badgeColor], color: badgeFg[badgeColor], fontWeight: 600 }}>{badge}</span>
         </div>
       )}
-      {sub && !badge && <div style={{ fontSize: 10, color: '#4A4438', marginTop: 8 }}>{sub}</div>}
+      {sub && !badge && <div style={{ fontSize: 10, color: '#6E6E73', marginTop: 8 }}>{sub}</div>}
     </div>
   )
 }
 
 function MiniTable({ rows }: { rows: string[][] }) {
-  const colorMap: Record<string, string> = { green: '#1D9E75', gold: '#C9A84C', red: '#D44B3A', muted: '#5A5040' }
+  const colorMap: Record<string, string> = { green: '#1D9E75', gold: '#C9A84C', red: '#D44B3A', muted: '#6E6E73' }
   return (
     <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
       <tbody>
         {rows.map((row, i) => (
           <tr key={i}>
-            <td style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#6A5E50', width: '45%' }}>{row[0]}</td>
-            {row[1] !== '' && <td style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#6A5E50' }}>{row[1]}</td>}
-            <td style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', textAlign: 'right', color: colorMap[row[2]] ?? '#C8BFA8', fontFamily: 'monospace', fontWeight: colorMap[row[2]] ? 500 : 400 }}>
+            <td style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#6E6E73', width: '45%' }}>{row[0]}</td>
+            {row[1] !== '' && <td style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#6E6E73' }}>{row[1]}</td>}
+            <td style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', textAlign: 'right', color: colorMap[row[2]] ?? '#F5F5F7', fontFamily: 'monospace', fontWeight: colorMap[row[2]] ? 500 : 400 }}>
               {row[row.length - 2] || row[row.length - 1]}
             </td>
           </tr>
@@ -934,11 +934,11 @@ function MiniTable({ rows }: { rows: string[][] }) {
 
 function FeeBox({ rows }: { rows: string[][] }) {
   return (
-    <div style={{ background: 'rgba(201,168,76,0.04)', border: '1px solid rgba(201,168,76,0.12)', borderRadius: 12, padding: '4px 18px' }}>
+    <div style={{ background: 'rgba(201,168,76,0.04)', border: '1px solid rgba(255,255,255,0.09)', borderRadius: 12, padding: '4px 18px' }}>
       {rows.map((row, i) => (
-        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: i === rows.length - 1 ? '14px 0 10px' : '10px 0', borderBottom: i < rows.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none', fontSize: i === rows.length - 1 ? 14 : 12, fontWeight: i === rows.length - 1 ? 600 : 400, color: i === rows.length - 1 ? '#C9A84C' : '#8A8070' }}>
+        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: i === rows.length - 1 ? '14px 0 10px' : '10px 0', borderBottom: i < rows.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none', fontSize: i === rows.length - 1 ? 14 : 12, fontWeight: i === rows.length - 1 ? 600 : 400, color: i === rows.length - 1 ? '#C9A84C' : '#86868B' }}>
           <span>{row[0]}</span>
-          <span style={{ fontFamily: 'monospace', color: row[2] ?? (i === rows.length - 1 ? '#C9A84C' : '#C8BFA8') }}>{row[1]}</span>
+          <span style={{ fontFamily: 'monospace', color: row[2] ?? (i === rows.length - 1 ? '#C9A84C' : '#F5F5F7') }}>{row[1]}</span>
         </div>
       ))}
     </div>

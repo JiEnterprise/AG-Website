@@ -14,9 +14,9 @@ const OFFICES = [
 ]
 
 const TAG_STYLES: Record<string, string> = {
-  'HQ': 'text-aurum-gold border-[rgba(201,168,76,0.4)] bg-[rgba(201,168,76,0.06)]',
+  'HQ': 'text-aurum-gold border-[rgba(255,255,255,0.25)] bg-[rgba(255,255,255,0.05)]',
   'Regional HQ': 'text-[#A8C4C8] border-[rgba(168,196,200,0.3)]',
-  'Major Office': 'text-[#8A8070] border-[rgba(138,128,112,0.25)]',
+  'Major Office': 'text-[#86868B] border-[rgba(138,128,112,0.25)]',
 }
 
 export default function FeaturedOfficesPage() {
@@ -25,25 +25,25 @@ export default function FeaturedOfficesPage() {
       <Navigation />
 
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden border-b border-[rgba(201,168,76,0.1)]">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0900] via-[#0D0C08] to-[#08080A]" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #C9A84C 0%, transparent 50%), radial-gradient(circle at 80% 20%, #C9A84C 0%, transparent 40%)' }} />
+      <section className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden border-b border-[rgba(255,255,255,0.09)]">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#000000] via-[#000000] to-[#000000]" />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 30% 40%, rgba(120,119,198,0.07) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(120,119,198,0.05) 0%, transparent 50%)' }} />
         <div className="relative z-10 max-w-[1240px] mx-auto w-full px-6 sm:px-10 pb-20">
-          <Link href="/careers" className="font-dm text-[10px] uppercase tracking-[0.28em] text-[#5A5040] hover:text-aurum-gold transition-colors duration-150 mb-4 inline-flex items-center gap-2">
+          <Link href="/careers" className="font-dm text-[10px] uppercase tracking-[0.28em] text-[#6E6E73] hover:text-aurum-gold transition-colors duration-150 mb-4 inline-flex items-center gap-2">
             ← Careers
           </Link>
           <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-6 mt-2">Featured Offices</p>
           <h1 className="font-playfair text-[56px] sm:text-[72px] leading-[1.0] text-pale-gold max-w-[700px] mb-8">
             A Global<br />Presence.
           </h1>
-          <p className="font-dm text-[16px] leading-relaxed text-[#C8BEA8] max-w-[520px] mb-8">
+          <p className="font-dm text-[16px] leading-relaxed text-[#F5F5F7] max-w-[520px] mb-8">
             Aurum Global operates in 47 cities across 31 countries — giving our clients local expertise backed by global resources.
           </p>
           <div className="flex gap-10">
             {[{ value: '47', label: 'Cities' }, { value: '31', label: 'Countries' }, { value: '4,200+', label: 'Employees' }].map(s => (
               <div key={s.label}>
                 <p className="font-playfair text-[36px] text-aurum-gold leading-none">{s.value}</p>
-                <p className="font-dm text-[10px] uppercase tracking-[0.18em] text-[#5A5040] mt-1">{s.label}</p>
+                <p className="font-dm text-[10px] uppercase tracking-[0.18em] text-[#6E6E73] mt-1">{s.label}</p>
               </div>
             ))}
           </div>
@@ -51,19 +51,19 @@ export default function FeaturedOfficesPage() {
       </section>
 
       {/* Offices grid */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-24 border-b border-[rgba(201,168,76,0.1)]">
+      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-24 border-b border-[rgba(255,255,255,0.09)]">
         <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-12">Featured Locations</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {OFFICES.map(o => (
-            <div key={o.city} className="rounded-2xl border border-[rgba(201,168,76,0.1)] bg-[rgba(17,17,20,0.6)] p-7 hover:border-[rgba(201,168,76,0.28)] hover:-translate-y-1 transition-all duration-200">
+            <div key={o.city} className="rounded-2xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.04)] p-7 hover:border-[rgba(255,255,255,0.18)] hover:-translate-y-1 transition-all duration-200">
               <span className={`font-dm text-[8px] uppercase tracking-[0.14em] px-2.5 py-1 rounded-full border mb-4 inline-block ${TAG_STYLES[o.tag]}`}>
                 {o.tag}
               </span>
               <h3 className="font-playfair text-[24px] text-pale-gold mb-1">{o.city}</h3>
-              <p className="font-dm text-[11px] text-[#5A5040] mb-4">{o.country}</p>
+              <p className="font-dm text-[11px] text-[#6E6E73] mb-4">{o.country}</p>
               <div className="w-8 h-[1px] bg-aurum-gold opacity-30 mb-4" />
-              <p className="font-dm text-[12px] text-[#C8BEA8] mb-2">{o.role}</p>
-              <p className="font-dm text-[11px] text-[#8A8070] mb-3 leading-relaxed">{o.focus}</p>
+              <p className="font-dm text-[12px] text-[#F5F5F7] mb-2">{o.role}</p>
+              <p className="font-dm text-[11px] text-[#86868B] mb-3 leading-relaxed">{o.focus}</p>
               <p className="font-dm text-[10px] uppercase tracking-[0.14em] text-aurum-gold opacity-60">{o.employees} employees</p>
             </div>
           ))}
@@ -71,11 +71,11 @@ export default function FeaturedOfficesPage() {
       </section>
 
       {/* Map placeholder */}
-      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(201,168,76,0.1)]">
-        <div className="rounded-2xl border border-[rgba(201,168,76,0.14)] bg-[rgba(17,17,20,0.5)] h-64 flex items-center justify-center">
+      <section className="max-w-[1240px] mx-auto px-6 sm:px-10 py-20 border-b border-[rgba(255,255,255,0.09)]">
+        <div className="rounded-2xl border border-[rgba(255,255,255,0.09)] bg-[rgba(255,255,255,0.04)] h-64 flex items-center justify-center">
           <div className="text-center">
             <p className="font-playfair text-[32px] text-aurum-gold opacity-20 mb-3">◦ · ◦ · ◦</p>
-            <p className="font-dm text-[11px] uppercase tracking-[0.2em] text-[#4A4030]">Offices in 47 cities across 31 countries</p>
+            <p className="font-dm text-[11px] uppercase tracking-[0.2em] text-[#6E6E73]">Offices in 47 cities across 31 countries</p>
           </div>
         </div>
       </section>
@@ -86,10 +86,10 @@ export default function FeaturedOfficesPage() {
         <h2 className="font-playfair text-[48px] sm:text-[56px] text-pale-gold leading-tight mb-6">
           Where Would You<br />Like to Work?
         </h2>
-        <p className="font-dm text-[15px] text-[#8A8070] leading-relaxed max-w-[440px] mx-auto mb-10">
+        <p className="font-dm text-[15px] text-[#86868B] leading-relaxed max-w-[440px] mx-auto mb-10">
           Explore our open roles and filter by location to find opportunities near you — or in a city you&apos;ve always wanted to work in.
         </p>
-        <Link href="/careers/open-roles" className="inline-flex items-center gap-2 px-8 h-12 bg-aurum-gold font-dm text-[12px] uppercase tracking-[0.12em] text-[#0A0800] font-medium hover:bg-pale-gold transition-all duration-200">
+        <Link href="/careers/open-roles" className="inline-flex items-center gap-2 px-8 h-12 bg-aurum-gold font-dm text-[12px] uppercase tracking-[0.12em] text-[#000000] font-medium hover:bg-pale-gold transition-all duration-200">
           View Open Roles <ArrowRight size={14} strokeWidth={2} />
         </Link>
       </section>

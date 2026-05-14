@@ -86,7 +86,7 @@ export default function CryptoSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 font-lora text-[16px] text-[#B8AE99] leading-[1.8] max-w-[480px]"
+              className="mt-6 font-lora text-[16px] text-[#86868B] leading-[1.8] max-w-[480px]"
             >
               Aurum Global provides sophisticated cryptocurrency portfolio
               management for institutions and HNWIs. Multi-chain exposure with
@@ -104,7 +104,7 @@ export default function CryptoSection() {
               {PILLS.map(pill => (
                 <span
                   key={pill}
-                  className="px-3 py-1.5 rounded-full border border-[rgba(201,168,76,0.25)] font-dm text-[11px] text-[#B8AE99] hover:border-aurum-gold hover:text-aurum-gold transition-colors duration-200"
+                  className="px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.16)] font-dm text-[11px] text-[#86868B] hover:border-aurum-gold hover:text-aurum-gold transition-colors duration-200"
                 >
                   {pill}
                 </span>
@@ -122,7 +122,7 @@ export default function CryptoSection() {
               {prices.map(coin => (
                 <div
                   key={coin.symbol}
-                  className="bg-carbon border border-[rgba(201,168,76,0.08)] rounded-lg p-4 hover:border-[rgba(201,168,76,0.2)] transition-colors duration-300"
+                  className="bg-carbon border border-[rgba(255,255,255,0.07)] rounded-lg p-4 hover:border-[rgba(255,255,255,0.13)] transition-colors duration-300"
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-mono text-[11px] font-medium text-pale-gold">
@@ -135,7 +135,7 @@ export default function CryptoSection() {
                       {coin.change24h.toFixed(2)}%
                     </span>
                   </div>
-                  <div className="font-mono text-[13px] text-[#B8AE99]">
+                  <div className="font-mono text-[13px] text-[#86868B]">
                     {coin.price > 10000
                       ? '$' + coin.price.toLocaleString('en-US', { maximumFractionDigits: 0 })
                       : '$' + coin.price.toFixed(2)}

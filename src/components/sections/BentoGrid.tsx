@@ -115,15 +115,15 @@ function BentoCard({ card, index }: { card: Card; index: number }) {
       }}
       className={cn(
         'group relative flex flex-col rounded-xl p-7',
-        'bg-carbon border border-[rgba(201,168,76,0.08)]',
+        'bg-carbon border border-[rgba(255,255,255,0.07)]',
         'transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
-        'hover:border-[rgba(201,168,76,0.35)] hover:-translate-y-1',
-        'hover:shadow-[0_20px_60px_rgba(201,168,76,0.07)]',
+        'hover:border-[rgba(255,255,255,0.22)] hover:-translate-y-1',
+        'hover:shadow-[0_20px_60px_rgba(255,255,255,0.06)]',
         card.featured && 'md:col-span-2',
       )}
     >
       {/* Icon */}
-      <div className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(201,168,76,0.2)] mb-5">
+      <div className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(255,255,255,0.13)] mb-5">
         <card.Icon size={18} className="text-aurum-gold" strokeWidth={1.5} />
       </div>
 
@@ -154,7 +154,7 @@ function BentoCard({ card, index }: { card: Card; index: number }) {
 
       {/* Featured accent line */}
       {card.featured && (
-        <div className="absolute top-0 left-7 right-7 h-px bg-gradient-to-r from-transparent via-[rgba(201,168,76,0.4)] to-transparent" />
+        <div className="absolute top-0 left-7 right-7 h-px bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.25)] to-transparent" />
       )}
     </motion.article>
   )
@@ -197,7 +197,7 @@ export default function BentoGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 font-dm text-[15px] text-[#B8AE99] max-w-[600px] mx-auto leading-relaxed"
+            className="mt-5 font-dm text-[15px] text-[#86868B] max-w-[600px] mx-auto leading-relaxed"
           >
             From private wealth to algorithmic trading — Aurum Global operates
             across the full spectrum of institutional financial services.
