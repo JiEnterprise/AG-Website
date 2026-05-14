@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 import CountUp from '@/components/ui/CountUp'
 
 const STATS = [
-  { value: 2.4, prefix: '$', suffix: 'B+', decimals: 1, label: 'Assets Under Management' },
-  { value: 47, prefix: '', suffix: '+', decimals: 0, label: 'Live Trading Strategies' },
-  { value: 99.97, prefix: '', suffix: '%', decimals: 2, label: 'Platform Uptime' },
-  { value: 3, prefix: '', suffix: '+', decimals: 0, label: 'Years of Excellence' },
+  { value: 2022, prefix: '', suffix: '', decimals: 0, label: 'Year Founded' },
+  { value: 12, prefix: '', suffix: '+', decimals: 0, label: 'Asset Classes' },
+  { value: 3, prefix: '', suffix: '+', decimals: 0, label: 'Years Building' },
+  { value: 24, prefix: '', suffix: '/7', decimals: 0, label: 'Platform Operations' },
 ]
 
 export default function StatsBar() {

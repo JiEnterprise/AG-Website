@@ -12,10 +12,10 @@ const ParticleNetwork = dynamic(() => import('@/components/three/ParticleNetwork
 })
 
 const STATS = [
-  { value: 2.4, prefix: '$', suffix: 'B+', label: 'Assets Under Management', decimals: 1 },
-  { value: 47, prefix: '', suffix: '+', label: 'Strategies Live', decimals: 0 },
-  { value: 99.97, prefix: '', suffix: '%', label: 'Platform Uptime', decimals: 2 },
+  { value: 2022, prefix: '', suffix: '', label: 'Year Founded', decimals: 0 },
   { value: 12, prefix: '', suffix: '+', label: 'Asset Classes', decimals: 0 },
+  { value: 3, prefix: '', suffix: '+', label: 'Years Building', decimals: 0 },
+  { value: 24, prefix: '', suffix: '/7', label: 'Always On', decimals: 0 },
 ]
 
 export default function HeroSection() {
@@ -99,7 +99,7 @@ export default function HeroSection() {
         {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="font-playfair font-bold text-pale-gold leading-[1.05]"
+          className="font-playfair font-bold text-pale-gold leading-[1.05] tracking-tight"
           style={{ fontSize: 'clamp(44px, 8vw, 96px)' }}
         >
           The Future of
@@ -107,13 +107,14 @@ export default function HeroSection() {
           <em className="not-italic text-aurum-gold">Institutional Finance.</em>
         </motion.h1>
 
-        {/* Sub */}
+        {/* Sub — one clear idea, Apple-style */}
         <motion.p
           variants={itemVariants}
-          className="mt-7 font-dm text-[17px] text-[#B8AE99] max-w-[560px] leading-relaxed"
+          className="mt-7 font-dm text-[17px] text-[#B8AE99] max-w-[520px] leading-[1.7]"
         >
-          Multi-asset intelligence. Institutional-grade execution.
-          AI-powered insight. One unified platform.
+          Where institutional intelligence meets
+          precision execution — across every asset class,
+          at every scale.
         </motion.p>
 
         {/* CTAs */}
@@ -132,9 +133,18 @@ export default function HeroSection() {
             href="#contact"
             className="inline-flex items-center px-8 h-12 rounded-full border border-aurum-gold text-[13px] font-dm font-medium uppercase tracking-[0.08em] text-aurum-gold transition-all duration-300 hover:bg-aurum-gold hover:text-[#0A0800]"
           >
-            Request Demo
+            Request Access
           </a>
         </motion.div>
+
+        {/* Audience signal — who this is built for */}
+        <motion.p
+          variants={itemVariants}
+          className="mt-4 font-dm text-[10px] tracking-[0.18em] text-[#4A4438] uppercase"
+          aria-label="Serving investors, private clients, family offices, and press"
+        >
+          Investors&nbsp;·&nbsp;Private Clients&nbsp;·&nbsp;Family Offices&nbsp;·&nbsp;Press
+        </motion.p>
 
         {/* Stats counters */}
         <motion.div

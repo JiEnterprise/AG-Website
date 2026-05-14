@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { generateEquityCurve } from '@/lib/marketData'
-import CountUp from '@/components/ui/CountUp'
 
 const STRATEGIES = [
   {
@@ -11,9 +10,9 @@ const STRATEGIES = [
     label: 'Mean Reversion',
     description:
       'Exploits price deviations from statistical equilibrium across correlated equity pairs. Targets 45–60 minute holding periods.',
-    sharpe: 2.84,
-    winRate: 68.3,
-    drawdown: -4.2,
+    approach: 'Statistical',
+    timeframe: 'Intraday',
+    assetClass: 'Equities',
     x: 50, y: 50,
   },
   {
@@ -21,9 +20,9 @@ const STRATEGIES = [
     label: 'Momentum Scalping',
     description:
       'High-frequency momentum captures intraday breakouts with algorithmic entry/exit based on volume confirmation.',
-    sharpe: 2.31,
-    winRate: 61.8,
-    drawdown: -6.7,
+    approach: 'Systematic',
+    timeframe: 'Intraday',
+    assetClass: 'Equities',
     x: 75, y: 25,
   },
   {
@@ -31,9 +30,9 @@ const STRATEGIES = [
     label: 'Statistical Arbitrage',
     description:
       'Cross-asset statistical arbitrage identifying pricing inefficiencies in correlated securities.',
-    sharpe: 3.12,
-    winRate: 72.1,
-    drawdown: -3.8,
+    approach: 'Quantitative',
+    timeframe: 'Short-term',
+    assetClass: 'Multi-Asset',
     x: 25, y: 25,
   },
   {
@@ -41,9 +40,9 @@ const STRATEGIES = [
     label: 'Dividend Capture',
     description:
       'Systematic dividend capture strategy across high-yield equities with ex-dividend timing optimization.',
-    sharpe: 1.95,
-    winRate: 74.5,
-    drawdown: -2.9,
+    approach: 'Systematic',
+    timeframe: 'Swing',
+    assetClass: 'Equities',
     x: 80, y: 65,
   },
   {
@@ -51,9 +50,9 @@ const STRATEGIES = [
     label: 'Options Income',
     description:
       'Theta decay strategies — iron condors, covered calls — generating consistent premium income.',
-    sharpe: 2.44,
-    winRate: 79.2,
-    drawdown: -5.1,
+    approach: 'Derivatives',
+    timeframe: 'Weekly',
+    assetClass: 'Options',
     x: 20, y: 70,
   },
   {
@@ -61,9 +60,9 @@ const STRATEGIES = [
     label: 'Pairs Trading',
     description:
       'Long/short equity pairs identified via cointegration analysis with dynamic hedge ratios.',
-    sharpe: 2.67,
-    winRate: 65.4,
-    drawdown: -5.8,
+    approach: 'Statistical',
+    timeframe: 'Multi-day',
+    assetClass: 'Equities',
     x: 55, y: 80,
   },
   {
@@ -71,9 +70,9 @@ const STRATEGIES = [
     label: 'Trend Following',
     description:
       'Multi-timeframe trend following across futures, FX, and crypto with ATR-based position sizing.',
-    sharpe: 1.87,
-    winRate: 54.7,
-    drawdown: -9.3,
+    approach: 'Systematic',
+    timeframe: 'Swing',
+    assetClass: 'Futures / FX',
     x: 35, y: 45,
   },
   {
@@ -81,9 +80,9 @@ const STRATEGIES = [
     label: 'Market Making',
     description:
       'Algorithmic market making providing two-sided liquidity in liquid equity and ETF markets.',
-    sharpe: 3.41,
-    winRate: 82.0,
-    drawdown: -2.1,
+    approach: 'Quantitative',
+    timeframe: 'Tick',
+    assetClass: 'Equities / ETFs',
     x: 65, y: 45,
   },
 ]
@@ -217,23 +216,23 @@ function StrategyPanel({ strategyId }: { strategyId: string | null }) {
           <p className="mt-2 font-dm text-[13px] text-muted-gold leading-relaxed">{strategy.description}</p>
           <div className="mt-4 grid grid-cols-3 gap-3">
             <div className="text-center">
-              <div className="font-playfair text-[20px] text-aurum-gold">{strategy.sharpe}</div>
-              <div className="font-dm text-[9px] uppercase tracking-wider text-muted-gold mt-1">Sharpe</div>
+              <div className="font-dm text-[13px] font-medium text-aurum-gold">{strategy.approach}</div>
+              <div className="font-dm text-[9px] uppercase tracking-wider text-muted-gold mt-1">Approach</div>
             </div>
             <div className="text-center">
-              <div className="font-playfair text-[20px] text-gain">{strategy.winRate}%</div>
-              <div className="font-dm text-[9px] uppercase tracking-wider text-muted-gold mt-1">Win Rate</div>
+              <div className="font-dm text-[13px] font-medium text-pale-gold">{strategy.timeframe}</div>
+              <div className="font-dm text-[9px] uppercase tracking-wider text-muted-gold mt-1">Timeframe</div>
             </div>
             <div className="text-center">
-              <div className="font-playfair text-[20px] text-loss">{strategy.drawdown}%</div>
-              <div className="font-dm text-[9px] uppercase tracking-wider text-muted-gold mt-1">Max DD</div>
+              <div className="font-dm text-[13px] font-medium text-pale-gold">{strategy.assetClass}</div>
+              <div className="font-dm text-[9px] uppercase tracking-wider text-muted-gold mt-1">Asset Class</div>
             </div>
           </div>
         </>
       ) : (
         <div className="flex items-center justify-center h-full min-h-[140px]">
           <p className="font-dm text-[13px] text-muted-gold text-center">
-            Click any strategy node to view details and metrics.
+            Click any strategy node to view details.
           </p>
         </div>
       )}
@@ -411,26 +410,16 @@ export default function QuantSection() {
           </div>
         </div>
 
-        {/* Metrics */}
+        {/* Approach pillars */}
         <div className="grid grid-cols-3 gap-8 mb-14 border-y border-[rgba(201,168,76,0.1)] py-10">
           {[
-            { value: 2.84, label: 'Avg Sharpe Ratio', suffix: '', decimals: 2 },
-            { value: 68.3, label: 'Average Win Rate', suffix: '%', decimals: 1 },
-            { value: 7.2, label: 'Max Drawdown', suffix: '%', decimals: 1, prefix: '-' },
-          ].map(stat => (
-            <div key={stat.label} className="text-center">
-              <div className="font-playfair text-aurum-gold" style={{ fontSize: 'clamp(36px, 5vw, 52px)' }}>
-                <CountUp
-                  end={stat.value}
-                  prefix={stat.prefix || ''}
-                  suffix={stat.suffix}
-                  decimals={stat.decimals}
-                  duration={2000}
-                />
-              </div>
-              <div className="mt-2 font-dm text-[11px] uppercase tracking-[0.15em] text-muted-gold">
-                {stat.label}
-              </div>
+            { label: 'Mathematically Rigorous', sub: 'Every strategy is built on statistical foundations, not intuition.' },
+            { label: 'Multi-Regime Tested', sub: 'Designed to perform across bull, bear, and sideways market conditions.' },
+            { label: 'Risk-Adjusted Focus', sub: 'Capital preservation is built into the model before return optimisation.' },
+          ].map(item => (
+            <div key={item.label} className="text-center px-4">
+              <div className="font-playfair text-[18px] text-aurum-gold leading-snug mb-3">{item.label}</div>
+              <div className="font-dm text-[12px] text-muted-gold leading-relaxed">{item.sub}</div>
             </div>
           ))}
         </div>
@@ -439,9 +428,9 @@ export default function QuantSection() {
         <div className="mb-14">
           <div className="mb-3 flex items-center justify-between">
             <span className="font-dm text-[11px] uppercase tracking-[0.2em] text-muted-gold">
-              Portfolio Equity Curve — Cumulative Return
+              Strategy Equity Curve — Illustrative Backtest
             </span>
-            <span className="font-mono text-[11px] text-gain">+247.3% since inception</span>
+            <span className="font-mono text-[11px] text-muted-gold italic">For illustrative purposes only</span>
           </div>
           <EquityCurve />
         </div>

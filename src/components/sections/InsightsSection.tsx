@@ -14,12 +14,12 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 const FEATURED = {
   category: 'MACRO',
-  headline: 'The Great Monetary Reset: How Central Bank Divergence Is Reshaping Global Capital Flows',
-  author: 'Dr. Alicia Wentworth, Chief Macro Strategist',
-  date: 'April 4, 2026',
+  headline: 'AG Insights: Bringing Institutional-Grade Research to Every Aurum Global Client',
+  author: 'Aurum Global',
+  date: 'Coming Soon',
   excerpt: [
-    'As the Federal Reserve signals a prolonged pause and the ECB moves toward easing, institutional capital is flowing in unprecedented patterns across G10 currency markets. Our proprietary flow analysis suggests a structural shift that could define portfolio positioning for the next 18–24 months.',
-    'The divergence in monetary policy cycles presents both risk and opportunity. For sophisticated investors willing to look beyond conventional allocation frameworks, the cross-asset dislocations emerging from this environment offer asymmetric return potential that warrants immediate strategic attention.',
+    'AG Insights is our proprietary intelligence layer — designed to surface the market data, macro analysis, and asset-class research that institutional desks rely on, made accessible through a single unified platform.',
+    'From options flow and crypto on-chain signals to equity earnings and global macro shifts, AG Insights will deliver curated, actionable intelligence for every client tier. This section will be live as we roll out to early access users.',
   ],
 }
 
@@ -68,8 +68,17 @@ export default function InsightsSection() {
             style={{ fontSize: 'clamp(32px, 5vw, 52px)' }}
           >
             Market Intelligence.{' '}
-            <span className="text-aurum-gold">Elevated.</span>
+            <span className="text-aurum-gold">Coming Soon.</span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-3 font-dm text-[11px] text-muted-gold tracking-[0.12em] italic"
+          >
+            Sample content shown below — live insights launch with early access.
+          </motion.p>
         </div>
 
         <div className="grid lg:grid-cols-11 gap-8">

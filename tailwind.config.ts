@@ -26,6 +26,7 @@ const config: Config = {
         dm: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-jetbrains)', 'monospace'],
         lora: ['var(--font-lora)', 'Georgia', 'serif'],
+        cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'gold-gradient': 'linear-gradient(135deg, #C9A84C 0%, #8B6E2E 100%)',
