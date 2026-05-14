@@ -9,20 +9,24 @@ export default function CustomCursor() {
   useEffect(() => {
     if (typeof window === 'undefined' || window.innerWidth < 768) return
 
-    let x = -100
-    let y = -100
+    // Dot tracks 1:1; ring lerps behind for a spring depth feel
+    let tx = -100, ty = -100   // target (mouse)
+    let rx = -100, ry = -100   // ring position (lerped)
     let hovered = false
     let clicked = false
+    let rafId: number
     let clickTimer: ReturnType<typeof setTimeout>
 
-    const move = (e: MouseEvent) => {
-      x = e.clientX
-      y = e.clientY
+    const LERP = 0.13
 
-      // 1:1 — direct DOM write, no React state, no spring
-      const transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`
-      if (ringRef.current) ringRef.current.style.transform = transform
-      if (dotRef.current) dotRef.current.style.transform = transform
+    const move = (e: MouseEvent) => {
+      tx = e.clientX
+      ty = e.clientY
+
+      // Dot: 1:1 — zero latency
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`
+      }
 
       // Hover detection
       const target = e.target as HTMLElement
@@ -43,18 +47,28 @@ export default function CustomCursor() {
       }
     }
 
+    // RAF loop lerps ring toward mouse — creates the "trailing" luxury feel
+    const loop = () => {
+      rx += (tx - rx) * LERP
+      ry += (ty - ry) * LERP
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`
+      }
+      rafId = requestAnimationFrame(loop)
+    }
+
     const applyRingState = () => {
       if (!ringRef.current || !dotRef.current) return
       if (clicked) {
-        ringRef.current.style.width = '16px'
-        ringRef.current.style.height = '16px'
-        ringRef.current.style.opacity = '0.5'
+        ringRef.current.style.width = '14px'
+        ringRef.current.style.height = '14px'
+        ringRef.current.style.opacity = '0.4'
         dotRef.current.style.width = '3px'
         dotRef.current.style.height = '3px'
       } else if (hovered) {
-        ringRef.current.style.width = '48px'
-        ringRef.current.style.height = '48px'
-        ringRef.current.style.opacity = '0.55'
+        ringRef.current.style.width = '52px'
+        ringRef.current.style.height = '52px'
+        ringRef.current.style.opacity = '0.5'
         dotRef.current.style.width = '5px'
         dotRef.current.style.height = '5px'
       } else {
@@ -73,15 +87,17 @@ export default function CustomCursor() {
       clickTimer = setTimeout(() => {
         clicked = false
         applyRingState()
-      }, 180)
+      }, 160)
     }
 
     window.addEventListener('mousemove', move, { passive: true })
     window.addEventListener('click', onClick)
+    rafId = requestAnimationFrame(loop)
 
     return () => {
       window.removeEventListener('mousemove', move)
       window.removeEventListener('click', onClick)
+      cancelAnimationFrame(rafId)
       clearTimeout(clickTimer)
     }
   }, [])

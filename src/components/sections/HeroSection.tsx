@@ -102,18 +102,24 @@ export default function HeroSection() {
           variants={itemVariants}
           className="mt-10 flex flex-col sm:flex-row items-center gap-3"
         >
-          <a
+          <motion.a
             href="#products"
-            className="inline-flex items-center gap-2 px-8 h-12 rounded-full bg-aurum-gold text-[12px] font-dm font-medium tracking-[0.06em] text-[#000000] hover:bg-pale-gold transition-colors duration-250"
+            whileHover={{ scale: 1.04, backgroundColor: '#E8D5A3' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+            className="inline-flex items-center gap-2 px-8 h-12 rounded-full bg-aurum-gold text-[12px] font-dm font-medium tracking-[0.06em] text-[#000000]"
           >
             Explore Services
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#contact"
-            className="inline-flex items-center px-8 h-12 rounded-full border border-[rgba(255,255,255,0.2)] text-[12px] font-dm tracking-[0.06em] text-[#F5F5F7] hover:border-[rgba(255,255,255,0.45)] transition-colors duration-250"
+            whileHover={{ scale: 1.04, borderColor: 'rgba(255,255,255,0.55)' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+            className="inline-flex items-center px-8 h-12 rounded-full border border-[rgba(255,255,255,0.2)] text-[12px] font-dm tracking-[0.06em] text-[#F5F5F7]"
           >
             Request an Introduction
-          </a>
+          </motion.a>
         </motion.div>
       </motion.div>
 

@@ -176,7 +176,7 @@ export default function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 h-16 transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           scrolled
             ? 'border-b border-[rgba(255,255,255,0.09)] bg-[rgba(0,0,0,0.84)] backdrop-blur-[20px]'
             : 'bg-[rgba(0,0,0,0.75)] backdrop-blur-[12px]'
@@ -290,12 +290,15 @@ export default function Navigation() {
             <div className="hidden xl:block w-[320px] overflow-hidden">
               <TickerStrip tickers={tickers} />
             </div>
-            <a
+            <motion.a
               href="/sign-in"
-              className="hidden sm:flex items-center px-5 h-9 rounded-full bg-aurum-gold text-[11px] font-dm uppercase tracking-[0.1em] font-medium text-[#000000] hover:bg-pale-gold transition-colors duration-200 whitespace-nowrap"
+              whileHover={{ scale: 1.05, backgroundColor: '#E8D5A3' }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: 'spring', stiffness: 450, damping: 22 }}
+              className="hidden sm:flex items-center px-5 h-9 rounded-full bg-aurum-gold text-[11px] font-dm uppercase tracking-[0.1em] font-medium text-[#000000] whitespace-nowrap"
             >
               Sign In
-            </a>
+            </motion.a>
             <button
               onClick={() => setMobileOpen(true)}
               className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px]"
@@ -314,10 +317,10 @@ export default function Navigation() {
       <AnimatePresence>
         {whatWeDoOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             className="fixed top-16 left-0 right-0 z-40"
             style={{
               background: 'rgba(0,0,0,0.88)',
@@ -386,10 +389,10 @@ export default function Navigation() {
       <AnimatePresence>
         {firmOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             className="fixed top-16 left-0 right-0 z-40"
             style={{
               background: 'rgba(0,0,0,0.88)',
@@ -451,10 +454,10 @@ export default function Navigation() {
       <AnimatePresence>
         {careersOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             className="fixed top-16 left-0 right-0 z-40"
             style={{
               background: 'rgba(0,0,0,0.88)',
