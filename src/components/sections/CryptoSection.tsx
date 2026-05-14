@@ -2,30 +2,21 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import dynamic from 'next/dynamic'
+import { ArrowRight } from 'lucide-react'
 import { CRYPTO_PRICES } from '@/lib/marketData'
 
-const CrystalScene = dynamic(() => import('@/components/three/CrystalScene'), {
-  ssr: false,
-  loading: () => <div className="w-full h-[400px]" />,
-})
-
-const PILLS = [
-  'Multi-chain',
-  'Cold Custody',
-  'DeFi Integration',
-  'Risk-Managed',
-  'Tax Optimization',
-  '24/7 Monitoring',
+const CAPABILITIES = [
+  'Multi-chain custody and settlement',
+  'DeFi protocol access and yield strategies',
+  'On-chain analytics and risk monitoring',
+  'Tax optimisation and regulatory reporting',
 ]
 
 export default function CryptoSection() {
   const [prices, setPrices] = useState(CRYPTO_PRICES)
-  const [prevPrices, setPrevPrices] = useState(CRYPTO_PRICES)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPrevPrices(prices)
       setPrices(prev =>
         prev.map(c => ({
           ...c,
@@ -35,129 +26,115 @@ export default function CryptoSection() {
       )
     }, 2000)
     return () => clearInterval(interval)
-  }, [prices])
+  }, [])
 
   return (
     <section
       id="crypto"
-      className="py-[120px] relative overflow-hidden"
-      style={{
-        background: '#070810',
-      }}
+      className="py-32 border-t border-[rgba(255,255,255,0.07)]"
       aria-label="Crypto and Digital Assets"
     >
-      {/* Radial glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse 60% 50% at 60% 50%, rgba(56,97,200,0.07) 0%, transparent 70%)',
-        }}
-        aria-hidden="true"
-      />
+      <div className="max-w-[1240px] mx-auto px-6 sm:px-10">
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
 
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left — copy */}
-          <div>
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="font-dm text-[10px] uppercase tracking-[0.25em] text-aurum-gold"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-8">
+              Digital Assets
+            </p>
+            <h2
+              className="font-playfair text-pale-gold leading-[1.1]"
+              style={{ fontSize: 'clamp(30px, 4vw, 46px)' }}
             >
-              Crypto & Digital Assets
-            </motion.span>
+              Digital assets managed<br />with institutional care.
+            </h2>
+            <p className="mt-7 font-dm text-[15px] text-[#86868B] leading-[1.8] max-w-[460px]">
+              We provide cryptocurrency portfolio management for institutions and high-net-worth individuals seeking disciplined exposure to digital assets — with the same rigour applied to our traditional portfolios.
+            </p>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+            {/* Capabilities */}
+            <motion.ul
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-4 font-playfair text-pale-gold leading-tight"
-              style={{ fontSize: 'clamp(30px, 4.5vw, 48px)' }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } },
+              }}
+              className="mt-8 flex flex-col divide-y divide-[rgba(255,255,255,0.07)]"
             >
-              Institutional Digital
-              <br />
-              <span className="text-aurum-gold">Asset Management.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 font-lora text-[16px] text-[#86868B] leading-[1.8] max-w-[480px]"
-            >
-              Aurum Global provides sophisticated cryptocurrency portfolio
-              management for institutions and HNWIs. Multi-chain exposure with
-              institutional-grade custody, risk management, and reporting.
-            </motion.p>
-
-            {/* Feature pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-7 flex flex-wrap gap-2"
-            >
-              {PILLS.map(pill => (
-                <span
-                  key={pill}
-                  className="px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.16)] font-dm text-[11px] text-[#86868B] hover:border-aurum-gold hover:text-aurum-gold transition-colors duration-200"
+              {CAPABILITIES.map(cap => (
+                <motion.li
+                  key={cap}
+                  variants={{
+                    hidden: { opacity: 0, x: -12 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+                  }}
+                  className="py-4 first:pt-0 font-dm text-[14px] text-[#86868B]"
                 >
-                  {pill}
-                </span>
+                  {cap}
+                </motion.li>
               ))}
-            </motion.div>
+            </motion.ul>
 
-            {/* Live price grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8 grid grid-cols-2 gap-3"
+            <a
+              href="/crypto-management"
+              className="mt-10 inline-flex items-center gap-2 font-dm text-[12px] text-aurum-gold hover:gap-3 transition-all duration-200"
             >
-              {prices.map(coin => (
+              Learn more <ArrowRight size={13} strokeWidth={1.75} />
+            </a>
+          </motion.div>
+
+          {/* Right — price table */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="border border-[rgba(255,255,255,0.09)] rounded-xl overflow-hidden">
+              {/* Table header */}
+              <div className="grid grid-cols-3 px-5 py-3 border-b border-[rgba(255,255,255,0.07)]">
+                <span className="font-dm text-[10px] uppercase tracking-[0.15em] text-[#6E6E73]">Asset</span>
+                <span className="font-dm text-[10px] uppercase tracking-[0.15em] text-[#6E6E73] text-right">Price</span>
+                <span className="font-dm text-[10px] uppercase tracking-[0.15em] text-[#6E6E73] text-right">24h</span>
+              </div>
+
+              {/* Rows */}
+              {prices.map((coin, i) => (
                 <div
                   key={coin.symbol}
-                  className="bg-carbon border border-[rgba(255,255,255,0.07)] rounded-lg p-4 hover:border-[rgba(255,255,255,0.13)] transition-colors duration-300"
+                  className={`grid grid-cols-3 px-5 py-4 ${i < prices.length - 1 ? 'border-b border-[rgba(255,255,255,0.05)]' : ''}`}
                 >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-mono text-[11px] font-medium text-pale-gold">
-                      {coin.symbol}
-                    </span>
-                    <span
-                      className={`font-mono text-[10px] ${coin.change24h >= 0 ? 'text-gain' : 'text-loss'}`}
-                    >
-                      {coin.change24h >= 0 ? '+' : ''}
-                      {coin.change24h.toFixed(2)}%
-                    </span>
+                  <div>
+                    <div className="font-mono text-[13px] text-pale-gold">{coin.symbol}</div>
+                    <div className="font-dm text-[11px] text-[#6E6E73] mt-0.5">{coin.name}</div>
                   </div>
-                  <div className="font-mono text-[13px] text-[#86868B]">
+                  <div className="font-mono text-[13px] text-[#86868B] text-right self-center">
                     {coin.price > 10000
                       ? '$' + coin.price.toLocaleString('en-US', { maximumFractionDigits: 0 })
                       : '$' + coin.price.toFixed(2)}
                   </div>
-                  <div className="font-dm text-[10px] text-muted-gold mt-0.5">{coin.name}</div>
+                  <div
+                    className={`font-mono text-[13px] text-right self-center ${coin.change24h >= 0 ? 'text-gain' : 'text-loss'}`}
+                  >
+                    {coin.change24h >= 0 ? '+' : ''}
+                    {coin.change24h.toFixed(2)}%
+                  </div>
                 </div>
               ))}
-            </motion.div>
-          </div>
-
-          {/* Right — 3D Crystal */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="flex items-center justify-center"
-          >
-            <div className="w-full max-w-[480px] h-[440px]">
-              <CrystalScene />
             </div>
+
+            <p className="mt-4 font-dm text-[11px] text-[#6E6E73]">
+              Indicative prices. Not investment advice.
+            </p>
           </motion.div>
+
         </div>
       </div>
     </section>

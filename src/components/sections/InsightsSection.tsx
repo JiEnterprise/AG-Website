@@ -45,12 +45,12 @@ export default function InsightsSection() {
   return (
     <section
       id="insights"
-      className="py-[120px] bg-[#0A0A0C]"
+      className="py-32 border-t border-[rgba(255,255,255,0.07)]"
       aria-label="AG Insights Intelligence"
     >
-      <div className="max-w-[1400px] mx-auto px-6">
+      <div className="max-w-[1240px] mx-auto px-6 sm:px-10">
         {/* Section header */}
-        <div className="mb-14 text-center">
+        <div className="mb-14">
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -67,8 +67,7 @@ export default function InsightsSection() {
             className="mt-4 font-playfair text-pale-gold"
             style={{ fontSize: 'clamp(32px, 5vw, 52px)' }}
           >
-            Market Intelligence.{' '}
-            <span className="text-aurum-gold">Elevated.</span>
+            Research and analysis.
           </motion.h2>
         </div>
 
