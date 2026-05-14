@@ -82,6 +82,7 @@ export default function BentoGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ x: 5, transition: { type: 'spring', stiffness: 380, damping: 28 } }}
               className={[
                 'group py-10',
                 'border-b border-[rgba(255,255,255,0.07)]',
@@ -97,18 +98,24 @@ export default function BentoGrid() {
               <p className="font-dm text-[13px] text-[#86868B] leading-[1.75] mb-5 max-w-[420px]">
                 {s.desc}
               </p>
-              <Link
-                href={s.href}
+              <motion.div
                 className="inline-flex items-center gap-1.5 font-dm text-[11px] text-[#6E6E73] group-hover:text-aurum-gold transition-colors duration-200"
-                aria-label={`Learn about ${s.title}`}
               >
-                Learn more
-                <ArrowRight
-                  size={11}
-                  strokeWidth={1.75}
-                  className="transition-transform duration-200 group-hover:translate-x-0.5"
-                />
-              </Link>
+                <Link
+                  href={s.href}
+                  className="inline-flex items-center gap-1.5"
+                  aria-label={`Learn about ${s.title}`}
+                >
+                  Learn more
+                  <motion.span
+                    className="inline-flex"
+                    whileHover={{ x: 3 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                  >
+                    <ArrowRight size={11} strokeWidth={1.75} />
+                  </motion.span>
+                </Link>
+              </motion.div>
             </motion.div>
           ))}
         </div>

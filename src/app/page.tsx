@@ -20,6 +20,18 @@ import Footer from '@/components/sections/Footer'
 const IntroAnimation  = dynamic(() => import('@/components/IntroAnimation'),             { ssr: false })
 
 export default function HomePage() {
+  // Scroll progress bar — direct DOM, zero React overhead
+  useEffect(() => {
+    const bar = document.getElementById('scroll-progress')
+    if (!bar) return
+    const update = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight
+      bar.style.transform = `scaleX(${total > 0 ? window.scrollY / total : 0})`
+    }
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
+  }, [])
+
   // Initialize Lenis smooth scroll
   useEffect(() => {
     interface LenisInstance {
@@ -33,9 +45,10 @@ export default function HomePage() {
       try {
         const { default: Lenis } = await import('lenis')
         lenis = new Lenis({
-          lerp: 0.08,
+          lerp: 0.065,        // silkier — slower lerp = more luxurious glide
           smoothWheel: true,
           touchMultiplier: 2,
+          wheelMultiplier: 0.9,
         }) as LenisInstance
 
         const tick = (time: number) => {
@@ -58,6 +71,9 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Scroll progress — thin gold line at top */}
+      <div id="scroll-progress" className="scroll-progress" aria-hidden="true" />
+
       <IntroAnimation />
       <Navigation />
 

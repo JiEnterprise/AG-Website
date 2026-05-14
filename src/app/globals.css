@@ -18,6 +18,13 @@
   --font-dm-sans: 'DM Sans', system-ui, sans-serif;
   --font-jetbrains: 'JetBrains Mono', monospace;
   --font-lora: 'Lora', Georgia, serif;
+
+  /* Motion timing tokens */
+  --ease-aurum: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
 }
 
 * {
@@ -36,7 +43,40 @@ body {
   font-family: var(--font-dm-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+/* Gold text selection */
+::selection {
+  background: rgba(201, 168, 76, 0.22);
+  color: #F5F5F7;
+}
+::-moz-selection {
+  background: rgba(201, 168, 76, 0.22);
+  color: #F5F5F7;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, #8B6E2E 0%, #C9A84C 50%, #E8D5A3 100%);
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 9998;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* GPU compositing for fixed/animated layers */
+.fixed,
+[data-composited] {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Custom scrollbar — Apple-style minimal */
@@ -166,6 +206,15 @@ body {
 /* Prevent FOUC on theme */
 html {
   background: #000000;
+}
+
+/* Gentle float */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-7px); }
+}
+.animate-float {
+  animation: float 5s var(--ease-aurum) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
