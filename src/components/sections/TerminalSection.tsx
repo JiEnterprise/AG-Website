@@ -192,11 +192,9 @@ export default function TerminalSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="mt-4 font-playfair text-pale-gold leading-tight"
-              style={{ fontSize: 'clamp(36px, 5vw, 56px)' }}
+              style={{ fontSize: 'clamp(36px, 5vw, 52px)' }}
             >
-              Bloomberg.
-              <br />
-              <span className="text-aurum-gold italic">Reimagined.</span>
+              Market data,<br />unified.
             </motion.h2>
 
             <motion.p
@@ -204,12 +202,11 @@ export default function TerminalSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 font-lora text-[16px] text-[#86868B] leading-[1.8] max-w-[480px]"
+              className="mt-6 font-dm text-[15px] text-[#86868B] leading-[1.8] max-w-[460px]"
             >
-              The AG Terminal delivers institutional-grade market intelligence to
-              private traders and wealth managers. Real-time data, AI-powered
-              analysis, and portfolio intelligence — without the six-figure
-              subscription.
+              AG Terminal brings real-time market data, AI-powered analysis, and
+              portfolio intelligence together in one interface — built for wealth
+              managers and sophisticated investors.
             </motion.p>
 
             {/* Feature list */}
@@ -251,16 +248,16 @@ export default function TerminalSection() {
             >
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-7 h-11 rounded-full bg-aurum-gold text-[12px] font-dm font-medium uppercase tracking-[0.08em] text-[#000000] hover:bg-pale-gold transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-7 h-11 rounded-full bg-aurum-gold text-[12px] font-dm font-medium tracking-[0.06em] text-[#000000] hover:bg-pale-gold transition-colors duration-200"
               >
-                Start Free Trial
+                Request Access
               </a>
               <a
-                href="#"
-                className="inline-flex items-center gap-2 px-7 h-11 rounded-full border border-[rgba(255,255,255,0.25)] text-[12px] font-dm uppercase tracking-[0.08em] text-aurum-gold hover:border-aurum-gold transition-colors duration-200"
+                href="/ag-terminal"
+                className="inline-flex items-center gap-2 px-7 h-11 rounded-full border border-[rgba(255,255,255,0.18)] text-[12px] font-dm tracking-[0.06em] text-[#F5F5F7] hover:border-[rgba(255,255,255,0.4)] transition-colors duration-200"
               >
-                View Documentation
-                <ArrowUpRight size={13} />
+                Learn more
+                <ArrowUpRight size={12} strokeWidth={1.75} />
               </a>
             </motion.div>
           </div>

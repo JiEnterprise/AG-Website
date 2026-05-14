@@ -1,32 +1,24 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { User, BarChart3, FileText, Globe } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
-const FEATURES = [
+const PILLARS = [
   {
-    Icon: User,
-    title: 'Dedicated Portfolio Manager',
-    description:
-      'A senior portfolio manager assigned exclusively to your account — personal, consistent, and accountable.',
+    title: 'Dedicated Advisory',
+    desc: 'A senior portfolio manager assigned exclusively to your account — with a 1:10 advisor-to-client ratio that ensures genuine attention.',
   },
   {
-    Icon: BarChart3,
-    title: 'Custom Asset Allocation',
-    description:
-      'Portfolio construction built around your specific risk tolerance, time horizon, and life goals.',
+    title: 'Bespoke Portfolios',
+    desc: 'Asset allocation built around your specific risk tolerance, time horizon, liquidity needs, and life objectives.',
   },
   {
-    Icon: FileText,
-    title: 'Monthly Performance Reporting',
-    description:
-      'Comprehensive, transparent reporting with full attribution analysis and forward-looking commentary.',
+    title: 'Transparent Reporting',
+    desc: 'Comprehensive monthly performance reports with full attribution analysis and forward-looking commentary.',
   },
   {
-    Icon: Globe,
-    title: 'Real-time Portfolio Access',
-    description:
-      'Monitor your portfolio 24/7 via the AG Terminal — full transparency, on any device.',
+    title: 'Real-Time Access',
+    desc: 'Monitor your portfolio at any time via AG Terminal — complete transparency across all positions and transactions.',
   },
 ]
 
@@ -34,116 +26,73 @@ export default function WealthSection() {
   return (
     <section
       id="wealth"
-      className="py-[140px] bg-[#F5F3EE]"
+      className="py-32 border-t border-[rgba(255,255,255,0.07)]"
       aria-label="Private Wealth Management"
     >
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid lg:grid-cols-5 gap-16 items-center">
-          {/* Left — editorial copy */}
-          <div className="lg:col-span-3">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="font-dm text-[10px] uppercase tracking-[0.25em] text-[#7A6A50]"
-            >
+      <div className="max-w-[1240px] mx-auto px-6 sm:px-10">
+
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
+
+          {/* Left — copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-dm text-[10px] uppercase tracking-[0.28em] text-aurum-gold mb-8">
               Private Wealth Management
-            </motion.span>
-
-            {/* Gold accent line */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 h-[3px] w-12 bg-aurum-gold origin-left"
-            />
-
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 font-playfair italic font-bold text-[#1A1510] leading-tight"
-              style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}
+            </p>
+            <h2
+              className="font-playfair text-pale-gold leading-[1.1]"
+              style={{ fontSize: 'clamp(30px, 4vw, 46px)' }}
             >
-              "Protecting and growing
-              <br />
-              generational wealth —
-              <br />
-              with precision, discretion,
-              <br />
-              and institutional rigor."
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8 font-lora text-[16px] text-[#6E6E73] leading-[1.8] max-w-[520px]"
-            >
-              Our Private Wealth Management division provides bespoke portfolio
-              management for high-net-worth individuals, family offices, and
-              institutional clients seeking concierge-level financial service.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-4 font-dm text-[13px] text-[#7A6A50] italic"
-            >
+              Wealth managed with<br />precision and discretion.
+            </h2>
+            <p className="mt-7 font-dm text-[15px] text-[#86868B] leading-[1.8] max-w-[460px]">
+              Our Private Wealth Management division provides bespoke portfolio management for high-net-worth individuals, family offices, and institutions seeking a genuinely personal service — not a product.
+            </p>
+            <p className="mt-5 font-dm text-[13px] text-[#6E6E73]">
               Minimum investment: $100,000
-            </motion.p>
-
-            <motion.a
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            </p>
+            <a
               href="#contact"
-              className="mt-8 inline-flex items-center px-7 h-12 rounded-full border border-[#1A1510] text-[12px] font-dm font-medium uppercase tracking-[0.1em] text-[#1A1510] hover:bg-aurum-gold hover:border-aurum-gold hover:text-[#000000] transition-all duration-300"
+              className="mt-10 inline-flex items-center gap-2 font-dm text-[12px] text-aurum-gold hover:gap-3 transition-all duration-200"
             >
-              Schedule Consultation
-            </motion.a>
-          </div>
+              Schedule a consultation <ArrowRight size={13} strokeWidth={1.75} />
+            </a>
+          </motion.div>
 
-          {/* Right — feature cards */}
+          {/* Right — pillars */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
             }}
-            className="lg:col-span-2 flex flex-col gap-4"
+            className="flex flex-col divide-y divide-[rgba(255,255,255,0.07)]"
           >
-            {FEATURES.map(feat => (
+            {PILLARS.map(p => (
               <motion.div
-                key={feat.title}
+                key={p.title}
                 variants={{
-                  hidden: { opacity: 0, x: 24 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+                  hidden: { opacity: 0, y: 12 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
                 }}
-                className="flex gap-4 p-5 rounded-lg bg-white border-l-[3px] border-aurum-gold shadow-sm"
+                className="py-7 first:pt-0 last:pb-0"
               >
-                <div className="flex-shrink-0 mt-0.5">
-                  <feat.Icon size={18} className="text-aurum-gold" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <div className="font-dm text-[14px] font-medium text-[#1A1510]">
-                    {feat.title}
-                  </div>
-                  <p className="mt-1 font-dm text-[13px] text-[#6A5A48] leading-relaxed">
-                    {feat.description}
-                  </p>
-                </div>
+                <h3 className="font-dm text-[15px] font-medium text-pale-gold mb-2">
+                  {p.title}
+                </h3>
+                <p className="font-dm text-[13px] text-[#86868B] leading-relaxed">
+                  {p.desc}
+                </p>
               </motion.div>
             ))}
           </motion.div>
+
         </div>
       </div>
     </section>

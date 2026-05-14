@@ -1,52 +1,31 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import CountUp from '@/components/ui/CountUp'
-
 const STATS = [
-  { value: 2.4, prefix: '$', suffix: 'B+', decimals: 1, label: 'Assets Under Management' },
-  { value: 47, prefix: '', suffix: '+', decimals: 0, label: 'Live Trading Strategies' },
-  { value: 99.97, prefix: '', suffix: '%', decimals: 2, label: 'Platform Uptime' },
-  { value: 3, prefix: '', suffix: '+', decimals: 0, label: 'Years of Excellence' },
+  { value: '$2.4B+', label: 'Assets Under Management' },
+  { value: '47+',    label: 'Live Trading Strategies' },
+  { value: '99.97%', label: 'Platform Uptime' },
+  { value: '12+',    label: 'Asset Classes' },
 ]
 
 export default function StatsBar() {
   return (
     <section
       id="solutions"
-      className="relative py-[80px] grain-overlay overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #C9A84C 0%, #8B6E2E 100%)',
-      }}
+      className="border-t border-b border-[rgba(255,255,255,0.07)] py-20"
       aria-label="Key metrics"
     >
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-          {STATS.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-center"
-            >
-              <div
-                className="font-playfair font-bold text-[#000000]"
-                style={{ fontSize: 'clamp(44px, 5.5vw, 68px)' }}
+      <div className="max-w-[1240px] mx-auto px-6 sm:px-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-0 md:divide-x md:divide-[rgba(255,255,255,0.07)]">
+          {STATS.map(s => (
+            <div key={s.label} className="md:px-10 first:pl-0 last:pr-0">
+              <p
+                className="font-playfair text-pale-gold leading-none"
+                style={{ fontSize: 'clamp(36px, 4vw, 52px)' }}
               >
-                <CountUp
-                  end={stat.value}
-                  prefix={stat.prefix}
-                  suffix={stat.suffix}
-                  decimals={stat.decimals}
-                  duration={2000}
-                />
-              </div>
-              <div className="mt-2 font-dm text-[11px] uppercase tracking-[0.18em] text-[#3A2E1A]">
-                {stat.label}
-              </div>
-            </motion.div>
+                {s.value}
+              </p>
+              <p className="mt-2 font-dm text-[11px] uppercase tracking-[0.15em] text-[#6E6E73]">
+                {s.label}
+              </p>
+            </div>
           ))}
         </div>
       </div>
