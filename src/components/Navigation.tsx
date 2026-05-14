@@ -6,11 +6,11 @@ import { X, ChevronDown } from 'lucide-react'
 import { INITIAL_TICKERS, simulateTicker, type TickerItem } from '@/lib/marketData'
 
 const CAREERS_LINKS = [
-  { label: 'Students', href: '#careers-students' },
-  { label: 'Life at AG', href: '#careers-life' },
-  { label: 'Benefits', href: '#careers-benefits' },
-  { label: 'Featured Offices', href: '#careers-offices' },
-  { label: 'Open Roles', href: '#careers-roles' },
+  { label: 'Students', href: '/careers/students' },
+  { label: 'Life at AG', href: '/careers/life-at-ag' },
+  { label: 'Benefits', href: '/careers/benefits' },
+  { label: 'Featured Offices', href: '/careers/featured-offices' },
+  { label: 'Open Roles', href: '/careers/open-roles' },
 ]
 
 const OUR_FIRM_LINKS = [
@@ -20,7 +20,7 @@ const OUR_FIRM_LINKS = [
   { label: 'Our Focus on Sustainability', href: '#firm-sustainability' },
   { label: 'Our Vendor Program', href: '#firm-vendor' },
   { label: 'Partnerships', href: '#firm-partnerships' },
-  { label: 'Locations', href: '#firm-locations' },
+  { label: 'Locations', href: '/careers/featured-offices' },
 ]
 
 const WHAT_WE_DO = [
@@ -28,36 +28,36 @@ const WHAT_WE_DO = [
     group: 'Private Banking',
     links: [
       { label: 'Private Wealth Management', href: '/private-wealth-management' },
-      { label: 'Institutional Banking', href: '#institutional' },
-      { label: 'Loans & Credit', href: '#loans' },
+      { label: 'Institutional Banking', href: '/institutional-banking' },
+      { label: 'Loans & Credit', href: '/loans-credit' },
     ],
   },
   {
     group: 'Asset Management',
     links: [
-      { label: 'Asset Management', href: '#asset-mgmt' },
-      { label: 'Crypto Management', href: '#crypto' },
-      { label: 'Mergers & Acquisitions', href: '#ma' },
+      { label: 'Asset Management', href: '/asset-management' },
+      { label: 'Crypto Management', href: '/crypto-management' },
+      { label: 'Mergers & Acquisitions', href: '/mergers-acquisitions' },
     ],
   },
   {
     group: 'Products',
     links: [
-      { label: 'Mutual Funds', href: '#mutual-funds' },
-      { label: 'ETFs', href: '#etfs' },
-      { label: 'Money Market Funds', href: '#money-market' },
-      { label: 'Stocks', href: '#stocks' },
-      { label: 'CDs', href: '#cds' },
-      { label: 'Bonds', href: '#bonds' },
-      { label: 'AG Terminal', href: '#ag-terminal' },
-      { label: 'AGQuant', href: '#agquant' },
-      { label: 'Bot Trading', href: '#bot-trading' },
+      { label: 'Mutual Funds', href: '/mutual-funds' },
+      { label: 'ETFs', href: '/etfs' },
+      { label: 'Money Market Funds', href: '/money-market-funds' },
+      { label: 'Stocks', href: '/stocks' },
+      { label: 'CDs', href: '/cds' },
+      { label: 'Bonds', href: '/bonds' },
+      { label: 'AG Terminal', href: '/ag-terminal' },
+      { label: 'AGQuant', href: '/agquant' },
+      { label: 'Bot Trading', href: '/bot-trading' },
     ],
   },
   {
     group: 'Intelligence',
     links: [
-      { label: 'AG Insights', href: '#insights' },
+      { label: 'AG Insights', href: '/ag-insights' },
     ],
   },
 ]
