@@ -20,15 +20,24 @@ import {
   MessageCircle,
   Cpu,
   Settings,
+  User,
+  TrendingUp,
+  DollarSign,
+  BookOpen,
+  UserPlus,
+  CheckSquare,
+  ScrollText,
+  Mail,
 } from 'lucide-react'
 import { useAdvisorStore } from '@/lib/store/advisorStore'
 import { formatCurrency } from '@/lib/formatters'
 
 type NavItem = {
   label: string
-  href: '/advisor/dashboard' | '/advisor/clients' | '/advisor/performance' | '/advisor/trades' | '/advisor/signals' | '/advisor/risk' | '/advisor/orders' | '/advisor/statements' | '/advisor/billing' | '/advisor/calendar' | '/advisor/research' | '/advisor/alerts' | '/advisor/messages' | '/advisor/agquant' | '/advisor/settings'
+  href: string
   icon: LucideIcon
   badge?: 'clients' | 'signals' | 'billing' | 'alerts' | 'messages' | 'statements'
+  silver?: boolean
 }
 
 const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
@@ -43,6 +52,7 @@ const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
   {
     label: 'Trading',
     items: [
+      { label: 'Live P&L', href: '/advisor/pnl', icon: TrendingUp },
       { label: 'Trade Log', href: '/advisor/trades', icon: Maximize2 },
       { label: 'AGQuant Signals', href: '/advisor/signals', icon: Activity, badge: 'signals' },
       { label: 'Risk Monitor', href: '/advisor/risk', icon: Shield },
@@ -50,11 +60,27 @@ const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
     ],
   },
   {
+    label: 'Income',
+    items: [
+      { label: 'YieldMax', href: '/advisor/yieldmax', icon: DollarSign },
+    ],
+  },
+  {
     label: 'Reporting',
     items: [
       { label: 'Statements', href: '/advisor/statements', icon: FileText, badge: 'statements' },
       { label: 'Fee Collection', href: '/advisor/billing', icon: CreditCard, badge: 'billing' },
+      { label: 'Ledger', href: '/advisor/ledger', icon: BookOpen },
       { label: 'Event Calendar', href: '/advisor/calendar', icon: Calendar },
+    ],
+  },
+  {
+    label: 'Client Ops',
+    items: [
+      { label: 'Onboard Client', href: '/advisor/clients/onboard', icon: UserPlus },
+      { label: 'Compliance', href: '/advisor/compliance', icon: CheckSquare },
+      { label: 'Audit Log', href: '/advisor/audit', icon: ScrollText },
+      { label: 'Email Templates', href: '/advisor/templates', icon: Mail },
     ],
   },
   {
@@ -70,6 +96,12 @@ const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
     items: [
       { label: 'AGQuant Engine', href: '/advisor/agquant', icon: Cpu },
       { label: 'Settings', href: '/advisor/settings', icon: Settings },
+    ],
+  },
+  {
+    label: 'Personal',
+    items: [
+      { label: 'My Account', href: '/advisor/personal', icon: User, silver: true },
     ],
   },
 ]
@@ -92,7 +124,17 @@ export default function Sidebar() {
 
   useEffect(() => {
     if (pathname.startsWith('/advisor/')) {
-      setActiveRoute(pathname as Parameters<typeof setActiveRoute>[0])
+      // Only set for known routes in the store
+      const knownRoutes = [
+        '/advisor/dashboard', '/advisor/clients', '/advisor/performance',
+        '/advisor/trades', '/advisor/signals', '/advisor/risk', '/advisor/orders',
+        '/advisor/statements', '/advisor/billing', '/advisor/calendar',
+        '/advisor/research', '/advisor/alerts', '/advisor/messages',
+        '/advisor/agquant', '/advisor/settings',
+      ]
+      if (knownRoutes.includes(pathname)) {
+        setActiveRoute(pathname as Parameters<typeof setActiveRoute>[0])
+      }
     }
   }, [pathname, setActiveRoute])
 
@@ -107,13 +149,23 @@ export default function Sidebar() {
           <p className="sg-lbl">{group.label}</p>
           <div>
             {group.items.map((item) => {
-              const active = pathname === item.href
+              const active = pathname === item.href || pathname.startsWith(item.href + '/')
               const Icon = item.icon
+              const silverStyle = item.silver
+                ? { color: active ? '#A0A0BE' : undefined }
+                : {}
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={`si ${active ? 'on' : ''}`}
+                  style={
+                    item.silver && active
+                      ? { borderLeftColor: '#A0A0BE', color: '#A0A0BE' }
+                      : item.silver
+                        ? silverStyle
+                        : {}
+                  }
                 >
                   <Icon size={13} />
                   <span className="truncate">{item.label}</span>

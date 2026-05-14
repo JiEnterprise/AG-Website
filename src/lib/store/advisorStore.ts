@@ -39,6 +39,14 @@ type RouteId =
   | '/advisor/messages'
   | '/advisor/agquant'
   | '/advisor/settings'
+  | '/advisor/personal'
+  | '/advisor/pnl'
+  | '/advisor/yieldmax'
+  | '/advisor/ledger'
+  | '/advisor/clients/onboard'
+  | '/advisor/compliance'
+  | '/advisor/audit'
+  | '/advisor/templates'
 
 interface AdvisorState {
   activeRoute: RouteId
