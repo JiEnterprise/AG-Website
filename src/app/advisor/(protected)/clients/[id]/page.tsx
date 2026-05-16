@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
-  ArrowUpRight, ArrowDownRight, Mail, Phone, Shield,
+  ArrowUpRight, ArrowDownRight, Mail, Phone,
   TrendingUp, DollarSign, Target, FileText, ChevronRight,
-  Activity, Clock,
+  Activity, Clock, ChevronLeft,
 } from 'lucide-react'
-import PageHeader from '@/components/advisor/PageHeader'
 import EquityChart from '@/components/advisor/EquityChart'
 import TradeRow from '@/components/advisor/TradeRow'
 import { getClientById, getTradesByClient, getStatementsByClient, snapshots } from '@/lib/advisorMetrics'
@@ -24,9 +23,9 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
   const client = getClientById(params.id)
   if (!client) notFound()
 
-  const trades     = getTradesByClient(client.id)
-  const statements = getStatementsByClient(client.id)
-  const snap       = snapshots.find((s) => s.clientId === client.id)
+  const trades      = getTradesByClient(client.id)
+  const statements  = getStatementsByClient(client.id)
+  const snap        = snapshots.find((s) => s.clientId === client.id)
   const totalReturn = allTimeReturn(client.currentAUM, client.initialDeposit)
   const roi         = allTimeReturnPct(client.currentAUM, client.initialDeposit)
   const riskColor   = RISK_COLORS[client.riskProfile ?? ''] ?? 'var(--t3)'
@@ -36,214 +35,240 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
     : 0
   const cashPct = 100 - investedPct
 
+  const totalUnrealizedPnl = snap?.openPositions.reduce((s, p) => s + p.unrealizedPnl, 0) ?? 0
+  const totalMarketValue   = snap?.openPositions.reduce((s, p) => s + p.marketValue, 0) ?? 0
+
   return (
-    <div>
-      <PageHeader
-        eyebrow="Client 360°"
-        title={`${client.name}`}
-        subtitle={`${client.id} · ${client.tier} · onboarded ${new Date(client.onboarded).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`}
-        action={
-          <div style={{ display: 'flex', gap: 8 }}>
-            <Link
-              href={`/advisor/orders?client=${client.id}`}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 7,
-                background: 'rgba(107,107,107,0.12)', border: '1px solid rgba(107,107,107,0.28)',
-                fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--gold)', textDecoration: 'none',
-              }}
-            >
-              <Activity size={11} /> Place Order
-            </Link>
-            <Link
-              href={`/advisor/statements?client=${client.id}`}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 7,
-                background: 'var(--bg-elevated)', border: '1px solid var(--bdr)',
-                fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t2)', textDecoration: 'none',
-              }}
-            >
-              <FileText size={11} /> Statement
-            </Link>
-          </div>
-        }
-      />
+    <div className="ag-page">
 
-      {/* ── Identity strip ──────────────────────────────── */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px',
-        background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, marginBottom: 16,
-        borderLeft: `3px solid ${client.color}`,
-      }}>
-        <div style={{
-          width: 52, height: 52, borderRadius: 14, flexShrink: 0,
-          background: `${client.color}1A`, color: client.color, border: `1px solid ${client.color}33`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--font-dm-sans)', fontSize: 17, fontWeight: 700,
-        }}>{client.initials}</div>
-
-        <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 16, fontWeight: 600, color: 'var(--t1)' }}>{client.name}</span>
-            <span style={{
-              fontFamily: 'var(--font-dm-sans)', fontSize: 9, fontWeight: 600,
-              color: riskColor, background: `${riskColor}18`, border: `1px solid ${riskColor}33`,
-              padding: '2px 8px', borderRadius: 20,
-            }}>{client.riskProfile}</span>
-            <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 9, color: 'var(--t3)', background: 'var(--bg-elevated)', padding: '2px 6px', borderRadius: 4 }}>{client.id}</span>
-          </div>
-          <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t2)', marginTop: 2 }}>
-            {client.investmentObjective} · {client.strategy}
-          </div>
-          {client.taxStatus && (
-            <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)', marginTop: 1 }}>
-              {client.taxStatus} · Fee {(client.feeRate * 100).toFixed(2)}% {client.billingCycle}
-            </div>
-          )}
-        </div>
-
-        {/* Contact */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'flex-end' }}>
-          {client.email && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t2)' }}>
-              <Mail size={10} color="var(--t3)" /> {client.email}
-            </span>
-          )}
-          {client.phone && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t2)' }}>
-              <Phone size={10} color="var(--t3)" /> {client.phone}
-            </span>
-          )}
-          {client.nextReview && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>
-              <Clock size={9} /> Next review: {new Date(client.nextReview).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </span>
-          )}
+      {/* ── Breadcrumb + actions ─────────────────────────────── */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+        <Link
+          href="/advisor/clients"
+          style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'var(--t3)', textDecoration: 'none' }}
+        >
+          <ChevronLeft size={12} /> Client Roster
+        </Link>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Link href={`/advisor/orders?client=${client.id}`} className="ag-btn ag-btn-primary" style={{ textDecoration: 'none', fontSize: 11 }}>
+            <Activity size={11} /> Place Order
+          </Link>
+          <Link href={`/advisor/statements?client=${client.id}`} className="ag-btn ag-btn-ghost" style={{ textDecoration: 'none', fontSize: 11 }}>
+            <FileText size={11} /> Statement
+          </Link>
         </div>
       </div>
 
-      {/* ── KPI row ─────────────────────────────────────── */}
-      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 10, marginBottom: 20 }}>
-        {[
-          { label: 'Current AUM',    value: formatCurrency(client.currentAUM),      color: 'var(--gold)',   sub: `From ${formatCurrency(client.initialDeposit)}` },
-          { label: 'Total Return',   value: `+${formatCurrency(totalReturn)}`,       color: 'var(--gain)',   sub: `+${formatPercent(roi)} ROI` },
-          { label: 'Cash Balance',   value: formatCurrency(client.cashBalance),      color: 'var(--t1)',     sub: `${cashPct.toFixed(1)}% of AUM` },
-          { label: 'Open Positions', value: String(client.openPositions),            color: client.openPositions > 0 ? 'var(--info)' : 'var(--t3)', sub: 'live holdings' },
-          { label: 'Fee Status',     value: client.feeStatus === 'paid' ? 'Paid' : `$${client.feeDue?.toFixed(2) ?? '0.00'}`, color: client.feeStatus === 'paid' ? 'var(--gain)' : 'var(--loss)', sub: client.feeStatus === 'paid' ? 'All current' : `Due ${client.feeDueDate ?? ''}` },
-        ].map((m) => (
-          <div key={m.label} style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 10, padding: '13px 15px' }}>
-            <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--t3)', marginBottom: 5 }}>{m.label}</div>
-            <div style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 17, fontWeight: 600, color: m.color }}>{m.value}</div>
-            <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)', marginTop: 3 }}>{m.sub}</div>
+      {/* ── Identity strip ───────────────────────────────────── */}
+      <div className="ag-card" style={{ borderLeft: `3px solid ${client.color}`, marginBottom: 18 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
+          <div
+            className="ag-av"
+            style={{ width: 52, height: 52, fontSize: 17, background: `${client.color}1A`, color: client.color, border: `1px solid ${client.color}33`, borderRadius: 14 }}
+          >
+            {client.initials}
           </div>
-        ))}
-      </section>
 
-      {/* ── Equity chart ────────────────────────────────── */}
-      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, padding: '18px 20px', marginBottom: 20 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-          <h2 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--gold)', margin: 0 }}>Equity Curve</h2>
-          <div style={{ display: 'flex', gap: 16 }}>
-            {snap && (
-              <>
-                <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>
-                  Realized: <span style={{ color: 'var(--gain)', fontFamily: 'var(--font-jetbrains)' }}>+{formatCurrency(snap.totalRealizedPnl)}</span>
-                </span>
-                <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>
-                  Dividends: <span style={{ color: 'var(--gain)', fontFamily: 'var(--font-jetbrains)' }}>+{formatCurrency(snap.totalDividends)}</span>
-                </span>
-              </>
+          <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <span style={{ fontSize: 17, fontWeight: 700, color: 'var(--t1)' }}>{client.name}</span>
+              <span className="ag-pill" style={{ background: `${riskColor}18`, color: riskColor, fontSize: 9 }}>
+                {client.riskProfile}
+              </span>
+              <span className="ag-pill ag-pill-gray" style={{ fontSize: 9 }}>{client.id}</span>
+              <span className="ag-pill ag-pill-gray" style={{ fontSize: 9 }}>{client.tier}</span>
+            </div>
+            <div style={{ fontSize: 11, color: 'var(--t2)' }}>
+              {client.investmentObjective} · {client.strategy}
+            </div>
+            {client.taxStatus && (
+              <div style={{ fontSize: 10, color: 'var(--t3)', marginTop: 2 }}>
+                {client.taxStatus} · Fee {(client.feeRate * 100).toFixed(2)}% {client.billingCycle}
+              </div>
+            )}
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'flex-end' }}>
+            {client.email && (
+              <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'var(--t2)' }}>
+                <Mail size={10} color="var(--t3)" /> {client.email}
+              </span>
+            )}
+            {client.phone && (
+              <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'var(--t2)' }}>
+                <Phone size={10} color="var(--t3)" /> {client.phone}
+              </span>
+            )}
+            {client.nextReview && (
+              <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 10, color: 'var(--t3)' }}>
+                <Clock size={9} /> Next review: {new Date(client.nextReview).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </span>
             )}
           </div>
         </div>
-        <EquityChart clientId={client.id} />
       </div>
 
-      {/* ── 2-col: Holdings + Goals ──────────────────────── */}
-      <section className="g2" style={{ marginBottom: 20 }}>
+      {/* ── KPI row ──────────────────────────────────────────── */}
+      <section className="ag-kpi-row" style={{ marginBottom: 18 }}>
+        <div className="ag-kpi" style={{
+          background: 'linear-gradient(135deg, rgba(107,107,107,0.12) 0%, rgba(107,107,107,0.04) 100%)',
+          borderColor: 'var(--bdr-gold)',
+        }}>
+          <div className="ag-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <DollarSign size={10} color="var(--gold)" />Current AUM
+          </div>
+          <div className="ag-kpi-value" style={{ color: 'var(--gold)', fontSize: 20 }}>{formatCurrency(client.currentAUM)}</div>
+          <div className="ag-kpi-sub">From {formatCurrency(client.initialDeposit)}</div>
+        </div>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <TrendingUp size={10} color="var(--gain)" />Total Return
+          </div>
+          <div className="ag-kpi-value" style={{ color: 'var(--gain)', fontSize: 20 }}>+{formatCurrency(totalReturn)}</div>
+          <div className="ag-kpi-sub">+{formatPercent(roi)} ROI</div>
+        </div>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label">Cash Balance</div>
+          <div className="ag-kpi-value" style={{ fontSize: 20 }}>{formatCurrency(client.cashBalance)}</div>
+          <div className="ag-kpi-sub">{cashPct.toFixed(1)}% of AUM</div>
+        </div>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label">Open Positions</div>
+          <div className="ag-kpi-value" style={{ color: client.openPositions > 0 ? 'var(--info)' : 'var(--t3)', fontSize: 20 }}>
+            {client.openPositions}
+          </div>
+          <div className="ag-kpi-sub">live holdings</div>
+        </div>
+        <div className="ag-kpi" style={client.feeStatus !== 'paid' ? {
+          background: 'rgba(220,38,38,0.06)', borderColor: 'rgba(220,38,38,0.22)',
+        } : {}}>
+          <div className="ag-kpi-label">Fee Status</div>
+          <div className="ag-kpi-value" style={{ color: client.feeStatus === 'paid' ? 'var(--gain)' : 'var(--loss)', fontSize: 20 }}>
+            {client.feeStatus === 'paid' ? 'Paid' : formatCurrency(client.feeDue ?? 0)}
+          </div>
+          <div className="ag-kpi-sub">{client.feeStatus === 'paid' ? 'All current' : `Due ${client.feeDueDate ?? ''}`}</div>
+        </div>
+      </section>
 
-        {/* Holdings / Positions */}
-        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, padding: '18px 20px' }}>
-          <h2 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--gold)', margin: '0 0 14px' }}>Open Positions</h2>
+      {/* ── Equity chart ─────────────────────────────────────── */}
+      <div className="ag-card" style={{ marginBottom: 18 }}>
+        <div className="ag-card-head">
+          <span className="ag-card-title">Equity Curve</span>
+          {snap && (
+            <div style={{ display: 'flex', gap: 20, fontSize: 10, color: 'var(--t3)' }}>
+              <span>Realized: <span style={{ color: 'var(--gain)', fontVariantNumeric: 'tabular-nums' }}>+{formatCurrency(snap.totalRealizedPnl)}</span></span>
+              <span>Dividends: <span style={{ color: 'var(--gain)', fontVariantNumeric: 'tabular-nums' }}>+{formatCurrency(snap.totalDividends)}</span></span>
+            </div>
+          )}
+        </div>
+        <div className="ag-card-body" style={{ padding: '20px' }}>
+          <EquityChart clientId={client.id} />
+        </div>
+      </div>
+
+      {/* ── Holdings + Goals ──────────────────────────────────── */}
+      <div className="ag-g2" style={{ marginBottom: 18 }}>
+
+        {/* Open Positions */}
+        <div className="ag-card">
+          <div className="ag-card-head">
+            <span className="ag-card-title">Open Positions</span>
+            {snap && (
+              <span style={{ fontSize: 10, color: 'var(--t2)' }}>
+                Unrealized: <span style={{ color: totalUnrealizedPnl >= 0 ? 'var(--gain)' : 'var(--loss)', fontWeight: 600 }}>
+                  {totalUnrealizedPnl >= 0 ? '+' : ''}{formatCurrency(totalUnrealizedPnl)}
+                </span>
+              </span>
+            )}
+          </div>
           {snap && snap.openPositions.length > 0 ? (
-            <>
-              {/* Table header */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 60px 80px 80px 80px', gap: 8, paddingBottom: 8, borderBottom: '1px solid var(--bdr)', marginBottom: 4 }}>
-                {['Symbol', 'Shares', 'Mkt Val', 'Avg Cost', 'P&L'].map((h) => (
-                  <span key={h} style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--t3)' }}>{h}</span>
+            <table className="ag-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Shares</th>
+                  <th>Mkt Val</th>
+                  <th>Avg Cost</th>
+                  <th>P&amp;L</th>
+                </tr>
+              </thead>
+              <tbody>
+                {snap.openPositions.map((pos) => (
+                  <tr key={pos.symbol}>
+                    <td className="ag-td-main">{pos.symbol}</td>
+                    <td>{pos.shares.toLocaleString()}</td>
+                    <td className="ag-td-main">{formatCurrency(pos.marketValue)}</td>
+                    <td>{formatCurrency(pos.avgCost)}</td>
+                    <td style={{ color: pos.unrealizedPnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                        {pos.unrealizedPnl >= 0 ? <ArrowUpRight size={10} /> : <ArrowDownRight size={10} />}
+                        {formatCurrency(Math.abs(pos.unrealizedPnl))}
+                      </span>
+                    </td>
+                  </tr>
                 ))}
-              </div>
-              {snap.openPositions.map((pos) => (
-                <div key={pos.symbol} style={{ display: 'grid', gridTemplateColumns: '1fr 60px 80px 80px 80px', gap: 8, alignItems: 'center', padding: '9px 0', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 12, fontWeight: 600, color: 'var(--t1)' }}>{pos.symbol}</span>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: 'var(--t2)' }}>{pos.shares.toLocaleString()}</span>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: 'var(--t1)' }}>{formatCurrency(pos.marketValue)}</span>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: 'var(--t2)' }}>{formatCurrency(pos.avgCost)}</span>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: pos.unrealizedPnl >= 0 ? 'var(--gain)' : 'var(--loss)', display: 'flex', alignItems: 'center', gap: 2 }}>
-                    {pos.unrealizedPnl >= 0 ? <ArrowUpRight size={9} /> : <ArrowDownRight size={9} />}
-                    {formatCurrency(Math.abs(pos.unrealizedPnl))}
-                  </span>
-                </div>
-              ))}
-              {/* Portfolio totals */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 60px 80px 80px 80px', gap: 8, alignItems: 'center', paddingTop: 10, borderTop: '1px solid var(--bdr)', marginTop: 4 }}>
-                <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>Total invested</span>
-                <span />
-                <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 12, color: 'var(--gold)', fontWeight: 600 }}>
-                  {formatCurrency(snap.openPositions.reduce((s, p) => s + p.marketValue, 0))}
-                </span>
-                <span />
-                <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 12, color: 'var(--gain)', fontWeight: 600 }}>
-                  +{formatCurrency(snap.openPositions.reduce((s, p) => s + p.unrealizedPnl, 0))}
-                </span>
-              </div>
-            </>
+              </tbody>
+              <tfoot>
+                <tr style={{ background: 'var(--bg-elevated)' }}>
+                  <td style={{ padding: '9px 12px', color: 'var(--t3)', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em' }} colSpan={2}>
+                    Total invested
+                  </td>
+                  <td style={{ padding: '9px 12px', color: 'var(--gold)', fontWeight: 700 }}>
+                    {formatCurrency(totalMarketValue)}
+                  </td>
+                  <td style={{ padding: '9px 12px' }}></td>
+                  <td style={{ padding: '9px 12px', color: totalUnrealizedPnl >= 0 ? 'var(--gain)' : 'var(--loss)', fontWeight: 700 }}>
+                    {totalUnrealizedPnl >= 0 ? '+' : ''}{formatCurrency(totalUnrealizedPnl)}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
           ) : (
-            <div style={{ padding: '20px 0', textAlign: 'center' }}>
-              <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 12, color: 'var(--t3)', marginBottom: 6 }}>No open positions</div>
-              <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>
-                Cash balance: <span style={{ color: 'var(--t1)', fontFamily: 'var(--font-jetbrains)' }}>{formatCurrency(client.cashBalance)}</span>
-              </div>
+            <div className="ag-empty">
+              <span className="ag-empty-label">No open positions</span>
+              <span className="ag-empty-sub">Cash: {formatCurrency(client.cashBalance)}</span>
             </div>
           )}
         </div>
 
-        {/* Goals */}
-        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, padding: '18px 20px' }}>
-          <h2 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--gold)', margin: '0 0 14px' }}>Investment Goals</h2>
+        {/* Investment Goals */}
+        <div className="ag-card">
+          <div className="ag-card-head">
+            <span className="ag-card-title">Investment Goals</span>
+          </div>
           {client.goals && client.goals.length > 0 ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <div style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
               {client.goals.map((goal) => {
-                const statusColor = goal.status === 'achieved' ? 'var(--gain)' : goal.status === 'behind' ? 'var(--loss)' : 'var(--gold)'
+                const statusColor =
+                  goal.status === 'achieved' ? 'var(--gain)'
+                  : goal.status === 'behind' ? 'var(--loss)'
+                  : 'var(--gold)'
                 return (
-                  <div key={goal.id} style={{ background: 'var(--bg-elevated)', borderRadius: 10, padding: '14px 16px' }}>
+                  <div key={goal.id} style={{ background: 'var(--bg-elevated)', borderRadius: 8, padding: '12px 14px' }}>
                     <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 10 }}>
                       <div>
-                        <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 12, fontWeight: 500, color: 'var(--t1)', display: 'flex', alignItems: 'center', gap: 6 }}>
-                          <Target size={11} color="var(--gold)" />
-                          {goal.label}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: 'var(--t1)', marginBottom: 3 }}>
+                          <Target size={11} color="var(--gold)" />{goal.label}
                         </div>
-                        <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)', marginTop: 3 }}>
+                        <div style={{ fontSize: 10, color: 'var(--t3)' }}>
                           Target: {new Date(goal.targetDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                         </div>
                       </div>
-                      <span style={{
-                        fontFamily: 'var(--font-dm-sans)', fontSize: 9, fontWeight: 600,
-                        color: statusColor, background: `${statusColor}18`, border: `1px solid ${statusColor}33`,
-                        padding: '2px 8px', borderRadius: 20, textTransform: 'capitalize',
-                      }}>
+                      <span className="ag-pill" style={{ background: `${statusColor}18`, color: statusColor, fontSize: 9, textTransform: 'capitalize' }}>
                         {goal.status.replace('_', ' ')}
                       </span>
                     </div>
-                    <div style={{ marginBottom: 8 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                        <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 10, color: 'var(--t2)' }}>{formatCurrency(goal.currentAmount)}</span>
-                        <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 10, color: 'var(--t3)' }}>{formatCurrency(goal.targetAmount)}</span>
-                      </div>
-                      <div style={{ height: 4, borderRadius: 99, background: 'var(--bg-root)', overflow: 'hidden' }}>
-                        <div style={{ height: '100%', width: `${Math.min(goal.progress, 100)}%`, background: statusColor, borderRadius: 99, transition: 'width 0.6s ease' }} />
-                      </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, fontSize: 10 }}>
+                      <span style={{ color: 'var(--t2)', fontVariantNumeric: 'tabular-nums' }}>{formatCurrency(goal.currentAmount)}</span>
+                      <span style={{ color: 'var(--t3)', fontVariantNumeric: 'tabular-nums' }}>{formatCurrency(goal.targetAmount)}</span>
                     </div>
-                    <div style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: statusColor, fontWeight: 600 }}>
+                    <div className="ag-bar-track">
+                      <div
+                        className="ag-bar-fill"
+                        style={{ width: `${Math.min(goal.progress, 100)}%`, background: statusColor }}
+                      />
+                    </div>
+                    <div style={{ fontSize: 11, color: statusColor, fontWeight: 700, marginTop: 5 }}>
                       {goal.progress}% complete
                     </div>
                   </div>
@@ -251,80 +276,96 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
               })}
             </div>
           ) : (
-            <div style={{ padding: '20px 0', textAlign: 'center', fontFamily: 'var(--font-dm-sans)', fontSize: 12, color: 'var(--t3)' }}>
-              No goals defined
-            </div>
+            <div className="ag-empty"><span className="ag-empty-label">No goals defined</span></div>
           )}
         </div>
-      </section>
+      </div>
 
-      {/* ── Account details ──────────────────────────────── */}
-      <section className="g2" style={{ marginBottom: 20 }}>
-        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, padding: '18px 20px' }}>
-          <h2 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--gold)', margin: '0 0 12px' }}>Account Profile</h2>
-          {[
-            ['Client ID',            client.id],
-            ['Tier',                 client.tier],
-            ['Risk Profile',         client.riskProfile ?? '—'],
-            ['Objective',            client.investmentObjective ?? '—'],
-            ['Strategy',             client.strategy ?? '—'],
-            ['Tax Status',           client.taxStatus ?? '—'],
-            ['Fee Rate',             `${(client.feeRate * 100).toFixed(2)}% ${client.billingCycle}`],
-            ['Fee Status',           client.feeStatus],
-            ['Onboarded',            new Date(client.onboarded).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })],
-            ['Next Review',          client.nextReview ? new Date(client.nextReview).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '—'],
-          ].map(([label, value]) => (
-            <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-              <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t3)' }}>{label}</span>
-              <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t1)', fontWeight: 500 }}>{value}</span>
-            </div>
-          ))}
-        </div>
+      {/* ── Account profile + Monthly returns ────────────────── */}
+      <div className="ag-g2" style={{ marginBottom: 18 }}>
 
-        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, padding: '18px 20px' }}>
-          <h2 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--gold)', margin: '0 0 12px' }}>Monthly Performance</h2>
-          {snap && snap.monthlyReturns.length > 0 ? (
-            <>
-              <div style={{ display: 'grid', gridTemplateColumns: '70px 1fr 80px 60px', gap: 8, paddingBottom: 8, borderBottom: '1px solid var(--bdr)' }}>
-                {['Period', 'Net Return', 'Closing AUM', 'Divid.'].map((h) => (
-                  <span key={h} style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--t3)' }}>{h}</span>
-                ))}
+        {/* Account Profile */}
+        <div className="ag-card">
+          <div className="ag-card-head">
+            <span className="ag-card-title">Account Profile</span>
+          </div>
+          <div style={{ padding: '4px 0' }}>
+            {([
+              ['Client ID',    client.id],
+              ['Tier',         client.tier],
+              ['Risk Profile', client.riskProfile ?? '—'],
+              ['Objective',    client.investmentObjective ?? '—'],
+              ['Strategy',     client.strategy ?? '—'],
+              ['Tax Status',   client.taxStatus ?? '—'],
+              ['Fee Rate',     `${(client.feeRate * 100).toFixed(2)}% ${client.billingCycle}`],
+              ['Fee Status',   client.feeStatus],
+              ['Onboarded',    new Date(client.onboarded).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })],
+              ['Next Review',  client.nextReview ? new Date(client.nextReview).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '—'],
+            ] as [string, string][]).map(([label, value]) => (
+              <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid var(--bdr)' }}>
+                <span style={{ fontSize: 11, color: 'var(--t3)' }}>{label}</span>
+                <span style={{ fontSize: 11, color: 'var(--t1)', fontWeight: 500 }}>{value}</span>
               </div>
-              {[...snap.monthlyReturns].reverse().slice(0, 8).map((m) => (
-                <div key={m.month} style={{ display: 'grid', gridTemplateColumns: '70px 1fr 80px 60px', gap: 8, alignItems: 'center', padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 10, color: 'var(--t2)' }}>{m.month}</span>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: m.netReturn >= 0 ? 'var(--gain)' : 'var(--loss)', display: 'flex', alignItems: 'center', gap: 3 }}>
-                    {m.netReturn >= 0 ? <ArrowUpRight size={9} /> : <ArrowDownRight size={9} />}
-                    {formatCurrency(Math.abs(m.netReturn))}
-                  </span>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: 'var(--t1)' }}>{formatCurrency(m.closingAum)}</span>
-                  <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: m.dividends > 0 ? 'var(--gain)' : 'var(--t3)' }}>{m.dividends > 0 ? `+${formatCurrency(m.dividends)}` : '—'}</span>
-                </div>
-              ))}
-            </>
+            ))}
+          </div>
+        </div>
+
+        {/* Monthly Performance */}
+        <div className="ag-card">
+          <div className="ag-card-head">
+            <span className="ag-card-title">Monthly Performance</span>
+          </div>
+          {snap && snap.monthlyReturns.length > 0 ? (
+            <table className="ag-table">
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Net Return</th>
+                  <th>Closing AUM</th>
+                  <th>Dividends</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...snap.monthlyReturns].reverse().slice(0, 8).map((m) => (
+                  <tr key={m.month}>
+                    <td style={{ fontVariantNumeric: 'tabular-nums' }}>{m.month}</td>
+                    <td style={{ color: m.netReturn >= 0 ? 'var(--gain)' : 'var(--loss)', fontVariantNumeric: 'tabular-nums' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                        {m.netReturn >= 0 ? <ArrowUpRight size={9} /> : <ArrowDownRight size={9} />}
+                        {formatCurrency(Math.abs(m.netReturn))}
+                      </span>
+                    </td>
+                    <td className="ag-td-main" style={{ fontVariantNumeric: 'tabular-nums' }}>{formatCurrency(m.closingAum)}</td>
+                    <td style={{ color: m.dividends > 0 ? 'var(--gain)' : 'var(--t3)', fontVariantNumeric: 'tabular-nums' }}>
+                      {m.dividends > 0 ? `+${formatCurrency(m.dividends)}` : '—'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           ) : (
-            <div style={{ padding: '16px 0', fontFamily: 'var(--font-dm-sans)', fontSize: 12, color: 'var(--t3)' }}>No monthly data</div>
+            <div className="ag-empty"><span className="ag-empty-label">No monthly data</span></div>
           )}
         </div>
-      </section>
+      </div>
 
-      {/* ── Trade History ────────────────────────────────── */}
-      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, padding: '18px 20px', marginBottom: 20 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-          <h2 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--gold)', margin: 0 }}>Trade History</h2>
-          <Link href="/advisor/trades" style={{ display: 'flex', alignItems: 'center', gap: 4, fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)', textDecoration: 'none' }}>
+      {/* ── Trade History ─────────────────────────────────────── */}
+      <div className="ag-card" style={{ marginBottom: 18 }}>
+        <div className="ag-card-head">
+          <span className="ag-card-title">Trade History</span>
+          <Link href="/advisor/trades" style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 10, color: 'var(--t3)', textDecoration: 'none' }}>
             Full log <ChevronRight size={10} />
           </Link>
         </div>
         {trades.length === 0 ? (
-          <div style={{ padding: '16px 0', fontFamily: 'var(--font-dm-sans)', fontSize: 12, color: 'var(--t3)' }}>No trades recorded</div>
+          <div className="ag-empty"><span className="ag-empty-label">No trades recorded</span></div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', minWidth: 620, borderCollapse: 'collapse' }}>
+            <table className="ag-table" style={{ minWidth: 620 }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', textAlign: 'left' }}>
+                <tr>
                   {['Symbol', 'Type', 'Shares', 'Price', 'Amount', 'P&L', 'Date', 'Venue'].map((h) => (
-                    <th key={h} style={{ padding: '0 12px 10px', fontFamily: 'var(--font-dm-sans)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--t3)', fontWeight: 400 }}>{h}</th>
+                    <th key={h}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -338,31 +379,40 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
         )}
       </div>
 
-      {/* ── Statements ───────────────────────────────────── */}
+      {/* ── Statements ───────────────────────────────────────── */}
       {statements.length > 0 && (
-        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, padding: '18px 20px' }}>
-          <h2 style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--gold)', margin: '0 0 14px' }}>Statements</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {statements.map((stmt) => (
-              <div key={stmt.id} style={{ display: 'grid', gridTemplateColumns: '100px 1fr 100px 80px 80px', gap: 12, alignItems: 'center', padding: '9px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 10, color: 'var(--t2)' }}>{stmt.period}</span>
-                <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t1)' }}>{stmt.periodLabel}</span>
-                <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: 'var(--gold)' }}>{formatCurrency(stmt.managementFee)}</span>
-                <span style={{
-                  fontFamily: 'var(--font-dm-sans)', fontSize: 9, fontWeight: 600,
-                  color: stmt.status === 'paid' ? 'var(--gain)' : 'var(--loss)',
-                  background: stmt.status === 'paid' ? 'rgba(48,209,88,0.08)' : 'rgba(212,75,58,0.08)',
-                  border: `1px solid ${stmt.status === 'paid' ? 'rgba(48,209,88,0.2)' : 'rgba(212,75,58,0.2)'}`,
-                  padding: '2px 8px', borderRadius: 20, textTransform: 'uppercase',
-                }}>
-                  {stmt.status}
-                </span>
-                <Link href="/advisor/statements" style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--gold)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
-                  View <ChevronRight size={9} />
-                </Link>
-              </div>
-            ))}
+        <div className="ag-card">
+          <div className="ag-card-head">
+            <span className="ag-card-title">Statements</span>
           </div>
+          <table className="ag-table">
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th>Label</th>
+                <th>Total Due</th>
+                <th>Status</th>
+                <th>Paid Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {statements.map((stmt) => (
+                <tr key={stmt.id}>
+                  <td style={{ fontVariantNumeric: 'tabular-nums' }}>{stmt.period}</td>
+                  <td className="ag-td-main">{stmt.periodLabel}</td>
+                  <td style={{ fontVariantNumeric: 'tabular-nums' }}>{formatCurrency(stmt.totalDue)}</td>
+                  <td>
+                    <span className={`ag-pill ${stmt.status === 'paid' ? 'ag-pill-gain' : stmt.status === 'draft' ? 'ag-pill-gray' : 'ag-pill-loss'}`} style={{ fontSize: 9 }}>
+                      {stmt.status}
+                    </span>
+                  </td>
+                  <td style={{ color: 'var(--t3)', fontVariantNumeric: 'tabular-nums' }}>
+                    {stmt.paidDate ? new Date(stmt.paidDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

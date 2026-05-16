@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import {
   ArrowUpRight, UserPlus, ChevronRight,
-  TrendingUp, DollarSign, Shield, Phone, Mail,
+  TrendingUp, DollarSign, Users, Activity,
+  Phone, Mail,
 } from 'lucide-react'
-import PageHeader from '@/components/advisor/PageHeader'
 import { allClients, totalAum, totalOutstandingFees } from '@/lib/advisorMetrics'
 import { formatCurrency, formatPercent } from '@/lib/formatters'
 import { allTimeReturn, allTimeReturnPct } from '@/lib/calculations/returns'
@@ -17,182 +17,200 @@ const RISK_COLORS: Record<string, string> = {
 }
 
 export default function ClientsPage() {
-  const totalReturn = allClients.reduce((sum, c) => sum + allTimeReturn(c.currentAUM, c.initialDeposit), 0)
+  const totalReturn    = allClients.reduce((sum, c) => sum + allTimeReturn(c.currentAUM, c.initialDeposit), 0)
   const totalPositions = allClients.reduce((sum, c) => sum + c.openPositions, 0)
+  const activeCount    = allClients.filter((c) => c.status === 'active').length
 
   return (
-    <div>
-      <PageHeader
-        eyebrow="Wealth Management"
-        title="Client Roster"
-        subtitle={`${allClients.length} managed accounts · ${formatCurrency(totalAum)} combined AUM`}
-        action={
-          <Link
-            href="/advisor/clients/onboard"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: '7px 14px', borderRadius: 8,
-              background: 'rgba(107,107,107,0.12)', border: '1px solid rgba(107,107,107,0.28)',
-              fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--gold)',
-              textDecoration: 'none', fontWeight: 500,
-            }}
-          >
-            <UserPlus size={12} /> Onboard Client
-          </Link>
-        }
-      />
+    <div className="ag-page">
 
-      {/* Summary metrics */}
-      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 24 }}>
-        {[
-          { label: 'Combined AUM',      value: formatCurrency(totalAum),          color: 'var(--gold)',  icon: DollarSign,  sub: `${allClients.length} active accounts` },
-          { label: 'Total Return',      value: `+${formatCurrency(totalReturn)}`,  color: 'var(--gain)',  icon: TrendingUp,  sub: 'all-time realized' },
-          { label: 'Open Positions',    value: String(totalPositions),             color: 'var(--info)',  icon: ArrowUpRight, sub: 'across all accounts' },
-          { label: 'Fees Outstanding',  value: formatCurrency(totalOutstandingFees), color: totalOutstandingFees > 0 ? 'var(--loss)' : 'var(--gain)', icon: Shield, sub: totalOutstandingFees > 0 ? 'collection required' : 'all current' },
-        ].map((m) => (
-          <div key={m.label} style={{ background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 10, padding: '14px 16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 6 }}>
-              <m.icon size={11} color={m.color} />
-              <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--t3)' }}>{m.label}</span>
-            </div>
-            <div style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 18, fontWeight: 600, color: m.color }}>{m.value}</div>
-            <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)', marginTop: 3 }}>{m.sub}</div>
+      {/* ── Header ─────────────────────────────────────────── */}
+      <header className="ag-ph" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 20 }}>
+        <div>
+          <p className="ag-ph-ey">Wealth Management</p>
+          <h1 className="ag-ph-h">Client Roster</h1>
+          <p className="ag-ph-s">{allClients.length} managed accounts · {formatCurrency(totalAum)} combined AUM</p>
+        </div>
+        <Link
+          href="/advisor/clients/onboard"
+          className="ag-btn ag-btn-ghost"
+          style={{ textDecoration: 'none', flexShrink: 0 }}
+        >
+          <UserPlus size={12} />
+          Onboard Client
+        </Link>
+      </header>
+
+      {/* ── Summary KPI row ───────────────────────────────── */}
+      <section className="ag-kpi-row" style={{ gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: 24 }}>
+        <div className="ag-kpi" style={{
+          background: 'linear-gradient(135deg, rgba(107,107,107,0.12) 0%, rgba(107,107,107,0.04) 100%)',
+          borderColor: 'var(--bdr-gold)',
+        }}>
+          <div className="ag-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <DollarSign size={10} color="var(--gold)" />Combined AUM
           </div>
-        ))}
+          <div className="ag-kpi-value" style={{ color: 'var(--gold)', fontSize: 22 }}>{formatCurrency(totalAum)}</div>
+          <div className="ag-kpi-sub" style={{ color: 'var(--gain)', display: 'flex', alignItems: 'center', gap: 3 }}>
+            <ArrowUpRight size={10} />+{formatCurrency(totalReturn)} all-time
+          </div>
+        </div>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <TrendingUp size={10} color="var(--gain)" />Total Return
+          </div>
+          <div className="ag-kpi-value" style={{ color: 'var(--gain)' }}>+{formatCurrency(totalReturn)}</div>
+          <div className="ag-kpi-sub">realized + dividends</div>
+        </div>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <Activity size={10} color="var(--info)" />Open Positions
+          </div>
+          <div className="ag-kpi-value">{totalPositions}</div>
+          <div className="ag-kpi-sub">across {activeCount} accounts</div>
+        </div>
+        <div className="ag-kpi" style={totalOutstandingFees > 0 ? {
+          background: 'rgba(220,38,38,0.06)',
+          borderColor: 'rgba(220,38,38,0.22)',
+        } : {}}>
+          <div className="ag-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <Users size={10} color="var(--t3)" />Fees Outstanding
+          </div>
+          <div className="ag-kpi-value" style={{ color: totalOutstandingFees > 0 ? 'var(--loss)' : 'var(--gain)' }}>
+            {formatCurrency(totalOutstandingFees)}
+          </div>
+          <div className="ag-kpi-sub">{totalOutstandingFees > 0 ? 'pending collection' : 'all cleared'}</div>
+        </div>
       </section>
 
-      {/* Client cards */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {/* ── Client cards grid ─────────────────────────────── */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: 14 }}>
         {allClients.map((client) => {
-          const gain   = allTimeReturn(client.currentAUM, client.initialDeposit)
-          const roi    = allTimeReturnPct(client.currentAUM, client.initialDeposit)
-          const riskColor = RISK_COLORS[client.riskProfile ?? ''] ?? 'var(--t3)'
-
-          // AUM allocation bar within total
-          const allocPct = totalAum > 0 ? (client.currentAUM / totalAum) * 100 : 0
+          const gain       = allTimeReturn(client.currentAUM, client.initialDeposit)
+          const roi        = allTimeReturnPct(client.currentAUM, client.initialDeposit)
+          const riskColor  = RISK_COLORS[client.riskProfile ?? ''] ?? 'var(--t3)'
+          const cashPct    = (client.cashBalance / client.currentAUM) * 100
+          const equityPct  = 100 - cashPct
 
           return (
-            <div key={client.id} style={{
-              background: 'var(--bg-card)', border: '1px solid var(--bdr)', borderRadius: 12, overflow: 'hidden',
-            }}>
-              {/* Gold accent bar = client color */}
-              <div style={{ height: 2, background: `linear-gradient(90deg, ${client.color} 0%, transparent 100%)` }} />
-
-              <div style={{ padding: '18px 20px' }}>
-                {/* Top row */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    {/* Avatar */}
-                    <div style={{
-                      width: 44, height: 44, borderRadius: 12,
-                      background: `${client.color}1A`, color: client.color,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontFamily: 'var(--font-dm-sans)', fontSize: 14, fontWeight: 700,
-                      border: `1px solid ${client.color}33`,
-                    }}>
-                      {client.initials}
-                    </div>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 15, fontWeight: 600, color: 'var(--t1)' }}>{client.name}</span>
-                        <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 9, color: 'var(--t3)', background: 'var(--bg-elevated)', padding: '2px 6px', borderRadius: 4 }}>{client.id}</span>
-                        {/* Risk badge */}
-                        <span style={{
-                          fontFamily: 'var(--font-dm-sans)', fontSize: 9, fontWeight: 600,
-                          color: riskColor, background: `${riskColor}18`,
-                          border: `1px solid ${riskColor}33`, padding: '2px 8px', borderRadius: 20,
-                        }}>{client.riskProfile}</span>
-                      </div>
-                      <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t2)', marginTop: 3 }}>
-                        {client.investmentObjective} · {client.strategy}
-                      </div>
-                      {(client.email || client.phone) && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 4 }}>
-                          {client.email && (
-                            <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>
-                              <Mail size={9} /> {client.email}
-                            </span>
-                          )}
-                          {client.phone && (
-                            <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>
-                              <Phone size={9} /> {client.phone}
-                            </span>
-                          )}
-                        </div>
-                      )}
+            <div
+              key={client.id}
+              className="ag-card"
+              style={{ borderTop: `2px solid ${client.color}` }}
+            >
+              {/* Card header: avatar + name + badges */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', padding: '14px 16px 12px', borderBottom: '1px solid var(--bdr)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div
+                    className="ag-av"
+                    style={{ background: `${client.color}22`, color: client.color, width: 38, height: 38, fontSize: 13 }}
+                  >
+                    {client.initials}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--t1)', marginBottom: 3 }}>{client.name}</div>
+                    <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+                      <span style={{ fontSize: 9, color: 'var(--t3)', fontVariantNumeric: 'tabular-nums' }}>{client.id}</span>
+                      <span className="ag-pill ag-pill-gray" style={{ fontSize: 8 }}>{client.tier}</span>
+                      <span className="ag-pill" style={{
+                        fontSize: 8,
+                        background: `${riskColor}18`,
+                        color: riskColor,
+                      }}>
+                        {client.riskProfile ?? 'N/A'}
+                      </span>
                     </div>
                   </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--t1)', fontVariantNumeric: 'tabular-nums' }}>
+                    {formatCurrency(client.currentAUM)}
+                  </div>
+                  <div style={{ fontSize: 10, color: 'var(--gain)', display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'flex-end', marginTop: 2 }}>
+                    <ArrowUpRight size={10} />
+                    +{formatPercent(roi)} · +{formatCurrency(gain)}
+                  </div>
+                </div>
+              </div>
 
-                  {/* View button */}
-                  <Link
-                    href={`/advisor/clients/${client.id}`}
+              {/* Contact row */}
+              {(client.email || client.phone) && (
+                <div style={{ display: 'flex', gap: 16, padding: '8px 16px', borderBottom: '1px solid var(--bdr)', fontSize: 11, color: 'var(--t3)' }}>
+                  {client.email && (
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <Mail size={10} />{client.email}
+                    </span>
+                  )}
+                  {client.phone && (
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <Phone size={10} />{client.phone}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              {/* Metrics grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 0, borderBottom: '1px solid var(--bdr)' }}>
+                {[
+                  { label: 'Positions', value: client.openPositions },
+                  { label: 'Cash',      value: formatCurrency(client.cashBalance) },
+                  { label: 'Fee Rate',  value: `${client.feeRate}%` },
+                  { label: 'Billing',   value: client.billingCycle },
+                  { label: 'Objective', value: client.investmentObjective?.split(' ').slice(-1)[0] ?? '—' },
+                ].map((m, i) => (
+                  <div
+                    key={m.label}
                     style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 5,
-                      padding: '7px 12px', borderRadius: 7,
-                      border: '1px solid var(--bdr)', background: 'var(--bg-elevated)',
-                      fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--t2)',
-                      textDecoration: 'none',
+                      padding: '10px 12px',
+                      borderRight: i < 4 ? '1px solid var(--bdr)' : 'none',
                     }}
                   >
-                    Open 360° <ChevronRight size={11} />
-                  </Link>
-                </div>
-
-                {/* Metrics row */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 16 }}>
-                  {[
-                    { label: 'Current AUM',    value: formatCurrency(client.currentAUM),      color: 'var(--t1)' },
-                    { label: 'Initial Deposit', value: formatCurrency(client.initialDeposit),  color: 'var(--t2)' },
-                    { label: 'Total Return',   value: `+${formatCurrency(gain)}`,              color: 'var(--gain)' },
-                    { label: 'ROI',            value: `+${formatPercent(roi)}`,                color: 'var(--gain)' },
-                    { label: 'Open Positions', value: String(client.openPositions),            color: client.openPositions > 0 ? 'var(--info)' : 'var(--t3)' },
-                  ].map((m) => (
-                    <div key={m.label} style={{ background: 'var(--bg-elevated)', borderRadius: 8, padding: '10px 12px' }}>
-                      <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--t3)', marginBottom: 4 }}>{m.label}</div>
-                      <div style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 13, fontWeight: 600, color: m.color }}>{m.value}</div>
+                    <div style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--t3)', marginBottom: 3 }}>
+                      {m.label}
                     </div>
-                  ))}
-                </div>
-
-                {/* Bottom row: allocation bar + fee status + next review */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                  {/* Allocation */}
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                      <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Portfolio Share</span>
-                      <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 9, color: client.color }}>{allocPct.toFixed(1)}%</span>
-                    </div>
-                    <div style={{ height: 3, borderRadius: 99, background: 'var(--bg-elevated)', overflow: 'hidden' }}>
-                      <div style={{ height: '100%', width: `${allocPct}%`, background: client.color, borderRadius: 99 }} />
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--t1)', fontVariantNumeric: 'tabular-nums' }}>
+                      {m.value}
                     </div>
                   </div>
+                ))}
+              </div>
 
-                  {/* Fee status */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '5px 10px', borderRadius: 6, background: client.feeStatus === 'paid' ? 'rgba(48,209,88,0.08)' : 'rgba(212,75,58,0.08)', border: `1px solid ${client.feeStatus === 'paid' ? 'rgba(48,209,88,0.2)' : 'rgba(212,75,58,0.2)'}` }}>
-                    <span style={{ width: 5, height: 5, borderRadius: 99, background: client.feeStatus === 'paid' ? 'var(--gain)' : 'var(--loss)', display: 'block' }} />
-                    <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: client.feeStatus === 'paid' ? 'var(--gain)' : 'var(--loss)' }}>
-                      {client.feeStatus === 'paid' ? 'Fees current' : `Fee due ${client.feeDueDate ? new Date(client.feeDueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''}`}
-                    </span>
-                  </div>
+              {/* Allocation bar */}
+              <div style={{ padding: '10px 16px', borderBottom: '1px solid var(--bdr)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
+                  <span style={{ fontSize: 10, color: 'var(--t3)' }}>
+                    Equity <span style={{ color: 'var(--t2)', fontWeight: 600 }}>{equityPct.toFixed(0)}%</span>
+                  </span>
+                  <span style={{ fontSize: 10, color: 'var(--t3)' }}>
+                    Cash <span style={{ color: 'var(--t2)', fontWeight: 600 }}>{cashPct.toFixed(0)}%</span>
+                  </span>
+                </div>
+                <div className="ag-bar-track">
+                  <div className="ag-bar-fill" style={{ width: `${equityPct}%`, background: client.color }} />
+                </div>
+              </div>
 
-                  {/* Next review */}
+              {/* Footer: fee status + next review + CTA */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px' }}>
+                <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                  <span className={`ag-pill ${client.feeStatus === 'paid' ? 'ag-pill-gain' : client.feeStatus === 'partial' ? 'ag-pill-warn' : 'ag-pill-loss'}`} style={{ fontSize: 9 }}>
+                    Fee {client.feeStatus}
+                  </span>
                   {client.nextReview && (
-                    <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <Shield size={9} />
-                      Review: {new Date(client.nextReview).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </div>
+                    <span style={{ fontSize: 10, color: 'var(--t3)' }}>Review {client.nextReview}</span>
                   )}
-
-                  {/* Onboard date */}
-                  <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 10, color: 'var(--t3)' }}>
-                    Client since {new Date(client.onboarded).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                  </div>
                 </div>
+                <Link
+                  href={`/advisor/clients/${client.id}`}
+                  style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, color: 'var(--gold)', textDecoration: 'none', fontWeight: 600 }}
+                >
+                  360° View <ChevronRight size={11} />
+                </Link>
               </div>
             </div>
           )
         })}
-      </section>
+      </div>
     </div>
   )
 }
