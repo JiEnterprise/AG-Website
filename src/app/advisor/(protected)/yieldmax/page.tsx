@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/components/advisor/PageHeader'
 import MetricCard from '@/components/advisor/MetricCard'
 import { yieldmaxUniverse, dividendCalendar } from '@/lib/mock-data/yieldmax'
 
@@ -56,12 +55,12 @@ export default function YieldMaxPage() {
   const sortedDates = Object.keys(calByDate).sort()
 
   return (
-    <div className="space-y-5">
-      <PageHeader
-        eyebrow="Income strategy"
-        title="YieldMax Universe"
-        subtitle="Weekly option income ETFs · Ex-div calendar · NAV decay tracking · Distribution trends"
-      />
+    <div className="ag-page" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <header className="ag-ph">
+        <p className="ag-ph-ey">Income Strategy</p>
+        <h1 className="ag-ph-h">YieldMax Universe</h1>
+        <p className="ag-ph-s">Covered-call ETF screener · Dividend calendar · Yield analytics</p>
+      </header>
 
       {/* Alert banner for upcoming ex-div */}
       {nextExDiv && (
@@ -72,17 +71,17 @@ export default function YieldMaxPage() {
           <span className="font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--gold)]">
             Next Ex-Div
           </span>
-          <span className="font-mono text-[11px] text-[var(--t1)]">
+          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
             {nextExDiv.symbol} — {nextExDiv.date}
           </span>
-          <span className="font-mono text-[10px] text-[var(--t3)]">
+          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
             Est. ${nextExDiv.estimatedAmount.toFixed(2)}/share · {nextExDiv.underlying} underlying
           </span>
         </div>
       )}
 
       {/* Metrics */}
-      <section className="mrow">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
         <MetricCard
           label="ETFs Tracked"
           value={String(yieldmaxUniverse.length)}
@@ -109,7 +108,7 @@ export default function YieldMaxPage() {
           badge="Next 6 weeks"
           badgeVariant="warn"
         />
-      </section>
+      </div>
 
       {/* Tabs */}
       <div style={{ display: 'flex', gap: 2, borderBottom: '1px solid var(--bdr)', marginBottom: -4 }}>
@@ -134,7 +133,7 @@ export default function YieldMaxPage() {
 
       {/* Screener */}
       {tab === 'screener' && (
-        <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] overflow-x-auto">
+        <article className="ag-card">
           <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 900 }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
@@ -142,7 +141,7 @@ export default function YieldMaxPage() {
                   (h) => (
                     <th
                       key={h}
-                      className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]"
+                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
                       style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                     >
                       {h}
@@ -176,38 +175,38 @@ export default function YieldMaxPage() {
                     </div>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[10px] text-[var(--t3)]">{etf.underlying}</span>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{etf.underlying}</span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[11px] text-[var(--t1)]">${etf.currentPrice.toFixed(2)}</span>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>${etf.currentPrice.toFixed(2)}</span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[11px]" style={{ color: 'var(--gain)' }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gain)' }}>
                       {etf.annualYieldPct.toFixed(1)}%
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[11px]" style={{ color: decayColor(etf.navDecayPct) }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: decayColor(etf.navDecayPct) }}>
                       -{etf.navDecayPct.toFixed(1)}%
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[11px]" style={{ color: 'var(--gold)' }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gold)' }}>
                       ${etf.lastDistribution.toFixed(2)}
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[11px]" style={{ color: trendColor(etf.distributionTrend) }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: trendColor(etf.distributionTrend) }}>
                       {trendIcon(etf.distributionTrend)} {etf.distributionTrend}
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[11px]" style={{ color: rsiColor(etf.rsi14) }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: rsiColor(etf.rsi14) }}>
                       {etf.rsi14}
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span className="font-mono text-[10px] text-[var(--t2)]">{etf.nextExDivDate}</span>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{etf.nextExDivDate}</span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
                     <span
@@ -224,7 +223,7 @@ export default function YieldMaxPage() {
               ))}
             </tbody>
           </table>
-        </article>
+        </div>
       )}
 
       {/* Notes panel */}
@@ -243,11 +242,11 @@ export default function YieldMaxPage() {
               </div>
               <p className="font-dm text-[11px] leading-[1.65] text-[var(--t2)]">{etf.notes}</p>
               <div style={{ display: 'flex', gap: 16, marginTop: 10 }}>
-                <span className="font-mono text-[10px] text-[var(--t3)]">52W Low: ${etf.fiftyTwoWeekLow.toFixed(2)}</span>
-                <span className="font-mono text-[10px] text-[var(--t3)]">52W High: ${etf.fiftyTwoWeekHigh.toFixed(2)}</span>
-                <span className="font-mono text-[10px] text-[var(--t3)]">Pays: {etf.nextPayDate}</span>
+                <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>52W Low: ${etf.fiftyTwoWeekLow.toFixed(2)}</span>
+                <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>52W High: ${etf.fiftyTwoWeekHigh.toFixed(2)}</span>
+                <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>Pays: {etf.nextPayDate}</span>
               </div>
-            </article>
+            </div>
           ))}
         </div>
       )}
@@ -262,7 +261,7 @@ export default function YieldMaxPage() {
             return (
               <article
                 key={date}
-                className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-4"
+                className="ag-card"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
                   <span className="font-mono text-[13px] text-[var(--t1)] font-semibold">{date}</span>
@@ -304,7 +303,7 @@ export default function YieldMaxPage() {
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                           <span
-                            className="font-mono text-[11px] font-semibold"
+                            style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
                             style={{ color: ev.type === 'ex-div' ? 'var(--gold)' : 'var(--gain)' }}
                           >
                             {ev.symbol}
@@ -319,14 +318,14 @@ export default function YieldMaxPage() {
                             <span style={{ fontSize: 9, color: 'var(--t3)' }}>●</span>
                           )}
                         </div>
-                        <p className="font-mono text-[10px] text-[var(--t3)]">
+                        <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
                           ${ev.estimatedAmount.toFixed(2)}/share · {ev.underlying}
                         </p>
                       </div>
                     )
                   })}
                 </div>
-              </article>
+              </div>
             )
           })}
         </div>

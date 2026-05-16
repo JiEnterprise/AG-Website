@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import PageHeader from '@/components/advisor/PageHeader'
 import MetricCard from '@/components/advisor/MetricCard'
 import { clients, accountSnapshots } from '@/lib/mock-data/clients'
 import { personalAccount, personalPositions } from '@/lib/mock-data/personal'
@@ -100,12 +99,12 @@ export default function PnlPage() {
   }).length
 
   return (
-    <div className="space-y-5">
-      <PageHeader
-        eyebrow="Live P&L · All accounts"
-        title="Position Blotter"
-        subtitle="Real-time unrealized P&L across all accounts · Updates every 15s"
-      />
+    <div className="ag-page" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <header className="ag-ph">
+        <p className="ag-ph-ey">Live P&L · All Accounts</p>
+        <h1 className="ag-ph-h">Position Blotter</h1>
+        <p className="ag-ph-s">Real-time unrealized P&L across all accounts · Updates every 15s</p>
+      </header>
 
       {/* Live status bar */}
       <div
@@ -124,15 +123,15 @@ export default function PnlPage() {
           <span className="font-dm text-[10px] uppercase tracking-[0.14em] text-[var(--gold)]">
             Live Feed Active
           </span>
-          <span className="font-mono text-[10px] text-[var(--t3)]">
+          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
             Last update: {lastRefresh ? lastRefresh.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '—'}
           </span>
         </div>
-        <span className="font-mono text-[10px] text-[var(--t3)]">15s refresh · Alpaca WebSocket</span>
+        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>15s refresh · Alpaca WebSocket</span>
       </div>
 
       {/* Summary metrics */}
-      <section className="mrow">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
         <MetricCard
           label="Total Unrealized P&L"
           value={`${totalUnrealized >= 0 ? '+' : ''}${formatCurrency(totalUnrealized)}`}
@@ -155,7 +154,7 @@ export default function PnlPage() {
           value="3"
           badge="DL2503 · SR2501 · SC001"
         />
-      </section>
+      </div>
 
       {/* Filter tabs */}
       <div style={{ display: 'flex', gap: 2, borderBottom: '1px solid var(--bdr)', marginBottom: -4 }}>
@@ -179,7 +178,7 @@ export default function PnlPage() {
       </div>
 
       {/* Blotter table */}
-      <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] overflow-x-auto">
+      <article className="ag-card">
         {visible.length === 0 ? (
           <div className="p-10 text-center font-dm text-[11px] text-[var(--t3)]">
             No open positions in selected accounts
@@ -192,7 +191,7 @@ export default function PnlPage() {
                   (h) => (
                     <th
                       key={h}
-                      className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]"
+                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
                       style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                     >
                       {h}
@@ -218,20 +217,20 @@ export default function PnlPage() {
                       </span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span className="font-mono text-[11px] font-semibold text-[var(--t1)]">{pos.symbol}</span>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{pos.symbol}</span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span className="font-mono text-[11px] text-[var(--t2)]">{pos.shares}</span>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{pos.shares}</span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span className="font-mono text-[11px] text-[var(--t2)]">${pos.entryPrice.toFixed(2)}</span>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>${pos.entryPrice.toFixed(2)}</span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span className="font-mono text-[11px] text-[var(--t1)]">${cur.toFixed(2)}</span>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>${cur.toFixed(2)}</span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
                       <span
-                        className="font-mono text-[11px] font-semibold"
+                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
                         style={{ color: dollarPnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
                       >
                         {dollarPnl >= 0 ? '+' : ''}{formatCurrency(dollarPnl)}
@@ -239,7 +238,7 @@ export default function PnlPage() {
                     </td>
                     <td style={{ padding: '10px 14px' }}>
                       <span
-                        className="font-mono text-[10px]"
+                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
                         style={{ color: pctPnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
                       >
                         {pctPnl >= 0 ? '+' : ''}{pctPnl.toFixed(2)}%
@@ -249,7 +248,7 @@ export default function PnlPage() {
                       <span className="font-dm text-[10px] text-[var(--t3)]">{pos.strategy}</span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span className="font-mono text-[10px] text-[var(--t3)]">{days}d</span>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{days}d</span>
                     </td>
                   </tr>
                 )
@@ -257,7 +256,7 @@ export default function PnlPage() {
             </tbody>
           </table>
         )}
-      </article>
+      </div>
 
       {/* Combined book value footer */}
       <div
@@ -268,13 +267,13 @@ export default function PnlPage() {
           Combined book — all accounts
         </span>
         <div className="flex items-center gap-6">
-          <span className="font-mono text-[10px] text-[var(--t3)]">
+          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
             Personal: {formatCurrency(personalAccount.currentAUM)} AUM
           </span>
-          <span className="font-mono text-[10px] text-[var(--t3)]">
+          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
             Clients: {formatCurrency(clients.reduce((s, c) => s + c.currentAUM, 0))} AUM
           </span>
-          <span className="font-mono text-[11px] font-semibold" style={{ color: 'var(--gold)' }}>
+          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gold)' }}>
             Total: {formatCurrency(personalAccount.currentAUM + clients.reduce((s, c) => s + c.currentAUM, 0))}
           </span>
         </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/components/advisor/PageHeader'
 import MetricCard from '@/components/advisor/MetricCard'
 import { agquantStrategies, systemStatus } from '@/lib/mock-data/research'
 import { allSignals } from '@/lib/advisorMetrics'
@@ -63,12 +62,12 @@ export default function AgquantPage() {
   }
 
   return (
-    <div className="space-y-5">
-      <PageHeader
-        eyebrow="Systematic trading"
-        title="AGQuant Engine"
-        subtitle="Algorithmic strategy management · Live state monitor · Signal feed"
-      />
+    <div className="ag-page" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <header className="ag-ph">
+        <p className="ag-ph-ey">AGQuant Engine</p>
+        <h1 className="ag-ph-h">Strategy Control Center</h1>
+        <p className="ag-ph-s">Live strategy status · Signal engine · Risk controls · System health</p>
+      </header>
 
       {/* Live mode banner */}
       {liveMode && (
@@ -107,13 +106,13 @@ export default function AgquantPage() {
         />
         <MetricCard label="Active Strategies" value={String(agquantStrategies.filter((s) => s.status === 'active').length)} />
         <MetricCard label="Signals Today" value={String(allSignals.length)} valueColor="var(--warn)" />
-      </section>
+      </div>
 
       <section className="grid gap-4 xl:grid-cols-2">
         {/* Left column */}
         <div className="space-y-4">
           {/* AGQuant Live State Monitor */}
-          <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-4">
+          <article className="ag-card">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
               <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">
                 AGQuant Live State Monitor
@@ -133,7 +132,7 @@ export default function AgquantPage() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <span className="font-mono text-[12px] font-semibold text-[var(--t1)]">{sym.symbol}</span>
-                      <span className="font-mono text-[11px]" style={{ color: 'var(--gold)' }}>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gold)' }}>
                         ${sym.lastPrice.toFixed(2)}
                       </span>
                       <span
@@ -146,17 +145,17 @@ export default function AgquantPage() {
                         {watchStatusLabel(sym.watchStatus)}
                       </span>
                     </div>
-                    <span className="font-mono text-[10px] text-[var(--t3)]">{sym.strategy}</span>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{sym.strategy}</span>
                   </div>
 
                   {/* RSI bar */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                    <span className="font-dm text-[9px] uppercase tracking-[0.12em] text-[var(--t3)]" style={{ minWidth: 28 }}>
+                    <span style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }} style={{ minWidth: 28 }}>
                       RSI
                     </span>
                     <div style={{ flex: 1 }}>{rsiBar(sym.rsi14)}</div>
                     <span
-                      className="font-mono text-[11px] font-semibold"
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
                       style={{
                         minWidth: 24,
                         color:
@@ -197,10 +196,10 @@ export default function AgquantPage() {
                 </div>
               ))}
             </div>
-          </article>
+          </div>
 
           {/* Active Strategies */}
-          <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-4">
+          <article className="ag-card">
             <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">Active Strategies</h2>
             <div className="mt-2 space-y-2">
               {agquantStrategies.map((strategy) => (
@@ -236,28 +235,28 @@ export default function AgquantPage() {
                 </div>
               ))}
             </div>
-          </article>
+          </div>
         </div>
 
         {/* Right column */}
         <div className="space-y-4">
           {/* System Connections */}
-          <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-4">
+          <article className="ag-card">
             <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">System Connections</h2>
             <div className="mt-2 space-y-1">
-              <p className="font-mono text-[10px] text-[var(--t2)]">Alpaca API · <span className="text-[var(--gain)]">{systemStatus.alpacaApi}</span></p>
-              <p className="font-mono text-[10px] text-[var(--t2)]">Market data · <span className="text-[var(--gain)]">Streaming</span></p>
-              <p className="font-mono text-[10px] text-[var(--t2)]">Circuit breakers · <span className="text-[var(--gain)]">{systemStatus.circuitBreakers}</span></p>
-              <p className="font-mono text-[10px] text-[var(--t2)]">Kelly sizing · <span className="text-[var(--gold)]">{systemStatus.kellyPositionLimit.toFixed(2)}%</span></p>
-              <p className="font-mono text-[10px] text-[var(--t2)]">Log sync · <span className="text-[var(--gain)]">{systemStatus.logSync}</span></p>
-              <p className="font-mono text-[10px] text-[var(--t2)]">
+              <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>Alpaca API · <span className="text-[var(--gain)]">{systemStatus.alpacaApi}</span></p>
+              <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>Market data · <span className="text-[var(--gain)]">Streaming</span></p>
+              <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>Circuit breakers · <span className="text-[var(--gain)]">{systemStatus.circuitBreakers}</span></p>
+              <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>Kelly sizing · <span className="text-[var(--gold)]">{systemStatus.kellyPositionLimit.toFixed(2)}%</span></p>
+              <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>Log sync · <span className="text-[var(--gain)]">{systemStatus.logSync}</span></p>
+              <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
                 Live mode ·{' '}
                 <span style={{ color: liveMode ? 'var(--loss)' : 'var(--warn)' }}>
                   {liveMode ? 'Active — CAUTION' : 'Disabled'}
                 </span>
               </p>
             </div>
-          </article>
+          </div>
 
           {/* Paper → Live Toggle */}
           <article
@@ -325,19 +324,19 @@ export default function AgquantPage() {
                 All client orders will route to real markets. Use only when ready.
               </p>
             </div>
-          </article>
+          </div>
 
           {/* Signal Feed */}
-          <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-4">
+          <article className="ag-card">
             <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">Signal Feed (last 24h)</h2>
             <div className="mt-2 space-y-1">
               {allSignals.map((signal) => (
-                <p key={signal.id} className="font-mono text-[10px] text-[var(--t2)]">
+                <p key={signal.id} style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
                   {new Date(signal.generatedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} · {signal.symbol} {signal.type} signal · Confidence {signal.confidence.toFixed(2)}%
                 </p>
               ))}
             </div>
-          </article>
+          </div>
         </div>
       </section>
 
@@ -450,7 +449,7 @@ export default function AgquantPage() {
             <p className="font-dm text-[12px] uppercase tracking-[0.2em]" style={{ color: 'var(--loss)' }}>
               Live Trading Activated
             </p>
-            <p className="font-mono text-[10px] text-[var(--t3)]" style={{ marginTop: 8 }}>
+            <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ marginTop: 8 }}>
               All orders now route to Alpaca Live
             </p>
           </div>

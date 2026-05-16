@@ -8,6 +8,13 @@ interface MetricCardProps {
   valueColor?: string
 }
 
+const BADGE_CLASS: Record<string, string> = {
+  gain: 'ag-pill-gain',
+  loss: 'ag-pill-loss',
+  warn: 'ag-pill-warn',
+  gold: 'ag-pill-gray',
+}
+
 export default function MetricCard({
   label,
   value,
@@ -17,29 +24,19 @@ export default function MetricCard({
   accent = false,
   valueColor = 'var(--gold)',
 }: MetricCardProps) {
-  const badgeStyles = {
-    gain: 'bg',
-    loss: 'br',
-    warn: 'bo',
-    gold: 'ba',
-  }[badgeVariant]
-
   return (
-    <article className={`mc ${accent ? 'ac' : ''}`}>
-      <p className="mc-l">{label}</p>
-      <p className="mc-v" style={{ color: valueColor }}>
-        {value}
-      </p>
+    <div className="ag-kpi" style={accent ? {
+      background: 'linear-gradient(135deg, rgba(107,107,107,0.12) 0%, rgba(107,107,107,0.04) 100%)',
+      borderColor: 'var(--bdr-gold)',
+    } : {}}>
+      <div className="ag-kpi-label">{label}</div>
+      <div className="ag-kpi-value" style={{ color: valueColor, fontSize: 18 }}>{value}</div>
       {(badge || sub) && (
-        <div className="mc-s">
-          {badge && (
-            <span className={`bx ${badgeStyles}`}>
-              {badge}
-            </span>
-          )}
+        <div className="ag-kpi-sub" style={{ display: 'flex', gap: 5, alignItems: 'center', marginTop: 4 }}>
+          {badge && <span className={`ag-pill ${BADGE_CLASS[badgeVariant] ?? 'ag-pill-gray'}`} style={{ fontSize: 9 }}>{badge}</span>}
           {sub && <span>{sub}</span>}
         </div>
       )}
-    </article>
+    </div>
   )
 }

@@ -1,85 +1,104 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import PageHeader from '@/components/advisor/PageHeader'
 import TradeRow from '@/components/advisor/TradeRow'
 import { allTrades } from '@/lib/advisorMetrics'
+import { allClients } from '@/lib/advisorMetrics'
 import { formatCurrency } from '@/lib/formatters'
 
-type FilterClient = 'all' | 'DL2503' | 'SR2501'
 type FilterType = 'all' | 'BUY' | 'SELL' | 'DIV'
 
 export default function TradesPage() {
-  const [client, setClient] = useState<FilterClient>('all')
-  const [type, setType] = useState<FilterType>('all')
-  const [query, setQuery] = useState('')
+  const [clientId, setClientId] = useState('all')
+  const [type,     setType]     = useState<FilterType>('all')
+  const [query,    setQuery]    = useState('')
 
-  const filteredTrades = useMemo(() => {
-    return allTrades
-      .filter((trade) => (client === 'all' ? true : trade.clientId === client))
-      .filter((trade) => (type === 'all' ? true : trade.type === type))
-      .filter((trade) => (query ? trade.symbol.toLowerCase().includes(query.toLowerCase()) : true))
-      .sort((a, b) => b.date.localeCompare(a.date))
-  }, [client, type, query])
+  const filteredTrades = useMemo(() =>
+    allTrades
+      .filter((t) => clientId === 'all' || t.clientId === clientId)
+      .filter((t) => type === 'all' || t.type === type)
+      .filter((t) => !query || t.symbol.toLowerCase().includes(query.toLowerCase()))
+      .sort((a, b) => b.date.localeCompare(a.date)),
+    [clientId, type, query]
+  )
 
-  const novRealized = filteredTrades
-    .filter((trade) => trade.gain !== null && trade.date.startsWith('2025-11'))
-    .reduce((sum, trade) => sum + (trade.gain ?? 0), 0)
+  const totalGain = filteredTrades.reduce((s, t) => s + (t.gain ?? 0), 0)
+  const totalFees = filteredTrades.reduce((s, t) => s + t.transactionFee, 0)
 
-  const totalFees = filteredTrades.reduce((sum, trade) => sum + trade.transactionFee, 0)
-
-  const pillClass = (active: boolean) =>
-    `rounded-full border px-2 py-1 font-dm text-[9px] uppercase tracking-[0.12em] ${active ? 'border-[var(--gold)] text-[var(--gold)] bg-[var(--gold-dim)]' : 'border-[var(--bdr)] text-[var(--t3)]'}`
+  const pill = (active: boolean) => ({
+    display: 'inline-flex', alignItems: 'center', padding: '4px 10px',
+    borderRadius: 20, fontSize: 9, fontWeight: 700, letterSpacing: '0.08em',
+    textTransform: 'uppercase' as const, cursor: 'pointer', border: 'none',
+    background: active ? 'var(--gold-dim)' : 'transparent',
+    color:      active ? 'var(--gold)'     : 'var(--t3)',
+    outline:    active ? '1px solid var(--bdr-gold)' : '1px solid var(--bdr)',
+  })
 
   return (
-    <div className="space-y-5">
-      <PageHeader
-        eyebrow="Execution history"
-        title="Trade Log"
-        subtitle="All executed orders across managed accounts"
-      />
+    <div className="ag-page">
+      <header className="ag-ph" style={{ marginBottom: 20 }}>
+        <p className="ag-ph-ey">Execution History</p>
+        <h1 className="ag-ph-h">Trade Log</h1>
+        <p className="ag-ph-s">All executed orders across managed accounts · {filteredTrades.length} trades shown</p>
+      </header>
 
-      <section className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <button className={pillClass(client === 'all')} onClick={() => setClient('all')}>All</button>
-          <button className={pillClass(client === 'DL2503')} onClick={() => setClient('DL2503')}>DL2503</button>
-          <button className={pillClass(client === 'SR2501')} onClick={() => setClient('SR2501')}>SR2501</button>
-          <button className={pillClass(type === 'BUY')} onClick={() => setType((prev) => (prev === 'BUY' ? 'all' : 'BUY'))}>BUY</button>
-          <button className={pillClass(type === 'SELL')} onClick={() => setType((prev) => (prev === 'SELL' ? 'all' : 'SELL'))}>SELL</button>
-          <button className={pillClass(type === 'DIV')} onClick={() => setType((prev) => (prev === 'DIV' ? 'all' : 'DIV'))}>DIV</button>
+      {/* Summary row */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginBottom: 16 }}>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label">Trades shown</div>
+          <div className="ag-kpi-value">{filteredTrades.length}</div>
+        </div>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label">Realized gain</div>
+          <div className="ag-kpi-value" style={{ color: totalGain >= 0 ? 'var(--gain)' : 'var(--loss)', fontSize: 18 }}>
+            {totalGain >= 0 ? '+' : ''}{formatCurrency(totalGain)}
+          </div>
+        </div>
+        <div className="ag-kpi">
+          <div className="ag-kpi-label">Total fees</div>
+          <div className="ag-kpi-value" style={{ color: 'var(--loss)', fontSize: 18 }}>{formatCurrency(totalFees)}</div>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="ag-card" style={{ marginBottom: 14 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 14px', flexWrap: 'wrap' }}>
+          <button style={pill(clientId === 'all')} onClick={() => setClientId('all')}>All</button>
+          {allClients.map((c) => (
+            <button key={c.id} style={pill(clientId === c.id)} onClick={() => setClientId(c.id)}>{c.id}</button>
+          ))}
+          <div style={{ width: 1, height: 20, background: 'var(--bdr)', margin: '0 4px' }} />
+          {(['BUY', 'SELL', 'DIV'] as FilterType[]).map((t) => (
+            <button key={t} style={pill(type === t)} onClick={() => setType((prev) => prev === t ? 'all' : t)}>{t}</button>
+          ))}
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search symbol..."
-            className="ml-auto h-8 rounded-[var(--radius-sm)] border border-[var(--bdr)] bg-[var(--bg-input)] px-2 font-mono text-[10px] text-[var(--t2)] outline-none focus:border-[var(--gold-border)]"
+            placeholder="Search symbol…"
+            className="ag-input"
+            style={{ marginLeft: 'auto', width: 140, height: 30 }}
           />
         </div>
-      </section>
+      </div>
 
-      <section className="overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)]">
-        <table className="w-full min-w-[700px] border-collapse">
-          <thead>
-            <tr className="border-b border-[rgba(255,255,255,0.05)] text-left">
-              <th className="px-3 pb-2 pt-3 font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--t3)]">Symbol</th>
-              <th className="px-3 pb-2 pt-3 font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--t3)]">Type</th>
-              <th className="px-3 pb-2 pt-3 font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--t3)]">Description</th>
-              <th className="px-3 pb-2 pt-3 font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--t3)]">Client</th>
-              <th className="px-3 pb-2 pt-3 font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--t3)]">P&L</th>
-              <th className="px-3 pb-2 pt-3 font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--t3)]">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredTrades.map((trade) => (
-              <TradeRow key={trade.id} trade={trade} />
-            ))}
-          </tbody>
-        </table>
-        <div className="border-t border-[rgba(255,255,255,0.05)] px-3 py-2 font-dm text-[10px] text-[var(--t3)]">
-          Total trades: <span className="text-[var(--t1)]">{filteredTrades.length}</span> · Nov realized (both clients):
-          <span className="text-[var(--gain)]"> +{formatCurrency(novRealized)}</span> · Total fees:
-          <span className="text-[var(--loss)]"> {formatCurrency(totalFees)}</span>
+      {/* Table */}
+      <div className="ag-card">
+        <div style={{ overflowX: 'auto' }}>
+          <table className="ag-table" style={{ minWidth: 700 }}>
+            <thead>
+              <tr>
+                <th>Symbol</th><th>Type</th><th>Description</th><th>Client</th><th>P&amp;L</th><th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredTrades.map((trade) => <TradeRow key={trade.id} trade={trade} />)}
+            </tbody>
+          </table>
         </div>
-      </section>
+        {filteredTrades.length === 0 && (
+          <div className="ag-empty"><span className="ag-empty-label">No trades match filters</span></div>
+        )}
+      </div>
     </div>
   )
 }

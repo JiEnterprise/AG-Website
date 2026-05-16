@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/components/advisor/PageHeader'
 import MetricCard from '@/components/advisor/MetricCard'
 import { complianceItems, getComplianceScore, type ComplianceItem, type ComplianceStatus } from '@/lib/mock-data/compliance'
 import { clients } from '@/lib/mock-data/clients'
@@ -57,14 +56,14 @@ export default function CompliancePage() {
   })
 
   return (
-    <div className="space-y-5">
-      <PageHeader
-        eyebrow="Compliance · Per-Client"
-        title="Compliance Checklist"
-        subtitle="Green/red status board · Onboarding · Ongoing · Annual · Regulatory"
-      />
+    <div className="ag-page" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <header className="ag-ph">
+        <p className="ag-ph-ey">Compliance · Per-Client</p>
+        <h1 className="ag-ph-h">Compliance Checklist</h1>
+        <p className="ag-ph-s">Green/red status board · Onboarding · Ongoing · Annual · Regulatory</p>
+      </header>
 
-      <section className="mrow">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
         <MetricCard
           label="Firm-Wide Score"
           value={`${Math.round((totalComplete / totalItems) * 100)}%`}
@@ -89,7 +88,7 @@ export default function CompliancePage() {
           value="2"
           badge="DL2503 · SR2501"
         />
-      </section>
+      </div>
 
       {/* Per-client score cards */}
       <div className="grid gap-3 md:grid-cols-2">
@@ -100,7 +99,7 @@ export default function CompliancePage() {
           return (
             <article
               key={client.id}
-              className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-4"
+              className="ag-card"
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
                 <div
@@ -128,7 +127,7 @@ export default function CompliancePage() {
                   {score.overdue} overdue item{score.overdue > 1 ? 's' : ''} — action required
                 </p>
               )}
-            </article>
+            </div>
           )
         })}
       </div>
@@ -170,14 +169,14 @@ export default function CompliancePage() {
       </div>
 
       {/* Compliance table */}
-      <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] overflow-x-auto">
+      <article className="ag-card">
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 700 }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
               {['Status', 'Client', 'Category', 'Requirement', 'Completed', 'Due Date', 'Notes'].map((h) => (
                 <th
                   key={h}
-                  className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]"
+                  style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
                   style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                 >
                   {h}
@@ -206,7 +205,7 @@ export default function CompliancePage() {
                     </span>
                   </td>
                   <td style={{ padding: '10px 14px' }}>
-                    <span className="font-mono text-[10px]" style={{ color: client?.color ?? 'var(--t2)' }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: client?.color ?? 'var(--t2)' }}>
                       {item.clientId}
                     </span>
                   </td>
@@ -219,13 +218,13 @@ export default function CompliancePage() {
                     <span className="font-dm text-[11px] text-[var(--t1)]">{item.label}</span>
                   </td>
                   <td style={{ padding: '10px 14px' }}>
-                    <span className="font-mono text-[10px] text-[var(--t3)]">
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
                       {item.completedDate ?? '—'}
                     </span>
                   </td>
                   <td style={{ padding: '10px 14px' }}>
                     <span
-                      className="font-mono text-[10px]"
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
                       style={{ color: item.status === 'overdue' ? 'var(--loss)' : 'var(--t3)' }}
                     >
                       {item.dueDate ?? '—'}
@@ -241,7 +240,7 @@ export default function CompliancePage() {
             })}
           </tbody>
         </table>
-      </article>
+      </div>
 
       <div
         className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--bdr)] bg-[var(--bg-card)] px-4 py-3"
@@ -250,7 +249,7 @@ export default function CompliancePage() {
         <span className="font-dm text-[10px] uppercase tracking-[0.14em] text-[var(--t3)]">
           Compliance framework — Aurum Global Inc.
         </span>
-        <span className="font-mono text-[10px] text-[var(--t3)]">
+        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
           {totalItems} total requirements · Updated quarterly
         </span>
       </div>

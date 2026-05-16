@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/components/advisor/PageHeader'
 import MetricCard from '@/components/advisor/MetricCard'
 import { auditLog, type AuditCategory } from '@/lib/mock-data/audit'
 import { clients } from '@/lib/mock-data/clients'
@@ -47,33 +46,33 @@ export default function AuditPage() {
   }
 
   return (
-    <div className="space-y-5">
-      <PageHeader
-        eyebrow="Compliance · Immutable"
-        title="Communication & Action Audit Log"
-        subtitle="Append-only record of every system action · Timestamp · Actor · Before/After"
-      />
+    <div className="ag-page" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <header className="ag-ph">
+        <p className="ag-ph-ey">Compliance · Immutable</p>
+        <h1 className="ag-ph-h">Audit Log</h1>
+        <p className="ag-ph-s">Append-only record of every system action · Timestamp · Actor · Before/After</p>
+      </header>
 
       {/* Immutable notice */}
       <div
         className="flex items-center gap-3 rounded-[var(--radius-sm)] border px-4 py-2"
         style={{ borderColor: 'rgba(212,75,58,0.25)', background: 'rgba(212,75,58,0.04)' }}
       >
-        <span className="font-mono text-[10px]" style={{ color: 'var(--loss)' }}>⚠</span>
+        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--loss)' }}>⚠</span>
         <span className="font-dm text-[10px] uppercase tracking-[0.12em]" style={{ color: 'var(--loss)' }}>
           Immutable Audit Log
         </span>
-        <span className="font-mono text-[10px] text-[var(--t3)]">
+        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
           Entries cannot be edited or deleted · Append-only · Compliance standard AGM-1
         </span>
       </div>
 
-      <section className="mrow">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
         <MetricCard label="Total Entries" value={String(auditLog.length)} badge="Since inception" />
         <MetricCard label="Trades Logged" value={String(counts.trade)} badge="All strategy actions" valueColor="var(--gold)" />
         <MetricCard label="Fee Events" value={String(counts.fee)} badge="Invoices + payments" valueColor="var(--gain)" />
         <MetricCard label="Statements" value={String(counts.statement)} badge="Generated + delivered" />
-      </section>
+      </div>
 
       {/* Filters */}
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -112,7 +111,7 @@ export default function AuditPage() {
       </div>
 
       {/* Audit log entries */}
-      <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)]">
+      <article className="ag-card">
         {visible.length === 0 ? (
           <div className="p-10 text-center font-dm text-[11px] text-[var(--t3)]">No entries match the selected filters</div>
         ) : (
@@ -141,7 +140,7 @@ export default function AuditPage() {
                   >
                     {/* Timestamp */}
                     <div>
-                      <p className="font-mono text-[10px] text-[var(--t2)]">{date}</p>
+                      <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{date}</p>
                       <p className="font-mono text-[9px] text-[var(--t3)]">{time} UTC</p>
                     </div>
                     {/* Category */}
@@ -156,7 +155,7 @@ export default function AuditPage() {
                     {/* Client */}
                     <div>
                       {client ? (
-                        <span className="font-mono text-[10px]" style={{ color: client.color }}>{client.id}</span>
+                        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: client.color }}>{client.id}</span>
                       ) : (
                         <span className="font-dm text-[9px] text-[var(--t3)]">—</span>
                       )}
@@ -171,7 +170,7 @@ export default function AuditPage() {
                     {/* Expand indicator */}
                     <div style={{ paddingLeft: 12 }}>
                       {hasDetail && (
-                        <span className="font-mono text-[10px] text-[var(--t3)]">{isExpanded ? '▲' : '▼'}</span>
+                        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{isExpanded ? '▲' : '▼'}</span>
                       )}
                     </div>
                   </div>
@@ -187,19 +186,19 @@ export default function AuditPage() {
                     >
                       <div>
                         <p className="font-dm text-[8px] uppercase tracking-[0.12em] text-[var(--t3)] mb-1">Detail</p>
-                        <p className="font-mono text-[10px] leading-[1.6] text-[var(--t2)]">{entry.detail}</p>
+                        <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{entry.detail}</p>
                         <p className="font-dm text-[9px] text-[var(--t3)] mt-1">Actor: {entry.actor}</p>
                       </div>
                       {entry.before && (
                         <div>
                           <p className="font-dm text-[8px] uppercase tracking-[0.12em] mb-1" style={{ color: 'var(--loss)' }}>Before</p>
-                          <p className="font-mono text-[10px] text-[var(--t2)]">{entry.before}</p>
+                          <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{entry.before}</p>
                         </div>
                       )}
                       {entry.after && (
                         <div>
                           <p className="font-dm text-[8px] uppercase tracking-[0.12em] mb-1" style={{ color: 'var(--gain)' }}>After</p>
-                          <p className="font-mono text-[10px] text-[var(--t2)]">{entry.after}</p>
+                          <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{entry.after}</p>
                         </div>
                       )}
                     </div>
@@ -209,7 +208,7 @@ export default function AuditPage() {
             })}
           </div>
         )}
-      </article>
+      </div>
 
       <div
         className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--bdr)] bg-[var(--bg-card)] px-4 py-3"
@@ -218,7 +217,7 @@ export default function AuditPage() {
         <span className="font-dm text-[10px] uppercase tracking-[0.14em] text-[var(--t3)]">
           Showing {visible.length} of {auditLog.length} entries
         </span>
-        <span className="font-mono text-[10px] text-[var(--t3)]">
+        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
           Entries signed: SHA-256 · Compliant with AGM-1
         </span>
       </div>

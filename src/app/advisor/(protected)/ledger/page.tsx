@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/components/advisor/PageHeader'
 import MetricCard from '@/components/advisor/MetricCard'
 import { ledger, getTotalDeposited, getTotalFeesCollected } from '@/lib/mock-data/ledger'
 import { formatCurrency } from '@/lib/formatters'
@@ -33,14 +32,14 @@ export default function LedgerPage() {
   const outstanding = ledger.filter((e) => e.notes.includes('OUTSTANDING')).reduce((s, e) => s + Math.abs(e.amount), 0)
 
   return (
-    <div className="space-y-5">
-      <PageHeader
-        eyebrow="Accounting · Auditable"
-        title="Deposit & Withdrawal Ledger"
-        subtitle="Immutable record of all client cash movements · Deposits · Fees · Withdrawals"
-      />
+    <div className="ag-page" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <header className="ag-ph">
+        <p className="ag-ph-ey">Accounting · Auditable</p>
+        <h1 className="ag-ph-h">Deposit & Withdrawal Ledger</h1>
+        <p className="ag-ph-s">Immutable record of all client cash movements · Deposits · Fees · Withdrawals</p>
+      </header>
 
-      <section className="mrow">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
         <MetricCard
           label="Total Deposited"
           value={formatCurrency(totalDeposits)}
@@ -67,7 +66,7 @@ export default function LedgerPage() {
           value={String(ledger.length)}
           badge="Complete audit trail"
         />
-      </section>
+      </div>
 
       {/* Per-client summary */}
       <div className="grid gap-3 md:grid-cols-2">
@@ -80,7 +79,7 @@ export default function LedgerPage() {
           return (
             <article
               key={id}
-              className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] p-4"
+              className="ag-card"
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
                 <div
@@ -106,21 +105,21 @@ export default function LedgerPage() {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
                 <div>
-                  <p className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]">Deposited</p>
+                  <p style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}>Deposited</p>
                   <p className="font-mono text-[13px] text-[var(--t1)] font-semibold">{formatCurrency(deposited)}</p>
                 </div>
                 <div>
-                  <p className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]">Fees Collected</p>
+                  <p style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}>Fees Collected</p>
                   <p className="font-mono text-[13px]" style={{ color: 'var(--gain)', fontWeight: 600 }}>
                     {formatCurrency(feesCollected)}
                   </p>
                 </div>
                 <div>
-                  <p className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]">Entries</p>
+                  <p style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}>Entries</p>
                   <p className="font-mono text-[13px] text-[var(--t1)] font-semibold">{entries.length}</p>
                 </div>
               </div>
-            </article>
+            </div>
           )
         })}
       </div>
@@ -168,14 +167,14 @@ export default function LedgerPage() {
       </div>
 
       {/* Ledger table */}
-      <article className="rounded-[var(--radius-lg)] border border-[var(--bdr)] bg-[var(--bg-card)] overflow-x-auto">
+      <article className="ag-card">
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 800 }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
               {['Date', 'Client', 'Type', 'Amount', 'Method', 'Reference', 'Running Balance', 'Notes'].map((h) => (
                 <th
                   key={h}
-                  className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]"
+                  style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
                   style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                 >
                   {h}
@@ -195,11 +194,11 @@ export default function LedgerPage() {
                   }}
                 >
                   <td style={{ padding: '10px 14px' }}>
-                    <span className="font-mono text-[10px] text-[var(--t3)]">{entry.date}</span>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{entry.date}</span>
                   </td>
                   <td style={{ padding: '10px 14px' }}>
                     <span
-                      className="font-mono text-[10px]"
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
                       style={{ color: entry.clientId === 'SR2501' ? '#7F77DD' : '#378ADD' }}
                     >
                       {entry.clientId}
@@ -232,7 +231,7 @@ export default function LedgerPage() {
                   </td>
                   <td style={{ padding: '10px 14px' }}>
                     <span
-                      className="font-mono text-[11px] font-semibold"
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
                       style={{
                         color:
                           entry.amount > 0
@@ -255,7 +254,7 @@ export default function LedgerPage() {
                     <span className="font-mono text-[9px] text-[var(--t3)]">{entry.reference}</span>
                   </td>
                   <td style={{ padding: '10px 14px' }}>
-                    <span className="font-mono text-[11px] text-[var(--t2)]">
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
                       {formatCurrency(entry.runningBalance)}
                     </span>
                   </td>
@@ -277,7 +276,7 @@ export default function LedgerPage() {
             })}
           </tbody>
         </table>
-      </article>
+      </div>
     </div>
   )
 }
