@@ -11,6 +11,19 @@ export interface Advisor {
 }
 
 // ── Client ───────────────────────────────────────────────────
+export type RiskProfile = 'Conservative' | 'Moderate' | 'Balanced' | 'Growth' | 'Aggressive'
+export type InvestmentObjective = 'Capital Preservation' | 'Income' | 'Growth & Income' | 'Capital Appreciation' | 'Aggressive Growth'
+
+export interface ClientGoal {
+  id: string
+  label: string
+  targetAmount: number
+  currentAmount: number
+  targetDate: string
+  progress: number // 0–100
+  status: 'on_track' | 'behind' | 'achieved'
+}
+
 export interface Client {
   id: string
   name: string
@@ -28,6 +41,17 @@ export interface Client {
   feeStatus: 'paid' | 'unpaid' | 'partial'
   feeDue?: number
   feeDueDate?: string
+  // Wealth Management fields
+  email?: string
+  phone?: string
+  riskProfile?: RiskProfile
+  investmentObjective?: InvestmentObjective
+  strategy?: string
+  taxStatus?: 'Taxable' | 'Tax-Deferred' | 'Tax-Exempt'
+  nextReview?: string
+  goals?: ClientGoal[]
+  advisor?: string
+  notes?: string
 }
 
 // ── Account Snapshot ─────────────────────────────────────────
@@ -198,7 +222,7 @@ export type OrderSide = 'BUY' | 'SELL'
 export type OrderType = 'market' | 'limit' | 'stop_limit'
 
 export interface OrderTicket {
-  clientTarget: 'DL2503' | 'SR2501' | 'both'
+  clientTarget: string // client ID or 'all'
   symbol: string
   side: OrderSide
   orderType: OrderType
