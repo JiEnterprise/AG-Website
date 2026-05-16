@@ -178,7 +178,7 @@ export default function PnlPage() {
       </div>
 
       {/* Blotter table */}
-      <article className="ag-card">
+      <div className="ag-card">
         {visible.length === 0 ? (
           <div className="p-10 text-center font-dm text-[11px] text-[var(--t3)]">
             No open positions in selected accounts
@@ -191,8 +191,7 @@ export default function PnlPage() {
                   (h) => (
                     <th
                       key={h}
-                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
-                      style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
+                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                     >
                       {h}
                     </th>
@@ -230,16 +229,14 @@ export default function PnlPage() {
                     </td>
                     <td style={{ padding: '10px 14px' }}>
                       <span
-                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                        style={{ color: dollarPnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
+                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: dollarPnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
                       >
                         {dollarPnl >= 0 ? '+' : ''}{formatCurrency(dollarPnl)}
                       </span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
                       <span
-                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                        style={{ color: pctPnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
+                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: pctPnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
                       >
                         {pctPnl >= 0 ? '+' : ''}{pctPnl.toFixed(2)}%
                       </span>
@@ -273,7 +270,7 @@ export default function PnlPage() {
           <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>
             Clients: {formatCurrency(clients.reduce((s, c) => s + c.currentAUM, 0))} AUM
           </span>
-          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gold)' }}>
+          <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--gold)' }}>
             Total: {formatCurrency(personalAccount.currentAUM + clients.reduce((s, c) => s + c.currentAUM, 0))}
           </span>
         </div>

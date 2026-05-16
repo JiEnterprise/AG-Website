@@ -77,7 +77,7 @@ export default function LedgerPage() {
           const feesCollected = getTotalFeesCollected(id)
           const entries = ledger.filter((e) => e.clientId === id)
           return (
-            <article
+            <div
               key={id}
               className="ag-card"
             >
@@ -119,7 +119,7 @@ export default function LedgerPage() {
                   <p className="font-mono text-[13px] text-[var(--t1)] font-semibold">{entries.length}</p>
                 </div>
               </div>
-            </article>
+            </div>
           )
         })}
       </div>
@@ -167,7 +167,7 @@ export default function LedgerPage() {
       </div>
 
       {/* Ledger table */}
-      <article className="ag-card">
+      <div className="ag-card">
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 800 }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
@@ -271,7 +271,7 @@ export default function LedgerPage() {
             })}
           </tbody>
         </table>
-      </article>
+      </div>
     </div>
   )
 }

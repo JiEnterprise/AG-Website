@@ -112,7 +112,7 @@ export default function AgquantPage() {
         {/* Left column */}
         <div className="space-y-4">
           {/* AGQuant Live State Monitor */}
-          <article className="ag-card">
+          <div className="ag-card">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
               <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">
                 AGQuant Live State Monitor
@@ -193,10 +193,10 @@ export default function AgquantPage() {
                 </div>
               ))}
             </div>
-          </article>
+          </div>
 
           {/* Active Strategies */}
-          <article className="ag-card">
+          <div className="ag-card">
             <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">Active Strategies</h2>
             <div className="mt-2 space-y-2">
               {agquantStrategies.map((strategy) => (
@@ -232,13 +232,13 @@ export default function AgquantPage() {
                 </div>
               ))}
             </div>
-          </article>
+          </div>
         </div>
 
         {/* Right column */}
         <div className="space-y-4">
           {/* System Connections */}
-          <article className="ag-card">
+          <div className="ag-card">
             <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">System Connections</h2>
             <div className="mt-2 space-y-1">
               <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>Alpaca API · <span className="text-[var(--gain)]">{systemStatus.alpacaApi}</span></p>
@@ -253,10 +253,10 @@ export default function AgquantPage() {
                 </span>
               </p>
             </div>
-          </article>
+          </div>
 
           {/* Paper → Live Toggle */}
-          <article
+          <div
             className="rounded-[var(--radius-lg)] border p-4"
             style={{
               borderColor: liveMode ? 'rgba(212,75,58,0.4)' : 'rgba(107,107,107,0.2)',
@@ -324,7 +324,7 @@ export default function AgquantPage() {
           </div>
 
           {/* Signal Feed */}
-          <article className="ag-card">
+          <div className="ag-card">
             <h2 className="font-dm text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">Signal Feed (last 24h)</h2>
             <div className="mt-2 space-y-1">
               {allSignals.map((signal) => (
@@ -333,8 +333,8 @@ export default function AgquantPage() {
                 </p>
               ))}
             </div>
-          </article>
-        </article>
+          </div>
+        </div>
       </div>
 
       {/* Confirmation Modal */}

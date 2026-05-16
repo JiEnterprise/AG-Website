@@ -133,7 +133,7 @@ export default function YieldMaxPage() {
 
       {/* Screener */}
       {tab === 'screener' && (
-        <article className="ag-card">
+        <div className="ag-card">
           <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 900 }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
@@ -141,8 +141,7 @@ export default function YieldMaxPage() {
                   (h) => (
                     <th
                       key={h}
-                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
-                      style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
+                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                     >
                       {h}
                     </th>
@@ -181,27 +180,27 @@ export default function YieldMaxPage() {
                     <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>${etf.currentPrice.toFixed(2)}</span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gain)' }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--gain)' }}>
                       {etf.annualYieldPct.toFixed(1)}%
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: decayColor(etf.navDecayPct) }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: decayColor(etf.navDecayPct) }}>
                       -{etf.navDecayPct.toFixed(1)}%
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gold)' }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--gold)' }}>
                       ${etf.lastDistribution.toFixed(2)}
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: trendColor(etf.distributionTrend) }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: trendColor(etf.distributionTrend) }}>
                       {trendIcon(etf.distributionTrend)} {etf.distributionTrend}
                     </span>
                   </td>
                   <td style={{ padding: '11px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: rsiColor(etf.rsi14) }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: rsiColor(etf.rsi14) }}>
                       {etf.rsi14}
                     </span>
                   </td>
@@ -230,7 +229,7 @@ export default function YieldMaxPage() {
       {tab === 'screener' && (
         <div className="grid gap-3 md:grid-cols-2">
           {yieldmaxUniverse.filter((e) => e.inPortfolio).map((etf) => (
-            <article
+            <div
               key={etf.symbol}
               className="rounded-[var(--radius-sm)] border border-[var(--bdr-gold)] bg-[var(--gold-dim)] p-4"
             >
@@ -259,7 +258,7 @@ export default function YieldMaxPage() {
             const exDivs = events.filter((e) => e.type === 'ex-div')
             const pays = events.filter((e) => e.type === 'pay')
             return (
-              <article
+              <div
                 key={date}
                 className="ag-card"
               >
@@ -303,8 +302,7 @@ export default function YieldMaxPage() {
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                           <span
-                            style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                            style={{ color: ev.type === 'ex-div' ? 'var(--gold)' : 'var(--gain)' }}
+                            style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: ev.type === 'ex-div' ? 'var(--gold)' : 'var(--gain)' }}
                           >
                             {ev.symbol}
                           </span>

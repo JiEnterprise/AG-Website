@@ -111,7 +111,7 @@ export default function AuditPage() {
       </div>
 
       {/* Audit log entries */}
-      <article className="ag-card">
+      <div className="ag-card">
         {visible.length === 0 ? (
           <div className="p-10 text-center font-dm text-[11px] text-[var(--t3)]">No entries match the selected filters</div>
         ) : (
@@ -208,7 +208,7 @@ export default function AuditPage() {
             })}
           </div>
         )}
-      </article>
+      </div>
 
       <div
         className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--bdr)] bg-[var(--bg-card)] px-4 py-3"

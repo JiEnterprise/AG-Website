@@ -109,7 +109,7 @@ export default function PersonalPage() {
 
       {/* Open Positions */}
       {tab === 'positions' && (
-        <article className="ag-card">
+        <div className="ag-card">
           {personalPositions.length === 0 ? (
             <div className="p-8 text-center font-dm text-[11px] text-[var(--t3)]">No open positions — fully in cash</div>
           ) : (
@@ -185,12 +185,12 @@ export default function PersonalPage() {
               </tfoot>
             </table>
           )}
-        </article>
+        </div>
       )}
 
       {/* Trade History */}
       {tab === 'history' && (
-        <article className="ag-card">
+        <div className="ag-card">
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
@@ -258,12 +258,12 @@ export default function PersonalPage() {
               ))}
             </tbody>
           </table>
-        </article>
+        </div>
       )}
 
       {/* Monthly Returns */}
       {tab === 'monthly' && (
-        <article className="ag-card">
+        <div className="ag-card">
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
@@ -324,7 +324,7 @@ export default function PersonalPage() {
               })}
             </tbody>
           </table>
-        </article>
+        </div>
       )}
     </div>
   )

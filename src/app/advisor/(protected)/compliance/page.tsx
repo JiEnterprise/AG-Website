@@ -97,7 +97,7 @@ export default function CompliancePage() {
           const pct = score.total > 0 ? Math.round((score.complete / score.total) * 100) : 0
           const scoreColor = pct === 100 ? 'var(--gain)' : pct >= 70 ? 'var(--gold)' : 'var(--loss)'
           return (
-            <article
+            <div
               key={client.id}
               className="ag-card"
             >
@@ -127,7 +127,7 @@ export default function CompliancePage() {
                   {score.overdue} overdue item{score.overdue > 1 ? 's' : ''} — action required
                 </p>
               )}
-            </article>
+            </div>
           )
         })}
       </div>
@@ -169,7 +169,7 @@ export default function CompliancePage() {
       </div>
 
       {/* Compliance table */}
-      <article className="ag-card">
+      <div className="ag-card">
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 700 }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--bdr)' }}>
@@ -238,7 +238,7 @@ export default function CompliancePage() {
             })}
           </tbody>
         </table>
-      </article>
+      </div>
 
       <div
         className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--bdr)] bg-[var(--bg-card)] px-4 py-3"
