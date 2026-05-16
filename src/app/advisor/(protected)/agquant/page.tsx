@@ -106,7 +106,7 @@ export default function AgquantPage() {
         />
         <MetricCard label="Active Strategies" value={String(agquantStrategies.filter((s) => s.status === 'active').length)} />
         <MetricCard label="Signals Today" value={String(allSignals.length)} valueColor="var(--warn)" />
-      </div>
+      </section>
 
       <section className="grid gap-4 xl:grid-cols-2">
         {/* Left column */}
@@ -132,7 +132,7 @@ export default function AgquantPage() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <span className="font-mono text-[12px] font-semibold text-[var(--t1)]">{sym.symbol}</span>
-                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gold)' }}>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--gold)' }}>
                         ${sym.lastPrice.toFixed(2)}
                       </span>
                       <span
@@ -150,14 +150,12 @@ export default function AgquantPage() {
 
                   {/* RSI bar */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                    <span style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }} style={{ minWidth: 28 }}>
+                    <span style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", minWidth: 28 }}>
                       RSI
                     </span>
                     <div style={{ flex: 1 }}>{rsiBar(sym.rsi14)}</div>
                     <span
-                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                      style={{
-                        minWidth: 24,
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", minWidth: 24,
                         color:
                           sym.rsi14 <= 30
                             ? 'var(--gain)'
@@ -165,8 +163,7 @@ export default function AgquantPage() {
                               ? 'var(--loss)'
                               : sym.rsi14 >= 55
                                 ? 'var(--warn)'
-                                : 'var(--info)',
-                      }}
+                                : 'var(--info)' }}
                     >
                       {sym.rsi14}
                     </span>
@@ -196,7 +193,7 @@ export default function AgquantPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </article>
 
           {/* Active Strategies */}
           <article className="ag-card">
@@ -235,7 +232,7 @@ export default function AgquantPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </article>
         </div>
 
         {/* Right column */}
@@ -256,7 +253,7 @@ export default function AgquantPage() {
                 </span>
               </p>
             </div>
-          </div>
+          </article>
 
           {/* Paper → Live Toggle */}
           <article
@@ -336,9 +333,9 @@ export default function AgquantPage() {
                 </p>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </article>
+        </article>
+      </div>
 
       {/* Confirmation Modal */}
       {modal === 'confirm' && (
@@ -449,12 +446,12 @@ export default function AgquantPage() {
             <p className="font-dm text-[12px] uppercase tracking-[0.2em]" style={{ color: 'var(--loss)' }}>
               Live Trading Activated
             </p>
-            <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ marginTop: 8 }}>
+            <p style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", marginTop: 8 }}>
               All orders now route to Alpaca Live
             </p>
           </div>
         </div>
       )}
-    </div>
+    </section>
   )
 }

@@ -127,7 +127,7 @@ export default function CompliancePage() {
                   {score.overdue} overdue item{score.overdue > 1 ? 's' : ''} — action required
                 </p>
               )}
-            </div>
+            </article>
           )
         })}
       </div>
@@ -176,8 +176,7 @@ export default function CompliancePage() {
               {['Status', 'Client', 'Category', 'Requirement', 'Completed', 'Due Date', 'Notes'].map((h) => (
                 <th
                   key={h}
-                  style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
-                  style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
+                  style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                 >
                   {h}
                 </th>
@@ -205,7 +204,7 @@ export default function CompliancePage() {
                     </span>
                   </td>
                   <td style={{ padding: '10px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: client?.color ?? 'var(--t2)' }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: client?.color ?? 'var(--t2)' }}>
                       {item.clientId}
                     </span>
                   </td>
@@ -224,8 +223,7 @@ export default function CompliancePage() {
                   </td>
                   <td style={{ padding: '10px 14px' }}>
                     <span
-                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                      style={{ color: item.status === 'overdue' ? 'var(--loss)' : 'var(--t3)' }}
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: item.status === 'overdue' ? 'var(--loss)' : 'var(--t3)' }}
                     >
                       {item.dueDate ?? '—'}
                     </span>
@@ -240,7 +238,7 @@ export default function CompliancePage() {
             })}
           </tbody>
         </table>
-      </div>
+      </article>
 
       <div
         className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--bdr)] bg-[var(--bg-card)] px-4 py-3"

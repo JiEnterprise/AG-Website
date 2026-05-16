@@ -119,7 +119,7 @@ export default function LedgerPage() {
                   <p className="font-mono text-[13px] text-[var(--t1)] font-semibold">{entries.length}</p>
                 </div>
               </div>
-            </div>
+            </article>
           )
         })}
       </div>
@@ -174,8 +174,7 @@ export default function LedgerPage() {
               {['Date', 'Client', 'Type', 'Amount', 'Method', 'Reference', 'Running Balance', 'Notes'].map((h) => (
                 <th
                   key={h}
-                  style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
-                  style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
+                  style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                 >
                   {h}
                 </th>
@@ -198,8 +197,7 @@ export default function LedgerPage() {
                   </td>
                   <td style={{ padding: '10px 14px' }}>
                     <span
-                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                      style={{ color: entry.clientId === 'SR2501' ? '#7F77DD' : '#378ADD' }}
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: entry.clientId === 'SR2501' ? '#7F77DD' : '#378ADD' }}
                     >
                       {entry.clientId}
                     </span>
@@ -231,15 +229,12 @@ export default function LedgerPage() {
                   </td>
                   <td style={{ padding: '10px 14px' }}>
                     <span
-                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                      style={{
-                        color:
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color:
                           entry.amount > 0
                             ? 'var(--gain)'
                             : isOutstanding
                               ? 'var(--loss)'
-                              : 'var(--t2)',
-                      }}
+                              : 'var(--t2)' }}
                     >
                       {entry.amount > 0 ? '+' : ''}
                       {formatCurrency(entry.amount)}
@@ -276,7 +271,7 @@ export default function LedgerPage() {
             })}
           </tbody>
         </table>
-      </div>
+      </article>
     </div>
   )
 }

@@ -119,8 +119,7 @@ export default function PersonalPage() {
                   {['Symbol', 'Shares', 'Entry', 'Current', 'Unrlz P&L', 'Days', 'Strategy'].map((h) => (
                     <th
                       key={h}
-                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
-                      style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
+                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                     >
                       {h}
                     </th>
@@ -140,7 +139,7 @@ export default function PersonalPage() {
                       style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
                     >
                       <td style={{ padding: '10px 14px' }}>
-                        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: '#A0A0BE' }}>
+                        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: '#A0A0BE' }}>
                           {pos.symbol}
                         </span>
                       </td>
@@ -155,8 +154,7 @@ export default function PersonalPage() {
                       </td>
                       <td style={{ padding: '10px 14px' }}>
                         <span
-                          style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                          style={{ color: upnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
+                          style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: upnl >= 0 ? 'var(--gain)' : 'var(--loss)' }}
                         >
                           {upnl >= 0 ? '+' : ''}
                           {formatCurrency(upnl)} ({upnl >= 0 ? '+' : ''}
@@ -179,7 +177,7 @@ export default function PersonalPage() {
                     <span className="font-dm text-[10px] text-[var(--t3)]">Position value</span>
                   </td>
                   <td colSpan={3} style={{ padding: '10px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: '#A0A0BE', fontWeight: 500 }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: '#A0A0BE', fontWeight: 500 }}>
                       {formatCurrency(positionValue)}
                     </span>
                   </td>
@@ -187,7 +185,7 @@ export default function PersonalPage() {
               </tfoot>
             </table>
           )}
-        </div>
+        </article>
       )}
 
       {/* Trade History */}
@@ -199,8 +197,7 @@ export default function PersonalPage() {
                 {['Date', 'Symbol', 'Type', 'Shares', 'Price', 'Amount', 'Gain/Loss', 'Notes'].map((h) => (
                   <th
                     key={h}
-                    style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
-                    style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
+                    style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                   >
                     {h}
                   </th>
@@ -214,7 +211,7 @@ export default function PersonalPage() {
                     <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}>{trade.date}</span>
                   </td>
                   <td style={{ padding: '9px 14px' }}>
-                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: '#A0A0BE' }}>
+                    <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: '#A0A0BE' }}>
                       {trade.symbol}
                     </span>
                   </td>
@@ -241,8 +238,7 @@ export default function PersonalPage() {
                   </td>
                   <td style={{ padding: '9px 14px' }}>
                     <span
-                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                      style={{ color: trade.amount >= 0 ? 'var(--gain)' : 'var(--t2)' }}
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: trade.amount >= 0 ? 'var(--gain)' : 'var(--t2)' }}
                     >
                       {trade.amount >= 0 ? '+' : ''}
                       {formatCurrency(trade.amount)}
@@ -250,10 +246,7 @@ export default function PersonalPage() {
                   </td>
                   <td style={{ padding: '9px 14px' }}>
                     <span
-                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                      style={{
-                        color: trade.gain === null ? 'var(--t3)' : trade.gain >= 0 ? 'var(--gain)' : 'var(--loss)',
-                      }}
+                      style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: trade.gain === null ? 'var(--t3)' : trade.gain >= 0 ? 'var(--gain)' : 'var(--loss)' }}
                     >
                       {trade.gain === null ? '—' : `+${formatCurrency(trade.gain)}`}
                     </span>
@@ -265,7 +258,7 @@ export default function PersonalPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </article>
       )}
 
       {/* Monthly Returns */}
@@ -278,8 +271,7 @@ export default function PersonalPage() {
                   (h) => (
                     <th
                       key={h}
-                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)" }}
-                      style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
+                      style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t3)", padding: '10px 14px', textAlign: 'left', fontWeight: 500 }}
                     >
                       {h}
                     </th>
@@ -301,17 +293,17 @@ export default function PersonalPage() {
                       </span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gain)' }}>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--gain)' }}>
                         +{formatCurrency(row.realizedGain)}
                       </span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gold)' }}>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--gold)' }}>
                         +{formatCurrency(row.dividends)}
                       </span>
                     </td>
                     <td style={{ padding: '10px 14px' }}>
-                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--gain)', fontWeight: 600 }}>
+                      <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--gain)', fontWeight: 600 }}>
                         +{formatCurrency(row.netReturn)}
                       </span>
                     </td>
@@ -322,8 +314,7 @@ export default function PersonalPage() {
                     </td>
                     <td style={{ padding: '10px 14px' }}>
                       <span
-                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }}
-                        style={{ color: returnPct >= 0 ? 'var(--gain)' : 'var(--loss)' }}
+                        style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: returnPct >= 0 ? 'var(--gain)' : 'var(--loss)' }}
                       >
                         +{returnPct.toFixed(2)}%
                       </span>
@@ -333,7 +324,7 @@ export default function PersonalPage() {
               })}
             </tbody>
           </table>
-        </div>
+        </article>
       )}
     </div>
   )

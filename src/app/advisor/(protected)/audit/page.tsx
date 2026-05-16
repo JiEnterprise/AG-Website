@@ -58,7 +58,7 @@ export default function AuditPage() {
         className="flex items-center gap-3 rounded-[var(--radius-sm)] border px-4 py-2"
         style={{ borderColor: 'rgba(212,75,58,0.25)', background: 'rgba(212,75,58,0.04)' }}
       >
-        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: 'var(--loss)' }}>⚠</span>
+        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: 'var(--loss)' }}>⚠</span>
         <span className="font-dm text-[10px] uppercase tracking-[0.12em]" style={{ color: 'var(--loss)' }}>
           Immutable Audit Log
         </span>
@@ -155,7 +155,7 @@ export default function AuditPage() {
                     {/* Client */}
                     <div>
                       {client ? (
-                        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums" }} style={{ color: client.color }}>{client.id}</span>
+                        <span style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: client.color }}>{client.id}</span>
                       ) : (
                         <span className="font-dm text-[9px] text-[var(--t3)]">—</span>
                       )}
@@ -208,7 +208,7 @@ export default function AuditPage() {
             })}
           </div>
         )}
-      </div>
+      </article>
 
       <div
         className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--bdr)] bg-[var(--bg-card)] px-4 py-3"
