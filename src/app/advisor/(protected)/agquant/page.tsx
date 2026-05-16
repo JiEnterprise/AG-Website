@@ -335,7 +335,7 @@ export default function AgquantPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Confirmation Modal */}
       {modal === 'confirm' && (
@@ -452,6 +452,6 @@ export default function AgquantPage() {
           </div>
         </div>
       )}
-    </section>
+    </div>
   )
 }
