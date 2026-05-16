@@ -7,6 +7,8 @@ import HeroSection from '@/components/sections/HeroSection'
 import BentoGrid from '@/components/sections/BentoGrid'
 import TerminalSection from '@/components/sections/TerminalSection'
 import QuantSection from '@/components/sections/QuantSection'
+import TrustBar from '@/components/sections/TrustBar'
+import AudienceSection from '@/components/sections/AudienceSection'
 import StatsBar from '@/components/sections/StatsBar'
 import WealthSection from '@/components/sections/WealthSection'
 import InsightsSection from '@/components/sections/InsightsSection'
@@ -79,8 +81,14 @@ export default function HomePage() {
         {/* S01 — Hero */}
         <HeroSection />
 
+        {/* S01b — Firm Credentials Trust Bar */}
+        <TrustBar />
+
         {/* S02 — Business Lines Bento Grid */}
         <BentoGrid />
+
+        {/* S02b — Audience Routing (Investors / Clients / Curious / Press) */}
+        <AudienceSection />
 
         {/* S03 — AG Terminal Spotlight */}
         <TerminalSection />

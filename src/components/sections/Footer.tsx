@@ -196,10 +196,10 @@ export default function Footer() {
       {/* Regulatory text */}
       <div className="max-w-[1400px] mx-auto px-6 pb-6">
         <p className="font-mono text-[9px] text-muted-gold leading-[1.7] max-w-[800px] mx-auto text-center mb-6">
-          Aurum Global Inc. is a registered investment advisor. Past performance is not indicative of
-          future results. All investments involve risk, including the possible loss of principal. This
-          website is for informational purposes only and does not constitute investment advice.
-          Securities offered through regulated channels only.
+          Aurum Global Inc. is building next-generation institutional financial technology. This website
+          is for informational purposes only and does not constitute investment advice or an offer to
+          buy or sell any financial product. All investments involve risk, including the possible loss
+          of principal. Past performance, where referenced, is not indicative of future results.
         </p>
       </div>
 
@@ -207,7 +207,7 @@ export default function Footer() {
       <div className="border-t border-[rgba(255,255,255,0.05)] py-5">
         <div className="max-w-[1400px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="font-dm text-[11px] text-muted-gold">
-            © 2025 Aurum Global Inc. All rights reserved.
+            © 2026 Aurum Global Inc. All rights reserved.
           </span>
           <div className="flex items-center gap-4">
             {['Privacy Policy', 'Terms of Service', 'Disclosures'].map(link => (

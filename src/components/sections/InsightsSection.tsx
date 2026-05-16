@@ -8,18 +8,18 @@ import { INSIGHTS_FEED } from '@/lib/marketData'
 const CATEGORY_COLORS: Record<string, string> = {
   MACRO: 'text-[#7CA8D4] border-[rgba(124,168,212,0.3)] bg-[rgba(124,168,212,0.08)]',
   EQUITY: 'text-gain border-[rgba(45,140,94,0.3)] bg-[rgba(45,140,94,0.08)]',
-  CRYPTO: 'text-aurum-gold border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.07)]',
+  CRYPTO: 'text-aurum-gold border-[rgba(201,168,76,0.3)] bg-[rgba(201,168,76,0.08)]',
   OPTIONS: 'text-[#C47ACE] border-[rgba(196,122,206,0.3)] bg-[rgba(196,122,206,0.08)]',
 }
 
 const FEATURED = {
   category: 'MACRO',
-  headline: 'The Great Monetary Reset: How Central Bank Divergence Is Reshaping Global Capital Flows',
-  author: 'Dr. Alicia Wentworth, Chief Macro Strategist',
-  date: 'April 4, 2026',
+  headline: 'AG Insights: Bringing Institutional-Grade Research to Every Aurum Global Client',
+  author: 'Aurum Global',
+  date: 'Coming Soon',
   excerpt: [
-    'As the Federal Reserve signals a prolonged pause and the ECB moves toward easing, institutional capital is flowing in unprecedented patterns across G10 currency markets. Our proprietary flow analysis suggests a structural shift that could define portfolio positioning for the next 18–24 months.',
-    'The divergence in monetary policy cycles presents both risk and opportunity. For sophisticated investors willing to look beyond conventional allocation frameworks, the cross-asset dislocations emerging from this environment offer asymmetric return potential that warrants immediate strategic attention.',
+    'AG Insights is our proprietary intelligence layer — designed to surface the market data, macro analysis, and asset-class research that institutional desks rely on, made accessible through a single unified platform.',
+    'From options flow and crypto on-chain signals to equity earnings and global macro shifts, AG Insights will deliver curated, actionable intelligence for every client tier. This section will be live as we roll out to early access users.',
   ],
 }
 
@@ -68,8 +68,17 @@ export default function InsightsSection() {
             style={{ fontSize: 'clamp(32px, 5vw, 52px)' }}
           >
             Market Intelligence.{' '}
-            <span className="text-aurum-gold">Elevated.</span>
+            <span className="text-aurum-gold">Coming Soon.</span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-3 font-dm text-[11px] text-muted-gold tracking-[0.12em] italic"
+          >
+            Sample content shown below — live insights launch with early access.
+          </motion.p>
         </div>
 
         <div className="grid lg:grid-cols-11 gap-8">
@@ -92,7 +101,7 @@ export default function InsightsSection() {
                 placeholder="Search insights..."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
-                className="w-full h-11 pl-10 pr-4 bg-carbon border border-[rgba(255,255,255,0.09)] rounded-lg font-dm text-[13px] text-pale-gold placeholder:text-muted-gold focus:outline-none focus:border-aurum-gold transition-colors duration-200"
+                className="w-full h-11 pl-10 pr-4 bg-carbon border border-[rgba(201,168,76,0.1)] rounded-lg font-dm text-[13px] text-pale-gold placeholder:text-muted-gold focus:outline-none focus:border-aurum-gold transition-colors duration-200"
                 aria-label="Search market insights"
               />
             </motion.div>
@@ -106,7 +115,7 @@ export default function InsightsSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                  className="group rounded-xl p-5 bg-carbon border border-[rgba(255,255,255,0.07)] hover:border-[rgba(255,255,255,0.18)] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                  className="group rounded-xl p-5 bg-carbon border border-[rgba(201,168,76,0.08)] hover:border-[rgba(201,168,76,0.3)] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <CategoryPill category={item.category} />
@@ -139,14 +148,14 @@ export default function InsightsSection() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-5"
           >
-            <div className="sticky top-24 bg-carbon border border-[rgba(255,255,255,0.09)] rounded-xl p-7">
+            <div className="sticky top-24 bg-carbon border border-[rgba(201,168,76,0.12)] rounded-xl p-7">
               <div className="flex items-center justify-between mb-4">
                 <CategoryPill category={FEATURED.category} />
                 <span className="font-mono text-[10px] text-muted-gold">Featured Report</span>
               </div>
 
               {/* Decorative chart */}
-              <div className="mb-5 rounded-lg overflow-hidden bg-[#080809] border border-[rgba(255,255,255,0.05)] p-3">
+              <div className="mb-5 rounded-lg overflow-hidden bg-[#080809] border border-[rgba(201,168,76,0.06)] p-3">
                 <svg viewBox="0 0 300 60" className="w-full" aria-hidden="true">
                   <defs>
                     <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1">
@@ -177,7 +186,7 @@ export default function InsightsSection() {
                 <span className="font-mono text-[10px] text-muted-gold">{FEATURED.date}</span>
               </div>
               {FEATURED.excerpt.map((para, i) => (
-                <p key={i} className="mt-4 font-lora text-[14px] text-[#86868B] leading-[1.8]">
+                <p key={i} className="mt-4 font-lora text-[14px] text-[#B8AE99] leading-[1.8]">
                   {para}
                 </p>
               ))}
