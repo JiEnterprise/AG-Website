@@ -16,7 +16,7 @@ const RISK_COLORS: Record<string, string> = {
   Conservative: '#30D158',
   Moderate:     '#378ADD',
   Balanced:     '#7F77DD',
-  Growth:       '#C9A84C',
+  Growth:       '#6B6B6B',
   Aggressive:   '#FF453A',
 }
 
@@ -48,7 +48,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
               href={`/advisor/orders?client=${client.id}`}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 7,
-                background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.28)',
+                background: 'rgba(107,107,107,0.12)', border: '1px solid rgba(107,107,107,0.28)',
                 fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--gold)', textDecoration: 'none',
               }}
             >

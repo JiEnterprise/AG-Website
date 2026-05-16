@@ -137,7 +137,7 @@ export default function OnboardPage() {
     }
   }
 
-  const accentBorder = '1px solid rgba(201,168,76,0.3)'
+  const accentBorder = '1px solid rgba(107,107,107,0.3)'
 
   return (
     <div className="space-y-5" style={{ maxWidth: 760, margin: '0 auto' }}>
@@ -163,7 +163,7 @@ export default function OnboardPage() {
                   <div
                     style={{
                       width: 28, height: 28, borderRadius: '50%',
-                      background: done ? 'var(--gain-bg)' : active ? 'rgba(201,168,76,0.15)' : 'var(--bg-inset)',
+                      background: done ? 'var(--gain-bg)' : active ? 'rgba(107,107,107,0.15)' : 'var(--bg-inset)',
                       border: `2px solid ${color}`,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontFamily: 'var(--font-mono)', fontSize: 10, fontWeight: 700, color,
@@ -386,7 +386,7 @@ export default function OnboardPage() {
           {deposit.amount && (
             <div
               className="rounded-[var(--radius-sm)] p-3 font-mono text-[10px]"
-              style={{ background: 'rgba(201,168,76,0.06)', border: accentBorder, color: 'var(--t2)' }}
+              style={{ background: 'rgba(107,107,107,0.06)', border: accentBorder, color: 'var(--t2)' }}
             >
               Monthly management fee at 1% AUM: ~{' '}
               <span style={{ color: 'var(--gold)' }}>
@@ -508,13 +508,13 @@ export default function OnboardPage() {
       {step === 5 && (
         <div
           className="rounded-[var(--radius-lg)] border bg-[var(--bg-card)] p-6 space-y-5 text-center"
-          style={{ borderColor: 'rgba(201,168,76,0.3)' }}
+          style={{ borderColor: 'rgba(107,107,107,0.3)' }}
         >
           <div>
             <div
               style={{
                 width: 56, height: 56, borderRadius: '50%', margin: '0 auto 16px',
-                background: 'rgba(201,168,76,0.12)',
+                background: 'rgba(107,107,107,0.12)',
                 border: '2px solid var(--gold)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 24,
@@ -529,7 +529,7 @@ export default function OnboardPage() {
           {/* Generated ID */}
           <div
             className="rounded-[var(--radius-lg)] p-4 space-y-3"
-            style={{ background: 'rgba(201,168,76,0.06)', border: accentBorder, textAlign: 'left' }}
+            style={{ background: 'rgba(107,107,107,0.06)', border: accentBorder, textAlign: 'left' }}
           >
             <p className="font-dm text-[9px] uppercase tracking-[0.14em] text-[var(--t3)]">Generated Client Profile</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>

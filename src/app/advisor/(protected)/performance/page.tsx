@@ -90,8 +90,8 @@ export default function PerformancePage() {
               <AreaChart data={aumChartData}>
                 <defs>
                   <linearGradient id="aumGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#C9A84C" stopOpacity={0.18} />
-                    <stop offset="100%" stopColor="#C9A84C" stopOpacity={0} />
+                    <stop offset="0%" stopColor="#6B6B6B" stopOpacity={0.18} />
+                    <stop offset="100%" stopColor="#6B6B6B" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -101,7 +101,7 @@ export default function PerformancePage() {
                   contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--bdr)', borderRadius: 8, fontFamily: 'var(--font-dm-sans)', fontSize: 11 }}
                   formatter={(v: number) => [`$${v}K`, 'AUM']}
                 />
-                <Area dataKey="aum" stroke="#C9A84C" strokeWidth={2} fill="url(#aumGrad)" dot={false} />
+                <Area dataKey="aum" stroke="#6B6B6B" strokeWidth={2} fill="url(#aumGrad)" dot={false} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -148,7 +148,7 @@ export default function PerformancePage() {
                     contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--bdr)', borderRadius: 8, fontFamily: 'var(--font-dm-sans)', fontSize: 11 }}
                     formatter={(v: number) => [`$${v}K`, 'Gain']}
                   />
-                  <Bar dataKey="gain" fill="#C9A84C" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="gain" fill="#6B6B6B" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

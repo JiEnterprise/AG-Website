@@ -18,7 +18,7 @@ const categoryLabel: Record<string, string> = {
 
 const statusConfig: Record<ComplianceStatus, { label: string; color: string; bg: string }> = {
   complete: { label: 'Complete', color: 'var(--gain)', bg: 'var(--gain-bg)' },
-  pending: { label: 'Pending', color: 'var(--gold)', bg: 'rgba(201,168,76,0.1)' },
+  pending: { label: 'Pending', color: 'var(--gold)', bg: 'rgba(107,107,107,0.1)' },
   overdue: { label: 'Overdue', color: 'var(--loss)', bg: 'var(--loss-bg)' },
   na: { label: 'N/A', color: 'var(--t3)', bg: 'rgba(255,255,255,0.04)' },
 }

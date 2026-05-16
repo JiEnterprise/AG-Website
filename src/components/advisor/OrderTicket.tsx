@@ -157,8 +157,8 @@ export default function OrderTicket() {
 
         {/* Cost preview */}
         <div style={{
-          background: side === 'BUY' ? 'rgba(201,168,76,0.06)' : 'rgba(212,75,58,0.06)',
-          border: `1px solid ${side === 'BUY' ? 'rgba(201,168,76,0.22)' : 'rgba(212,75,58,0.22)'}`,
+          background: side === 'BUY' ? 'rgba(107,107,107,0.06)' : 'rgba(212,75,58,0.06)',
+          border: `1px solid ${side === 'BUY' ? 'rgba(107,107,107,0.22)' : 'rgba(212,75,58,0.22)'}`,
           borderRadius: 10, padding: '14px 16px', marginBottom: 16,
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>

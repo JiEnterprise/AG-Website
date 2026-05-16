@@ -12,7 +12,7 @@ const RISK_COLORS: Record<string, string> = {
   Conservative: '#30D158',
   Moderate:     '#378ADD',
   Balanced:     '#7F77DD',
-  Growth:       '#C9A84C',
+  Growth:       '#6B6B6B',
   Aggressive:   '#FF453A',
 }
 
@@ -32,7 +32,7 @@ export default function ClientsPage() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '7px 14px', borderRadius: 8,
-              background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.28)',
+              background: 'rgba(107,107,107,0.12)', border: '1px solid rgba(107,107,107,0.28)',
               fontFamily: 'var(--font-dm-sans)', fontSize: 11, color: 'var(--gold)',
               textDecoration: 'none', fontWeight: 500,
             }}

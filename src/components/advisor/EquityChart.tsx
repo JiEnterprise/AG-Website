@@ -98,7 +98,7 @@ export default function EquityChart({ clientId, width = 720, height = 220 }: Equ
     const lastY = scaleY(data[data.length - 1].y)
     ctx.beginPath()
     ctx.arc(lastX, lastY, 3, 0, Math.PI * 2)
-    ctx.fillStyle = '#C9A84C'
+    ctx.fillStyle = '#6B6B6B'
     ctx.fill()
 
     if (hoverIndex !== null) {
@@ -108,13 +108,13 @@ export default function EquityChart({ clientId, width = 720, height = 220 }: Equ
       ctx.beginPath()
       ctx.moveTo(px, padding.top)
       ctx.lineTo(px, height - padding.bottom)
-      ctx.strokeStyle = 'rgba(201,168,76,0.45)'
+      ctx.strokeStyle = 'rgba(107,107,107,0.45)'
       ctx.lineWidth = 1
       ctx.stroke()
 
       ctx.beginPath()
       ctx.arc(px, py, 3.5, 0, Math.PI * 2)
-      ctx.fillStyle = '#C9A84C'
+      ctx.fillStyle = '#6B6B6B'
       ctx.fill()
     }
 

@@ -263,7 +263,7 @@ export default function AgquantPage() {
           <article
             className="rounded-[var(--radius-lg)] border p-4"
             style={{
-              borderColor: liveMode ? 'rgba(212,75,58,0.4)' : 'rgba(201,168,76,0.2)',
+              borderColor: liveMode ? 'rgba(212,75,58,0.4)' : 'rgba(107,107,107,0.2)',
               background: liveMode ? 'rgba(212,75,58,0.05)' : 'var(--gold-dim)',
             }}
           >
@@ -281,8 +281,8 @@ export default function AgquantPage() {
                   gap: 12,
                   padding: '10px 14px',
                   borderRadius: 'var(--radius-sm)',
-                  background: liveMode ? 'rgba(212,75,58,0.08)' : 'rgba(201,168,76,0.06)',
-                  border: liveMode ? '1px solid rgba(212,75,58,0.2)' : '1px solid rgba(201,168,76,0.15)',
+                  background: liveMode ? 'rgba(212,75,58,0.08)' : 'rgba(107,107,107,0.06)',
+                  border: liveMode ? '1px solid rgba(212,75,58,0.2)' : '1px solid rgba(107,107,107,0.15)',
                 }}
               >
                 <div

@@ -1,34 +1,45 @@
 :root {
-  --bg-root:     #07070A;
-  --bg-surface:  #0D0D11;
-  --bg-card:     #111116;
-  --bg-elevated: #18181E;
-  --bg-input:    #1E1E24;
-  --gold:        #C9A84C;
-  --gold-dim:    rgba(201,168,76,0.10);
-  --gold-border: rgba(201,168,76,0.18);
-  --gold-pale:   #E8D5A3;
-  --gain:        #1D9E75;
-  --gain-bg:     rgba(29,158,117,0.10);
-  --loss:        #D44B3A;
-  --loss-bg:     rgba(212,75,58,0.08);
-  --warn:        #E8A020;
-  --warn-bg:     rgba(232,160,32,0.10);
-  --info:        #378ADD;
-  --info-bg:     rgba(55,138,221,0.10);
-  --purple:      #7F77DD;
-  --purple-bg:   rgba(127,119,221,0.10);
-  --t1:          #E8E2D8;
-  --t2:          #9A9282;
-  --t3:          #5A5248;
-  --t4:          #32302A;
+  /* ── Backgrounds — pure neutral dark, no warmth or tint ── */
+  --bg-root:     #080808;
+  --bg-surface:  #0C0C0C;
+  --bg-card:     #111111;
+  --bg-elevated: #181818;
+  --bg-input:    #1E1E1E;
+
+  /* ── Accent — steel grey #6B6B6B (per brand spec) ── */
+  --gold:        #6B6B6B;
+  --gold-dim:    rgba(107,107,107,0.08);
+  --gold-border: rgba(107,107,107,0.20);
+  --gold-pale:   #9C9C9C;
+
+  /* ── Status — institutional, not fluorescent ── */
+  --gain:        #16A34A;
+  --gain-bg:     rgba(22,163,74,0.08);
+  --loss:        #DC2626;
+  --loss-bg:     rgba(220,38,38,0.07);
+  --warn:        #D97706;
+  --warn-bg:     rgba(217,119,6,0.08);
+  --info:        #2563EB;
+  --info-bg:     rgba(37,99,235,0.08);
+  --purple:      #7C3AED;
+  --purple-bg:   rgba(124,58,237,0.08);
+
+  /* ── Text — cool, neutral, precise ── */
+  --t1:          #EFEFEF;
+  --t2:          #8A8A8A;
+  --t3:          #4C4C4C;
+  --t4:          #2E2E2E;
+
+  /* ── Borders ── */
   --bdr:         rgba(255,255,255,0.055);
   --bdr-hover:   rgba(255,255,255,0.10);
-  --bdr-gold:    rgba(201,168,76,0.22);
-  --sidebar-w:   190px;
-  --topbar-h:    56px;
-  --radius-sm:   6px;
-  --radius-md:   8px;
-  --radius-lg:   11px;
-  --radius-xl:   14px;
+  --bdr-gold:    rgba(107,107,107,0.22);
+
+  /* ── Layout ── */
+  --sidebar-w:   200px;
+  --topbar-h:    52px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   10px;
 }

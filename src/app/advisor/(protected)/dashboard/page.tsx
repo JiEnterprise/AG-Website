@@ -55,8 +55,8 @@ export default function DashboardPage() {
       <section style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 20 }}>
         {/* Total AUM */}
         <div style={{
-          background: 'linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.04) 100%)',
-          border: '1px solid rgba(201,168,76,0.22)',
+          background: 'linear-gradient(135deg, rgba(107,107,107,0.12) 0%, rgba(107,107,107,0.04) 100%)',
+          border: '1px solid rgba(107,107,107,0.22)',
           borderRadius: 10, padding: '16px 18px',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>

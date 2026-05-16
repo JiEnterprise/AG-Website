@@ -67,7 +67,7 @@ export default function YieldMaxPage() {
       {nextExDiv && (
         <div
           className="flex items-center gap-3 rounded-[var(--radius-sm)] border px-4 py-3"
-          style={{ borderColor: 'rgba(201,168,76,0.3)', background: 'var(--gold-dim)' }}
+          style={{ borderColor: 'rgba(107,107,107,0.3)', background: 'var(--gold-dim)' }}
         >
           <span className="font-dm text-[9px] uppercase tracking-[0.16em] text-[var(--gold)]">
             Next Ex-Div
@@ -157,7 +157,7 @@ export default function YieldMaxPage() {
                   key={etf.symbol}
                   style={{
                     borderBottom: '1px solid rgba(255,255,255,0.03)',
-                    background: etf.inPortfolio ? 'rgba(201,168,76,0.03)' : 'transparent',
+                    background: etf.inPortfolio ? 'rgba(107,107,107,0.03)' : 'transparent',
                   }}
                 >
                   <td style={{ padding: '11px 14px' }}>
@@ -293,11 +293,11 @@ export default function YieldMaxPage() {
                         style={{
                           borderColor:
                             ev.type === 'ex-div'
-                              ? 'rgba(201,168,76,0.2)'
+                              ? 'rgba(107,107,107,0.2)'
                               : 'rgba(71,186,130,0.2)',
                           background:
                             ev.type === 'ex-div'
-                              ? 'rgba(201,168,76,0.04)'
+                              ? 'rgba(107,107,107,0.04)'
                               : 'rgba(71,186,130,0.04)',
                           minWidth: 160,
                         }}

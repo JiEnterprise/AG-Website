@@ -110,7 +110,7 @@ export default function PnlPage() {
       {/* Live status bar */}
       <div
         className="flex items-center justify-between rounded-[var(--radius-sm)] border px-4 py-2"
-        style={{ borderColor: 'rgba(201,168,76,0.2)', background: 'var(--gold-dim)' }}
+        style={{ borderColor: 'rgba(107,107,107,0.2)', background: 'var(--gold-dim)' }}
       >
         <div className="flex items-center gap-3">
           <span
